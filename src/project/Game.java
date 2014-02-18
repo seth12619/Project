@@ -6,10 +6,17 @@
 
 package project;
 
+import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+
+
 /**
  *
  * @author Seth Legaspi/Marco Santos
  */
-public class Game {
+public class Game extends Canvas {
+    
+    public ArrayList<Ships> shipArr = new ArrayList<>();
     
 }
