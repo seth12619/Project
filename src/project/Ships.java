@@ -15,5 +15,8 @@ import java.awt.*;
 public interface Ships {
     
     public void draw(Graphics g);
+    public void move();
+    
+    
     
 }
