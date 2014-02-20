@@ -8,6 +8,9 @@ package project;
 
 import javax.swing.*;
 import java.awt.*;
+import javax.imageio.ImageIO;
+import java.awt.image.*;
+import java.io.*;
 
 /**
  *
@@ -15,6 +18,12 @@ import java.awt.*;
  */
 public class Ship extends Canvas {
     Color shipColor;
+    BufferedImage shipAv; //Ship's image
+    
+    
+    int xPos; //x position of image
+    int yPos; // y position of image
+    
     
     public Ship() {
     
@@ -22,10 +31,17 @@ public class Ship extends Canvas {
     
     /**
      * 
-     * @param g - The color that is set as the color of this certain object
+     * This will set an image to be used for a certain ship
+     * @param i - Will determine if player 1 image will be used, or player 2
+     * @throws java.io.IOException
      */
-    public void setColor(Color g) {
-        shipColor = g;
+    public void setImage(int i) throws IOException {
+        
+        if (i == 1) {
+        shipAv = ImageIO.read(new File("imageName.jpg"));
+        }
+        else 
+        shipAv = ImageIO.read(new File("imageName2.jpg"));
     }
     
     
@@ -58,7 +74,7 @@ public class Ship extends Canvas {
     }
     
     public void draw(Graphics g) {
-        
+        g.drawImage(shipAv, xPos, yPos, null);
         
     }
     
