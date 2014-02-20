@@ -17,6 +17,6 @@ import java.awt.*;
  */
 public class Game extends Canvas {
     
-    public ArrayList<Ships> shipArr = new ArrayList<>();
+    
     
 }
