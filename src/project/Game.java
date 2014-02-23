@@ -17,6 +17,19 @@ import java.awt.*;
  */
 public class Game extends Canvas {
     
-    
+    public Game() {
+        JPanel game = new JPanel();
+        game.setLayout(new BorderLayout());
+        game.setSize(800,450);
+        
+        
+        
+        
+        
+      
+        
+        
+        game.setVisible(true);
+    }
     
 }
