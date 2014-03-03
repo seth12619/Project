@@ -1,5 +1,4 @@
 
-
 package project;
 
 import java.util.*;
@@ -31,6 +30,7 @@ public class Project extends JFrame {
         setLayout(new BorderLayout());
         
         JPanel menu = new JPanel();
+        //menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
         menu.setLayout(new GridLayout(3, 3, 5, 5));
         
         
