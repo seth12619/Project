@@ -21,16 +21,16 @@ public class Project extends JFrame {
     public Project() {
         
         
-        setTitle("Project version 0.000000000001");
+        setTitle("Project version 0.000000000002");
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800,450);
         
         setLayout(new BorderLayout());
         
-        JPanel menu = new JPanel();
-        //menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
-        menu.setLayout(new GridLayout(3, 3, 5, 5));
+        final JPanel menu = new JPanel();
+        menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
+       // menu.setLayout(new GridLayout(3, 3, 5, 5));
         
         
         JButton join = new JButton("Join Game");
@@ -61,11 +61,13 @@ public class Project extends JFrame {
             });
             
         
-        menu.add(new JLabel(" ")); menu.add(new JLabel(" ")); menu.add(new JLabel(" "));
+        menu.add(new JLabel(" ")); menu.add(new JLabel("                                                                     ")); menu.add(new JLabel(" "));
         menu.add(join);
+        menu.add(new JLabel("        "));
         menu.add(create);
+        menu.add(new JLabel("        "));
         menu.add(exit);
-        menu.add(new JLabel(" "));menu.add(new JLabel(" "));menu.add(new JLabel(" "));  
+        menu.add(new JLabel(" "));menu.add(new JLabel("              "));menu.add(new JLabel(" "));  
         
     
         add(menu, BorderLayout.CENTER);
