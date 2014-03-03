@@ -1,4 +1,3 @@
-
 package project;
 
 import java.util.*;
@@ -39,6 +38,7 @@ public class Project extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     Game start = new Game();
+                    menu.setVisible(false);
                 }
             });
         
@@ -47,6 +47,8 @@ public class Project extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     //should start up server
+                    
+                    menu.setVisible(false);
                 }
             });
         
