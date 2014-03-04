@@ -1,3 +1,9 @@
+package project;
+
+import java.awt.Graphics;
+
+
+
 public class Bullet implements Drawable{
 
   private int xPos;
@@ -23,5 +29,15 @@ public class Bullet implements Drawable{
   public void draw(){
     //insert how to draw
   }
+
+    @Override
+    public void draw(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void animate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
   
 }
