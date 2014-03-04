@@ -23,17 +23,15 @@ public final class Server {
     public void startServer() throws IOException {
         
         
-        try (
+        while(true) {
             ServerSocket serve = new ServerSocket(8888);
             Socket client = serve.accept();
                 PrintWriter test = new PrintWriter(client.getOutputStream(), true);
             BufferedReader in = new BufferedReader (
                     new InputStreamReader(client.getInputStream()));
-                ) {
-   //The ff. are stub tests
-           
-            
+             test.println(in.readLine());
         }
+       
     }
     
 }
