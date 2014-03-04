@@ -26,7 +26,7 @@ public class Project extends JFrame {
     public Project() throws IOException {
         
         
-        setTitle("Project version 0.000000000002");
+        setTitle("Project version 0.000000000012");
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800,450);
@@ -41,6 +41,12 @@ public class Project extends JFrame {
             join.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    (new Thread(new createThread("client"))).start();
+                    try { 
+                        final Game start = new Game();
+                    } catch (IOException ex) {
+                        System.out.println("Fatal Error!");
+                    }
                     
                     menu.setVisible(false);
                 }
@@ -55,8 +61,8 @@ public class Project extends JFrame {
                             //should start up server
                             
                             (new Thread(new createThread("server"))).start();
-                            (new Thread(new createThread("client"))).start();
-                            final Game start = new Game(); //create client for server
+                          //  (new Thread(new createThread("client"))).start(); //create client for server
+                            final Game start = new Game(); 
                             start.create();
                             add(start, BorderLayout.NORTH);
                             

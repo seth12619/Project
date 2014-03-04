@@ -49,11 +49,7 @@ public class createThread implements Runnable {
         } catch (UnknownHostException ex) {
             System.out.println("Error in obtaining local IP address");
         }
-          // try {
-             //  sleep(5000);
-      //     } catch (InterruptedException ex) {
-       //        System.out.println("Socket Creation Interrupted");
-       //    }
+         
            try {
                sock = new Socket(ip, 8888);
            } catch (IOException ex) {
