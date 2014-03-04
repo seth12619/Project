@@ -34,7 +34,7 @@ public class createThread implements Runnable {
        if (checker.equals("server")){
            try {
             Server create = new Server(); //create server
-            
+            System.out.println("Sucess");
         } catch (IOException ex) {
             System.out.println("Error in Creating Server");
         }
