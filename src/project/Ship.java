@@ -36,7 +36,8 @@ public class Ship extends Canvas {
      * @throws java.io.IOException
      */
     public void setImage(int i) throws IOException {
-        
+        BufferedImage shipAv = null;
+        try {
         if (i == 1) {
         shipAv = ImageIO.read(new File("playerOne.png"));
         yPos = 20;
@@ -44,8 +45,11 @@ public class Ship extends Canvas {
         }
         else {
         shipAv = ImageIO.read(new File("playerTwo.png"));
-        yPos = 50;
+        yPos = 80;
         repaint();
+        }
+        } catch (IOException e) {
+            System.out.println("Sprite image loading error - shipAv");
         }
     }
     
