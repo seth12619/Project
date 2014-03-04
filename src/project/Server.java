@@ -29,7 +29,7 @@ public final class Server {
             ServerSocket serve = null;
             Socket client = null;
             try {
-                serve = new ServerSocket(8888);
+                serve = new ServerSocket( 8888 );
             } catch (IOException ex) {
                 System.out.println("Error in making ServerSocket");
             }
