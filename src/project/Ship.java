@@ -108,6 +108,26 @@ public class Ship extends Canvas {
         }
     }
     
+    public int getXPos(){
+        return xPos;
+    }
+    
+    public int getYPos(){
+        return yPos;
+    }
+    
+    public int getHBLength(){
+        return hBLength;
+    }
+    
+    public int getHBWidth(){
+        return hBWidth;
+    }
+    
+    public int getHealth(){
+        return health;
+    }
+    
     public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
         
