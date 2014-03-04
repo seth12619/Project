@@ -26,16 +26,17 @@ public final class Server {
         
         
         while(true) {
-            ServerSocket serve = null;
+            ServerSocket server = null;
             Socket client = null;
             try {
-                serve = new ServerSocket( 8888 );
+                server = new ServerSocket( 8888 );
+                
             } catch (IOException ex) {
                 System.out.println("Error in making ServerSocket");
             }
             
             try {
-                client = serve.accept();
+                client = server.accept();
             } catch (IOException ex) {
                 System.out.println("Error in accepting request from client");;
             }
