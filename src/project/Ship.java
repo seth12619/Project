@@ -40,10 +40,12 @@ public class Ship extends Canvas {
         if (i == 1) {
         shipAv = ImageIO.read(new File("playerOne.png"));
         yPos = 20;
+        repaint();
         }
         else {
         shipAv = ImageIO.read(new File("playerTwo.png"));
         yPos = 50;
+        repaint();
         }
     }
     
@@ -53,6 +55,7 @@ public class Ship extends Canvas {
      */
     public void moveUp() {
         yPos = yPos-2;
+        repaint();
     }
     
     /**
@@ -60,6 +63,7 @@ public class Ship extends Canvas {
      */
     public void moveDown() {
         yPos = yPos+2;
+        repaint();
     }
     
     /**
@@ -67,6 +71,7 @@ public class Ship extends Canvas {
      */
     public void moveRight() {
         xPos = xPos+2;
+        repaint();
     }
     
     /**
@@ -74,6 +79,7 @@ public class Ship extends Canvas {
      */
     public void moveLeft() {
          xPos = xPos-2;
+         repaint();
     }
     
     public void draw(Graphics g) {

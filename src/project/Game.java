@@ -86,6 +86,7 @@ public class Game extends Canvas implements Runnable {
     @Override
     public void paint(Graphics g) {
         avatar.draw(g);
+        repaint();
     }
 
     /**
