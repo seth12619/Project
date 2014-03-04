@@ -22,9 +22,7 @@ import java.util.logging.Logger;
 
 
 public class Game extends Canvas implements Runnable {
-    Socket sock;
-    PrintStream testOut;
-    Scanner in;
+    
     boolean window = true;
     
     final Ship avatar = new Ship();
@@ -47,40 +45,17 @@ public class Game extends Canvas implements Runnable {
      * @throws IOException 
      */
     public void create() {
-        try {
+          try {
             avatar.setImage(1);
         } catch (IOException ex) {
             System.out.println("Error in setting up avatar Image");
         }
-        InetAddress ip = null;
-        try {
-            ip = InetAddress.getLocalHost();
-        } catch (UnknownHostException ex) {
-            System.out.println("Error in obtaining local IP address");
-        }
-        String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
-        try {
-            sock = new Socket(ip, 8888);
-        } catch (IOException ex) {
-            System.out.println("Error in creating new socket");
-        }
-        try {
-            testOut = new PrintStream(sock.getOutputStream());
-        } catch (IOException ex) {
-            System.out.println("Error in getting OutputStream");
-        }
-        try {
-            in = new Scanner(new InputStreamReader(sock.getInputStream()));
-        } catch (IOException ex) {
-            System.out.println("Error in getting InputStream");
-        }
         
-        testOut.println(username);
-        try {
-            Server create = new Server(); //create server
-        } catch (IOException ex) {
-            System.out.println("Error in Creating Server");
-        }
+        String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
+       
+        
+       
+       
         
         Thread t = new Thread(this);
         t.start();
@@ -119,12 +94,17 @@ public class Game extends Canvas implements Runnable {
      */
     @Override
     public void run() {
+        
+        
+        
+        
+        /**
        while(window) {
            int i = 0;
            //TO DO LOGIC waawawawawawawawa
            System.out.println("checkTest " + i);
            i++;
-       }
+       } */
     }
     
 }

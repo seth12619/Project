@@ -53,6 +53,9 @@ public class Project extends JFrame {
                     
                       try {
                             //should start up server
+                            
+                            (new Thread(new createThread("server"))).start();
+                            (new Thread(new createThread("client"))).start();
                             final Game start = new Game(); //create client for server
                             start.create();
                             add(start, BorderLayout.NORTH);
@@ -100,5 +103,7 @@ public class Project extends JFrame {
         
         setVisible(true);
     }
+
+   
     
 }
