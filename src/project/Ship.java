@@ -23,10 +23,18 @@ public class Ship extends Canvas {
     
     int xPos; //x position of image
     int yPos; // y position of image
+    int hBLength //length of hit box
+    int hBWidth //width of hit box
+    int health //how much damage before going dead
+
     
     
-    public Ship() {
-        xPos = 15;
+    public Ship(int xPos, int yPos, int hBLength, int hBWidth, int health) {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.hBLength = hBLength;
+        this.hBWidth = hBWidth;
+        this.health = health;
     }
     
     /**
@@ -84,6 +92,18 @@ public class Ship extends Canvas {
     public void moveLeft() {
          xPos = xPos-2;
          repaint();
+    }
+    
+    public void shoot() {
+        //this would create an instance of the bullet class
+    }
+    
+    public void takeDamage(int damage) {
+        health = health - damage;
+        if (health <= 0)
+        {
+            //dies
+        }
     }
     
     public void draw(Graphics g) {

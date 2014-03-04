@@ -1,8 +1,6 @@
-package project;
-
 public interface Drawable
 {
-  public void draw();
-      
+  public void draw(Graphics g);
   
+  public void animate();
 }
