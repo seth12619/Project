@@ -34,12 +34,10 @@ public class createThread implements Runnable {
        if (checker.equals("server")){
            try {
             Server create = new Server(); //create server
-            sleep(4000);
+            
         } catch (IOException ex) {
             System.out.println("Error in Creating Server");
-        }  catch (InterruptedException ex) {
-               System.out.println("Thread Interrupted");
-           }
+        }
        }
        
        
