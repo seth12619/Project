@@ -23,9 +23,9 @@ public class Ship extends Canvas {
     
     int xPos; //x position of image
     int yPos; // y position of image
-    int hBLength //length of hit box
-    int hBWidth //width of hit box
-    int health //how much damage before going dead
+    int hBLength; //length of hit box
+    int hBWidth; //width of hit box
+    int health; //how much damage before going dead
 
     
     

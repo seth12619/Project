@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable {
     
     boolean window = true;
     
-    final Ship avatar = new Ship();
+  //  final Ship avatar = new Ship();
     
     public Game() throws IOException {
         
@@ -45,11 +45,7 @@ public class Game extends Canvas implements Runnable {
      * @throws IOException 
      */
     public void create() {
-          try {
-            avatar.setImage(1);
-        } catch (IOException ex) {
-            System.out.println("Error in setting up avatar Image");
-        }
+         
         
         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
        
@@ -62,7 +58,7 @@ public class Game extends Canvas implements Runnable {
     }
     
     public void join() throws IOException {
-        avatar.setImage(2);
+        
     }
     
     
@@ -85,7 +81,7 @@ public class Game extends Canvas implements Runnable {
     @Override
     public void paint(Graphics g) {
         g.translate(50, 0);
-        avatar.draw(g);
+        
         repaint();
     }
 

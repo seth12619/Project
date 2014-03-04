@@ -1,3 +1,7 @@
+package project;
+
+import java.awt.Graphics;
+
 public class ShipTwo implements Drawable
 {
   int xPos;
@@ -54,5 +58,15 @@ public class ShipTwo implements Drawable
     //possible to implement animation for getting hit?
     health = health - damage;
   }
+
+    @Override
+    public void draw(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void animate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
   
 }
