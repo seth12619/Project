@@ -26,7 +26,7 @@ public class Ship extends Canvas {
     
     
     public Ship() {
-    
+        xPos = 15;
     }
     
     /**
@@ -38,10 +38,13 @@ public class Ship extends Canvas {
     public void setImage(int i) throws IOException {
         
         if (i == 1) {
-        shipAv = ImageIO.read(new File("imageName.jpg"));
+        shipAv = ImageIO.read(new File("playerOne.png"));
+        yPos = 20;
         }
-        else 
-        shipAv = ImageIO.read(new File("imageName2.jpg"));
+        else {
+        shipAv = ImageIO.read(new File("playerTwo.png"));
+        yPos = 50;
+        }
     }
     
     
@@ -49,28 +52,28 @@ public class Ship extends Canvas {
      * Will decrease y by 1 px by default, thus moving object 1px on screen
      */
     public void moveUp() {
-        
+        yPos = yPos-2;
     }
     
     /**
      * Will increase y by 1 px by default, thus moving object 1px on screen
      */
     public void moveDown() {
-        
+        yPos = yPos+2;
     }
     
     /**
      * Will increase x by 1 px by default, thus moving object 1px on screen
      */
     public void moveRight() {
-        
+        xPos = xPos+2;
     }
     
     /**
      * Will decrease x by 1 px by default, thus moving object 1px on screen
      */
     public void moveLeft() {
-        
+         xPos = xPos-2;
     }
     
     public void draw(Graphics g) {
