@@ -35,6 +35,8 @@ public class Ship extends Canvas {
         this.hBLength = hBLength;
         this.hBWidth = hBWidth;
         this.health = health;
+        
+        //draw the hitbox here
     }
     
     /**
@@ -104,6 +106,26 @@ public class Ship extends Canvas {
         {
             //dies
         }
+    }
+    
+    public int getXPos(){
+        return xPos;
+    }
+    
+    public int getYPos(){
+        return yPos;
+    }
+    
+    public int getHBLength(){
+        return hBLength;
+    }
+    
+    public int getHBWidth(){
+        return hBWidth;
+    }
+    
+    public int getHealth(){
+        return health;
     }
     
     public void draw(Graphics g) {
