@@ -35,6 +35,8 @@ public class Ship extends Canvas {
         this.hBLength = hBLength;
         this.hBWidth = hBWidth;
         this.health = health;
+        
+        //draw the hitbox here
     }
     
     /**
