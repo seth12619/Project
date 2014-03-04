@@ -4,6 +4,10 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.net.*;
 
 /**
  *
@@ -37,7 +41,7 @@ public class Project extends JFrame {
             join.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    Game start = new Game();
+                    
                     menu.setVisible(false);
                 }
             });
@@ -46,8 +50,17 @@ public class Project extends JFrame {
             create.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //should start up server
                     
+                      try {
+                            //should start up server
+                            Game start = new Game(); //create client for server
+                            start.create();
+                            Server create = new Server(); //create server
+                            
+                      } catch (IOException ex) {
+                         System.out.println("Error");
+                       }
+                      
                     menu.setVisible(false);
                 }
             });

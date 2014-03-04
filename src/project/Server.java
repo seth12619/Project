@@ -13,9 +13,10 @@ import java.net.*;
  *
  * @author Seth Legaspi/Marco Santos
  */
-public class Server {
-    
-    public Server() {
+public final class Server {
+  
+    public Server() throws IOException {
+        startServer();
         
     }
     
@@ -29,6 +30,8 @@ public class Server {
             BufferedReader in = new BufferedReader (
                     new InputStreamReader(client.getInputStream()));
                 ) {
+   //The ff. are stub tests
+           
             
         }
     }
