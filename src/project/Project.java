@@ -12,6 +12,12 @@ import java.net.*;
 /**
  *
  * @author Seth Legaspi/Marco Santos
+ * 
+ * NOTE: 3/4/14 = The server client works; error is nullPointer, maybe once the stuff's there, it won't do this anymore
+ *  + server and client are run on separate threads, so you can sort of have the moving stuff work separately, and
+ * just have them do something with client and server respectively to change stuff.
+ * 私は魔法少年うう！
+ * 
  */
 public class Project extends JFrame {
 
@@ -109,7 +115,4 @@ public class Project extends JFrame {
         
         setVisible(true);
     }
-
-   
-    
 }
