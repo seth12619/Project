@@ -18,11 +18,11 @@ public class Project extends JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Project frame = new Project();
     }
     
-    public Project() {
+    public Project() throws IOException {
         
         
         setTitle("Project version 0.000000000002");
@@ -34,9 +34,7 @@ public class Project extends JFrame {
         
         final JPanel menu = new JPanel();
         menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
-       // menu.setLayout(new GridLayout(3, 3, 5, 5));
-        
-        
+
         
         JButton join = new JButton("Join Game");
             join.addActionListener( new ActionListener() {
@@ -56,19 +54,22 @@ public class Project extends JFrame {
                             //should start up server
                             final Game start = new Game(); //create client for server
                             start.create();
+                            add(start, BorderLayout.NORTH);
                             
-                            addWindowListener(new WindowAdapter() {
-                               @Override
-                               public void windowClosing(WindowEvent e) {
-                                     start.setWindowStatus();
-                                  }
-                               });
+                            //Should set WindowStatus to false upon closing
+                               addWindowListener(new WindowAdapter() {
+                                      @Override
+                                     public void windowClosing(WindowEvent e) {
+                                         start.setWindowStatus();
+                                       }
+                                     });
                             
                       } catch (IOException ex) {
                          System.out.println("Error");
                        }
                       
                     menu.setVisible(false);
+                    
                 }
             });
         
@@ -91,7 +92,8 @@ public class Project extends JFrame {
         menu.add(exit);
         menu.add(new JLabel(" "));menu.add(new JLabel("              "));menu.add(new JLabel(" "));  
         
-    
+   // Game start = new Game();
+   // add(start, BorderLayout.NORTH);
         add(menu, BorderLayout.CENTER);
         setLocationRelativeTo(null);
         
