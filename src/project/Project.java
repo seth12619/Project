@@ -37,6 +37,7 @@ public class Project extends JFrame {
        // menu.setLayout(new GridLayout(3, 3, 5, 5));
         
         
+        
         JButton join = new JButton("Join Game");
             join.addActionListener( new ActionListener() {
                 @Override
@@ -53,9 +54,15 @@ public class Project extends JFrame {
                     
                       try {
                             //should start up server
-                            Game start = new Game(); //create client for server
+                            final Game start = new Game(); //create client for server
                             start.create();
-                            Server create = new Server(); //create server
+                            
+                            addWindowListener(new WindowAdapter() {
+                               @Override
+                               public void windowClosing(WindowEvent e) {
+                                     start.setWindowStatus();
+                                  }
+                               });
                             
                       } catch (IOException ex) {
                          System.out.println("Error");
@@ -72,6 +79,8 @@ public class Project extends JFrame {
                     System.exit(1);
                 }
             });
+            
+       
             
         
         menu.add(new JLabel(" ")); menu.add(new JLabel("                                                                     ")); menu.add(new JLabel(" "));
