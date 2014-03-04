@@ -28,16 +28,15 @@ public class Game extends Canvas implements Runnable {
     final Ship avatar = new Ship();
     
     public Game() throws IOException {
-        JPanel game = new JPanel();
-        game.setLayout(new BorderLayout());
-        game.setSize(800,450);
         
+        setBackground(Color.WHITE);
+        setSize(800,450);
         
        
         
         
         
-        game.setVisible(true);
+       setVisible(true);
     }
     
      /**
@@ -85,6 +84,7 @@ public class Game extends Canvas implements Runnable {
     
     @Override
     public void paint(Graphics g) {
+        g.translate(50, 0);
         avatar.draw(g);
         repaint();
     }
