@@ -17,6 +17,8 @@ import java.io.*;
  *
  * @author Seth Legaspi/Marco Santos
  */
+
+
 public class Game extends Canvas implements Runnable {
     Socket sock;
     PrintStream testOut;
@@ -83,9 +85,12 @@ public class Game extends Canvas implements Runnable {
     
     @Override
     public void paint(Graphics g) {
-        
+        avatar.draw(g);
     }
 
+    /**
+     * This run method should be the thread part.
+     */
     @Override
     public void run() {
        while(window) {
