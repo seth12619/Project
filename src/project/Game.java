@@ -23,10 +23,14 @@ public class Game extends Canvas implements Runnable {
     Scanner in;
     boolean window = true;
     
+    final Ship avatar = new Ship();
+    
     public Game() throws IOException {
         JPanel game = new JPanel();
         game.setLayout(new BorderLayout());
         game.setSize(800,450);
+        
+        
        
         
         
@@ -34,7 +38,13 @@ public class Game extends Canvas implements Runnable {
         game.setVisible(true);
     }
     
+     /**
+      * This method should create a client, and a server.
+     * @throws UnknownHostException
+     * @throws IOException 
+     */
     public void create() throws UnknownHostException, IOException {
+        avatar.setImage(1);
         InetAddress ip = InetAddress.getLocalHost();
         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
         
@@ -50,6 +60,10 @@ public class Game extends Canvas implements Runnable {
         t.start();
     }
     
+    public void join() throws IOException {
+        avatar.setImage(2);
+    }
+    
     
     public String Test(String Input) {
         String potato;
@@ -60,9 +74,17 @@ public class Game extends Canvas implements Runnable {
         
     }
     
+    /**
+     * This method will setWindow status to false upon closing of the JFrame, to stop all threads or servers
+     */
     public void setWindowStatus() {
     window = false;
 }
+    
+    @Override
+    public void paint(Graphics g) {
+        
+    }
 
     @Override
     public void run() {
