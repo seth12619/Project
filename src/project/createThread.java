@@ -55,17 +55,23 @@ public class createThread implements Runnable {
            } catch (IOException ex) {
                System.out.println("Error in making Socket");
            }
+           
+             try {
+            in = new Scanner(new InputStreamReader(sock.getInputStream()));
+        } catch (IOException ex) {
+            System.out.println("Error in getting InputStream");
+        } 
+             
         try {
             testOut = new PrintStream(sock.getOutputStream());
         } catch (IOException ex) {
             System.out.println("Error in getting OutputStream");
         }
-       
-        try {
-            in = new Scanner(new InputStreamReader(sock.getInputStream()));
-        } catch (IOException ex) {
-            System.out.println("Error in getting InputStream");
-        } 
+       testOut.println("Test hello");
+       testOut.flush();
+       String t = in.nextLine(); //test message from server
+       System.out.println(t);
+      
                    }
                    
                    
