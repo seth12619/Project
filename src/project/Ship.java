@@ -29,12 +29,21 @@ public class Ship extends Canvas {
 
     
     
-    public Ship(int xPos, int yPos, int hBLength, int hBWidth, int health) {
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.hBLength = hBLength;
-        this.hBWidth = hBWidth;
-        this.health = health;
+    public Ship(int player) {
+        if (player == 1) {
+        this.xPos = 20;
+        this.yPos = 50;
+        this.hBLength =60;
+        this.hBWidth = 60;
+        this.health = 100;
+        } 
+        else if (player ==2) {
+        this.xPos = 20;
+        this.yPos = 120;
+        this.hBLength =60;
+        this.hBWidth = 60;
+        this.health = 100;
+        }
         
         //draw the hitbox here
     }
@@ -49,12 +58,12 @@ public class Ship extends Canvas {
         BufferedImage shipAv = null;
         try {
         if (i == 1) {
-        shipAv = ImageIO.read(new File("playerOne.png"));
+        shipAv = ImageIO.read(new File("playerOne.jpg"));
         yPos = 20;
         repaint();
         }
         else {
-        shipAv = ImageIO.read(new File("playerTwo.png"));
+        shipAv = ImageIO.read(new File("playerTwo.jpg"));
         yPos = 80;
         repaint();
         }
@@ -131,6 +140,8 @@ public class Ship extends Canvas {
     public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
         
+        
+        repaint();
     }
     
 }

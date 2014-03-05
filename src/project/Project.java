@@ -50,6 +50,8 @@ public class Project extends JFrame {
                     (new Thread(new createThread("client"))).start();
                     try { 
                         final Game start = new Game();
+                        start.join();
+                        add(start, BorderLayout.NORTH);
                     } catch (IOException ex) {
                         System.out.println("Fatal Error!");
                     }

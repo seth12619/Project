@@ -21,18 +21,42 @@ import java.util.logging.Logger;
  */
 
 
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas {
+    int player;
+    Ship avatar;
     
     boolean window = true;
     
   //  final Ship avatar = new Ship();
     
     public Game() throws IOException {
+        player = 0;
         
         setBackground(Color.WHITE);
         setSize(800,450);
         
-       
+        
+        
+       addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+                
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+           
+           
+           
+       });
         
         
         
@@ -40,25 +64,27 @@ public class Game extends Canvas implements Runnable {
     }
     
      /**
-      * This method should create a client, and a server.
-     * @throws UnknownHostException
-     * @throws IOException 
+      * This method will set Player as player one
+     * 
      */
     public void create() {
-         
+         setPlayerOne();
+         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
+         Ship avatar = new Ship(player);
         
-        String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
+       
        
         
-       
-       
-        
-        Thread t = new Thread(this);
-        t.start();
     }
     
-    public void join() throws IOException {
-        
+    /**
+     * This method will set player as player two
+     * 
+     */
+    public void join() {
+        setPlayerTwo();
+        String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
+        Ship avatar = new Ship(player);
     }
     
     
@@ -78,29 +104,23 @@ public class Game extends Canvas implements Runnable {
     window = false;
 }
     
+    /**
+     * The two methods below will set what player this is; it will also help in movement methods
+     */
+    public void setPlayerOne() {
+        player = 1;
+    }
+    public void setPlayerTwo() {
+        player = 2;  
+    }
+    
     @Override
     public void paint(Graphics g) {
-        g.translate(50, 0);
+        
+        avatar.draw(g);
         
         repaint();
     }
 
-    /**
-     * This run method should be the thread part.
-     */
-    @Override
-    public void run() {
-        
-        
-        
-        
-        /**
-       while(window) {
-           int i = 0;
-           //TO DO LOGIC waawawawawawawawa
-           System.out.println("checkTest " + i);
-           i++;
-       } */
-    }
-    
+
 }
