@@ -16,7 +16,7 @@ import java.io.*;
  *
  * @author Seth Legaspi/Marco Santos
  */
-public final class Ship extends Canvas {
+public final class Ship implements Drawable {
     Color shipColor;
     private BufferedImage shipAv; //Ship's image
     
@@ -26,10 +26,12 @@ public final class Ship extends Canvas {
     int hBLength; //length of hit box
     int hBWidth; //width of hit box
     int health; //how much damage before going dead
+    int player;
 
     
     
-    public Ship(int player) {
+    public Ship(int hum) {
+        player = hum;
         if (player == 1) {
         this.xPos = 20;
         this.yPos = 50;
@@ -59,8 +61,7 @@ public final class Ship extends Canvas {
                 System.out.println("Sprite image loading error - shipAv Player 2");
             }
             
-      
-        repaint();
+     
         }
         
         
@@ -68,36 +69,45 @@ public final class Ship extends Canvas {
     }
     
     
+    public void setPlayer(int hum) {
+        player = hum;
+    }
+    
+    
     /**
      * Will decrease y by 1 px by default, thus moving object 1px on screen
      */
+    @Override
     public void moveUp() {
         yPos = yPos-2;
-        repaint();
+        
     }
     
     /**
      * Will increase y by 1 px by default, thus moving object 1px on screen
      */
+    @Override
     public void moveDown() {
         yPos = yPos+2;
-        repaint();
+        
     }
     
     /**
      * Will increase x by 1 px by default, thus moving object 1px on screen
      */
+    @Override
     public void moveRight() {
         xPos = xPos+2;
-        repaint();
+       
     }
     
     /**
      * Will decrease x by 1 px by default, thus moving object 1px on screen
      */
+    @Override
     public void moveLeft() {
          xPos = xPos-2;
-         repaint();
+         
     }
     
     public void shoot() {
@@ -132,12 +142,15 @@ public final class Ship extends Canvas {
         return health;
     }
     
+
     @Override
-    public void paint(Graphics g) {
+    public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
-        
-        
-       
+    }
+
+    @Override
+    public void animate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 
 public class Game extends Canvas {
     int player;
-    Ship avatar;
+    Ship avatar = new Ship(player);
     
     boolean window = true;
     
@@ -70,7 +70,7 @@ public class Game extends Canvas {
     public void create() {
          setPlayerOne();
          String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
-         Ship avatar = new Ship(player);
+         avatar.setPlayer(player);
         
        
        
@@ -84,7 +84,7 @@ public class Game extends Canvas {
     public void join() {
         setPlayerTwo();
         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
-        Ship avatar = new Ship(player);
+        avatar.setPlayer(player);
         repaint();
     }
     
@@ -118,7 +118,7 @@ public class Game extends Canvas {
     @Override
     public void paint(Graphics g) {
         
-        avatar.paint(g);
+        avatar.draw(g);
         
         repaint();
     }
