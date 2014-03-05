@@ -8,7 +8,7 @@ package project;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.imageio.ImageIO;
+import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;
 
@@ -16,9 +16,9 @@ import java.io.*;
  *
  * @author Seth Legaspi/Marco Santos
  */
-public class Ship extends Canvas {
+public final class Ship extends Canvas {
     Color shipColor;
-    BufferedImage shipAv; //Ship's image
+    private BufferedImage shipAv; //Ship's image
     
     
     int xPos; //x position of image
@@ -37,7 +37,7 @@ public class Ship extends Canvas {
         this.hBWidth = 60;
         this.health = 100;
         } 
-        else if (player ==2) {
+        else if (player == 2) {
         this.xPos = 20;
         this.yPos = 120;
         this.hBLength =60;
@@ -45,31 +45,26 @@ public class Ship extends Canvas {
         this.health = 100;
         }
         
-        //draw the hitbox here
-    }
-    
-    /**
-     * 
-     * This will set an image to be used for a certain ship
-     * @param i - Will determine if player 1 image will be used, or player 2
-     * @throws java.io.IOException
-     */
-    public void setImage(int i) throws IOException {
-        BufferedImage shipAv = null;
-        try {
-        if (i == 1) {
-        shipAv = ImageIO.read(new File("playerOne.jpg"));
-        yPos = 20;
-        repaint();
-        }
-        else {
-        shipAv = ImageIO.read(new File("playerTwo.jpg"));
-        yPos = 80;
-        repaint();
-        }
+        
+        if (player == 1) {
+         try {    
+        shipAv = ImageIO.read(getClass().getResource("playerOne.jpg"));
         } catch (IOException e) {
-            System.out.println("Sprite image loading error - shipAv");
+            System.out.println("Sprite image loading error - shipAv Player 1");
+        } }
+        else if (player == 2) {
+            try {
+        shipAv = ImageIO.read(getClass().getResource("playerTwo.jpg"));
+            } catch (IOException e) {
+                System.out.println("Sprite image loading error - shipAv Player 2");
+            }
+            
+      
+        repaint();
         }
+        
+        
+        //draw the hitbox here
     }
     
     
@@ -137,11 +132,12 @@ public class Ship extends Canvas {
         return health;
     }
     
-    public void draw(Graphics g) {
+    @Override
+    public void paint(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
         
         
-        repaint();
+       
     }
     
 }

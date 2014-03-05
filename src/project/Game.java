@@ -59,7 +59,7 @@ public class Game extends Canvas {
        });
         
         
-        
+     
        setVisible(true);
     }
     
@@ -74,7 +74,7 @@ public class Game extends Canvas {
         
        
        
-        
+        repaint();
     }
     
     /**
@@ -85,6 +85,7 @@ public class Game extends Canvas {
         setPlayerTwo();
         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
         Ship avatar = new Ship(player);
+        repaint();
     }
     
     
@@ -117,10 +118,9 @@ public class Game extends Canvas {
     @Override
     public void paint(Graphics g) {
         
-        avatar.draw(g);
+        avatar.paint(g);
         
         repaint();
     }
-
 
 }
