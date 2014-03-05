@@ -36,12 +36,25 @@ public class Game extends Canvas {
         setSize(800,450);
         
         
-        
+        /**
+         * Note: Add collision so the avatar sprite ship won't go over bounds.
+         */
        addKeyListener(new KeyListener() {
 
             @Override
             public void keyTyped(KeyEvent e) {
-                
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    avatar.moveLeft();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    avatar.moveRight();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    avatar.moveUp();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    avatar.moveDown();
+                }
             }
 
             @Override
