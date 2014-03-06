@@ -42,6 +42,7 @@ public class createThread implements Runnable {
        
        
            else if (checker.equals("client")) {
+               while (true) {
                
         InetAddress ip = null;
         try {
@@ -73,7 +74,7 @@ public class createThread implements Runnable {
        System.out.println(t);
       
                    }
-                   
+           }
                    
       }     
 }

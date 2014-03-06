@@ -23,19 +23,20 @@ import java.util.logging.Logger;
 
 public class Game extends Canvas {
     int player;
-    Ship avatar = new Ship(player);
+    Ship avatar;
     
     boolean window = true;
     
   //  final Ship avatar = new Ship();
     
-    public Game() throws IOException {
-        player = 0;
+    public Game(int person) throws IOException {
+        player = person;
         
         setBackground(Color.WHITE);
         setSize(800,450);
         
-        
+        avatar = new Ship(player);
+        repaint();
         /**
          * Note: Add collision so the avatar sprite ship won't go over bounds.
          */
@@ -43,18 +44,7 @@ public class Game extends Canvas {
 
             @Override
             public void keyTyped(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    avatar.moveLeft();
-                }
-                else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    avatar.moveRight();
-                }
-                else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    avatar.moveUp();
-                }
-                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    avatar.moveDown();
-                }
+                
             }
 
             @Override
@@ -64,7 +54,22 @@ public class Game extends Canvas {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+               if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    avatar.moveLeft();
+                    repaint();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    avatar.moveRight();
+                    repaint();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    avatar.moveUp();
+                    repaint();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    avatar.moveDown();
+                    repaint();
+                }
             }
            
            
@@ -133,7 +138,7 @@ public class Game extends Canvas {
         
         avatar.draw(g);
         
-        repaint();
+       
     }
 
 }

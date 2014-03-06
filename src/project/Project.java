@@ -16,7 +16,7 @@ import java.net.*;
  * NOTE: 3/4/14 = The server client works; error is nullPointer, maybe once the stuff's there, it won't do this anymore
  *  + server and client are run on separate threads, so you can sort of have the moving stuff work separately, and
  * just have them do something with client and server respectively to change stuff.
- * 私は魔法少年うう！
+ * 
  * 
  */
 public class Project extends JFrame {
@@ -49,7 +49,7 @@ public class Project extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     (new Thread(new createThread("client"))).start();
                     try { 
-                        final Game start = new Game();
+                        final Game start = new Game(2);
                         start.join();
                         add(start, BorderLayout.NORTH);
                     } catch (IOException ex) {
@@ -70,13 +70,13 @@ public class Project extends JFrame {
                             
                             (new Thread(new createThread("server"))).start();
                           //  (new Thread(new createThread("client"))).start(); //create client for server
-                            final Game start = new Game(); 
+                            final Game start = new Game(1); 
                             start.create();
                             add(start, BorderLayout.NORTH);
                             
                             //Should set WindowStatus to false upon closing
                                addWindowListener(new WindowAdapter() {
-                                      @Override
+                                     @Override
                                      public void windowClosing(WindowEvent e) {
                                          start.setWindowStatus();
                                        }
