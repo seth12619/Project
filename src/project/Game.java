@@ -24,8 +24,11 @@ import java.util.logging.Logger;
 public class Game extends Canvas {
     int player;
     Ship avatar;
+    private final Action right;
+    private final Action up;
     
     boolean window = true;
+    
     
   //  final Ship avatar = new Ship();
     
@@ -37,6 +40,12 @@ public class Game extends Canvas {
         
         avatar = new Ship(player);
         repaint();
+        
+        right = new RightKey();
+        up = new UpKey();
+        
+       
+        
         /**
          * Note: Add collision so the avatar sprite ship won't go over bounds.
          */
@@ -51,6 +60,7 @@ public class Game extends Canvas {
             public void keyPressed(KeyEvent e) {
                  if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     avatar.moveLeft();
+
                     repaint();
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -122,6 +132,25 @@ public class Game extends Canvas {
     public void setWindowStatus() {
     window = false;
 }
+    
+    /**
+     * the ones below help in KeyBinding, they should define what happens when certain keys are presed
+     */
+    public class RightKey extends AbstractAction {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           avatar.moveRight();
+        }
+    }
+    
+        public class UpKey extends AbstractAction {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           avatar.moveUp();
+        }
+    }
     
     /**
      * The two methods below will set what player this is; it will also help in movement methods
