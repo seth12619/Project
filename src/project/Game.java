@@ -26,6 +26,7 @@ public class Game extends Canvas {
     Ship avatar;
     private final Action right;
     private final Action up;
+    ArrayList<Drawable> list = new ArrayList<Drawable>();
     
     boolean window = true;
     
@@ -39,7 +40,7 @@ public class Game extends Canvas {
         setSize(800,450);
         
         avatar = new Ship(player);
-        repaint();
+        list.add(avatar);
         
         right = new RightKey();
         up = new UpKey();
@@ -61,19 +62,22 @@ public class Game extends Canvas {
                  if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     avatar.moveLeft();
 
-                    repaint();
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     avatar.moveRight();
-                    repaint();
+
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_UP) {
                     avatar.moveUp();
-                    repaint();
+
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     avatar.moveDown();
-                    repaint();
+
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
+                    avatar.shoot();
+                    System.out.println("Sex");
                 }
             }
 
@@ -165,7 +169,10 @@ public class Game extends Canvas {
     @Override
     public void paint(Graphics g) {
         
-        avatar.draw(g);
+        for ( Drawable a : list)
+        {
+            a.draw(g);
+        }
         
        
     }
