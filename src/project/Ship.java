@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
- 
+ package Project;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +12,7 @@ import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;
 import java.util.*;
+
 
 /**
  *
@@ -142,13 +143,11 @@ public final class Ship implements Drawable {
     }
     
 
-    @Override
-    public void draw(Graphics g) {
+        public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
     }
 
-    @Override
-    public void animate() {
+        public void animate() {
         
     }
     

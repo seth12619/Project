@@ -1,9 +1,13 @@
+package project;
+
+
 import java.awt.Graphics;
 import javax.swing.*;
 import java.awt.*;
 import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;
+
 
 
 public class Bullet implements Drawable{
@@ -30,13 +34,33 @@ public class Bullet implements Drawable{
         } 
   }
 
-    @Override
-    public void draw(Graphics g) {
+  @Override
+        public void draw(Graphics g) {
         g.drawImage(bulAv, xPos, yPos, null);
     }
 
-    @Override
-    public void animate() {
+  @Override
+        public void animate() {
         xPos = xPos + speed;
+    }
+
+    @Override
+    public void moveUp() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void moveDown() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void moveRight() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void moveLeft() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
