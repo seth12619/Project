@@ -45,7 +45,10 @@ public class Bullet implements Drawable{
 
   @Override
         public void animate() {
-        xPos = xPos + speed;
+            for (int i = 0; i < 100; i=i+2) {
+          xPos = xPos + speed;
+            }
+            
     }
 
     @Override

@@ -32,11 +32,14 @@ public final class Ship implements Drawable {
     int player;
     public ArrayList<Drawable> list = new ArrayList<>();
     
+   int bulletxPos;
+   int bulletyPos;
+   
    
     
     //parameter - ArrayList<Drawable> a
     public Ship(int hum) {
-        bulletNu = 0;
+        bulletNu = -1;
         
         player = hum;
         if (player == 1) {
@@ -116,7 +119,12 @@ public final class Ship implements Drawable {
     }
     
     public void shoot() {
-        list.add( new Bullet (xPos -1, yPos + 1, 20, 20, 3, 5));
+        bulletxPos = xPos +5; bulletyPos = yPos+2;
+        list.add( new Bullet (bulletxPos, bulletyPos, 20, 20, 3, 5));
+        
+        
+        
+        bulletNu++;
         
         
     }
@@ -161,7 +169,8 @@ public final class Ship implements Drawable {
 
     @Override
         public void animate() {
-        
+            
+        list.get(bulletNu).animate();
     }
     
 }

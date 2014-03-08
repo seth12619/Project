@@ -31,7 +31,9 @@ public class Game extends Canvas {
     animateThread thread;
     ArrayList<Drawable> list = new ArrayList<Drawable>();
    
-
+    java.util.Timer myTimer;
+    String timeCheck = "okay";
+    
     boolean window = true;
    
     
@@ -82,11 +84,24 @@ public class Game extends Canvas {
                     repaint();        
                 }
                  else if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
-                    avatar.shoot();
+                     int delay = 50;
+                     avatar.shoot();
+                     TimerTask doIt = new TimerTask() {
+                         @Override
+                         public void run() {
+                             avatar.animate();
+                             repaint();
+                         }
+                     };
+                     
+                   myTimer = new java.util.Timer();
+                     
+                   myTimer.schedule(doIt, 50);
                     
                     System.out.println("Pew Pew Pew!");
                     repaint();
                 }
+                     
                 
                  
             }
