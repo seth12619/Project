@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
- package Project;
+ package project;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,8 +33,8 @@ public final class Ship implements Drawable {
     
 
     
-    
-    public Ship(int hum, ArrayList<Drawable> a) {
+    //parameter - ArrayList<Drawable> a
+    public Ship(int hum) {
         player = hum;
         if (player == 1) {
         this.xPos = 20;
@@ -51,16 +51,16 @@ public final class Ship implements Drawable {
         this.health = 100;
         }
         
-        list = a;
+       // list = a;
         if (player == 1) {
          try {    
-        shipAv = ImageIO.read(getClass().getResource("playerOne.png"));
+        shipAv = ImageIO.read(getClass().getResource("playerOne.jpg"));
         } catch (IOException e) {
             System.out.println("Sprite image loading error - shipAv Player 1");
         } }
         else if (player == 2) {
             try {
-        shipAv = ImageIO.read(getClass().getResource("playerTwo.png"));
+        shipAv = ImageIO.read(getClass().getResource("playerTwo.jpg"));
             } catch (IOException e) {
                 System.out.println("Sprite image loading error - shipAv Player 2");
             }
@@ -81,6 +81,7 @@ public final class Ship implements Drawable {
     /**
      * Will decrease y by 1 px by default, thus moving object 1px on screen
      */
+    @Override
     public void moveUp() {
         yPos = yPos-5;
         
@@ -89,6 +90,7 @@ public final class Ship implements Drawable {
     /**
      * Will increase y by 1 px by default, thus moving object 1px on screen
      */
+    @Override
     public void moveDown() {
         yPos = yPos+5;
         
@@ -97,6 +99,7 @@ public final class Ship implements Drawable {
     /**
      * Will increase x by 1 px by default, thus moving object 1px on screen
      */
+    @Override
     public void moveRight() {
         xPos = xPos+5;
        
@@ -105,6 +108,7 @@ public final class Ship implements Drawable {
     /**
      * Will decrease x by 1 px by default, thus moving object 1px on screen
      */
+    @Override
     public void moveLeft() {
          xPos = xPos-5;
          
@@ -143,10 +147,12 @@ public final class Ship implements Drawable {
     }
     
 
+    @Override
         public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
     }
 
+    @Override
         public void animate() {
         
     }

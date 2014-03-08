@@ -30,7 +30,7 @@ public class Bullet implements Drawable{
     try {    
         bulAv = ImageIO.read(getClass().getResource("Bullet.png"));
         } catch (IOException e) {
-            System.out.println("Sprite image loading error - shipAv Player 1");
+            System.out.println("Bullet image loading error");
         } 
   }
 
