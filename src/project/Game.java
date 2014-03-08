@@ -49,12 +49,7 @@ public class Game extends Canvas {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-               if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     avatar.moveLeft();
                     repaint();
                 }
@@ -70,6 +65,11 @@ public class Game extends Canvas {
                     avatar.moveDown();
                     repaint();
                 }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+              
             }
            
            
