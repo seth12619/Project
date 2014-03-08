@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -59,46 +58,46 @@ public class Game extends Canvas {
                 keysPressed.add(e.getKeyCode());
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
                     avatar.moveLeft();       
-                    if (keysPressed.contains(KeyEvent.VK_UP)) {
+                   /* if (keysPressed.contains(KeyEvent.VK_UP)) {
                         avatar.moveUp();
                     }
                     if (keysPressed.contains(KeyEvent.VK_DOWN)) {
                         avatar.moveDown();
-                    }
+                    } */
                     
                     repaint();
                 }
-                else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     avatar.moveRight();
-                    if (keysPressed.contains(KeyEvent.VK_UP)) {
+                /*    if (keysPressed.contains(KeyEvent.VK_UP)) {
                         avatar.moveUp();
                     }
                     if (keysPressed.contains(KeyEvent.VK_DOWN)) {
                         avatar.moveDown();
-                    }  
+                    }  */
                     repaint();
                 }
-                else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
                     avatar.moveUp();
-                    if (keysPressed.contains(KeyEvent.VK_LEFT)) {
+                  /*  if (keysPressed.contains(KeyEvent.VK_LEFT)) {
                         avatar.moveLeft();
                     }
                     if (keysPressed.contains(KeyEvent.VK_RIGHT)) {
                         avatar.moveRight();
-                    }
+                    } */
                     repaint();
                 }
-                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     avatar.moveDown();
-                    if (keysPressed.contains(KeyEvent.VK_LEFT)) {
+                  /*  if (keysPressed.contains(KeyEvent.VK_LEFT)) {
                         avatar.moveLeft();
                     }
                     if (keysPressed.contains(KeyEvent.VK_RIGHT)) {
                         avatar.moveRight();
-                    }
+                    } */
                     repaint();        
                 }
-                 else if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
+                 if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
                     avatar.shoot();
                     System.out.println("Sex");
                 }
