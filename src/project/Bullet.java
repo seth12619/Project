@@ -1,7 +1,9 @@
-package project;
-
 import java.awt.Graphics;
-
+import javax.swing.*;
+import java.awt.*;
+import javax.imageio.*;
+import java.awt.image.*;
+import java.io.*;
 
 
 public class Bullet implements Drawable{
@@ -12,6 +14,7 @@ public class Bullet implements Drawable{
   private int width;
   private int speed;
   private int damage;
+  private BufferedImage bulAv;
   
   public Bullet(int xPos, int yPos, int length, int width, int speed, int damage){
     this.xPos = xPos;
@@ -20,44 +23,20 @@ public class Bullet implements Drawable{
     this.width = width;
     this.speed = speed;
     this.damage = damage;
-  }
-  
-  public void travel(){
-    xPos = xPos + speed;
-  }
-  
-  public void draw(){
-    //insert how to draw
+    try {    
+        bulAv = ImageIO.read(getClass().getResource("Bullet.png"));
+        } catch (IOException e) {
+            System.out.println("Sprite image loading error - shipAv Player 1");
+        } 
   }
 
     @Override
     public void draw(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        g.drawImage(bulAv, xPos, yPos, null);
     }
 
     @Override
     public void animate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        xPos = xPos + speed;
     }
-
-    @Override
-    public void moveUp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void moveDown() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void moveRight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void moveLeft() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-  
 }
