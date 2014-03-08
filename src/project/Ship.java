@@ -28,7 +28,7 @@ public final class Ship implements Drawable {
     int health; //how much damage before going dead
     int player;
 
-    
+    ActionMap am = new ActionMap();
     
     public Ship(int hum) {
         player = hum;
