@@ -27,6 +27,8 @@ public class Game extends Canvas {
     animateThread thread;
     ArrayList<Drawable> list = new ArrayList<Drawable>();
     
+    private KeyState[] keys = null;
+    
     
     boolean window = true;
     ArrayList keysPressed = new ArrayList<>();
@@ -171,6 +173,8 @@ public class Game extends Canvas {
     public void setPlayerTwo() {
         player = 2;  
     }
+    
+    
     
     @Override
     public void paint(Graphics g) {
