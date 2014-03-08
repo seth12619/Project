@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 
-package project;
+ 
 
 import javax.swing.*;
 import java.awt.*;
 import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;
+import java.util.*;
 
 /**
  *
@@ -27,10 +28,12 @@ public final class Ship implements Drawable {
     int hBWidth; //width of hit box
     int health; //how much damage before going dead
     int player;
+    ArrayList<Drawable> list;
+    
 
     
     
-    public Ship(int hum) {
+    public Ship(int hum, ArrayList<Drawable> a) {
         player = hum;
         if (player == 1) {
         this.xPos = 20;
@@ -47,16 +50,16 @@ public final class Ship implements Drawable {
         this.health = 100;
         }
         
-        
+        list = a;
         if (player == 1) {
          try {    
-        shipAv = ImageIO.read(getClass().getResource("playerOne.jpg"));
+        shipAv = ImageIO.read(getClass().getResource("playerOne.png"));
         } catch (IOException e) {
             System.out.println("Sprite image loading error - shipAv Player 1");
         } }
         else if (player == 2) {
             try {
-        shipAv = ImageIO.read(getClass().getResource("playerTwo.jpg"));
+        shipAv = ImageIO.read(getClass().getResource("playerTwo.png"));
             } catch (IOException e) {
                 System.out.println("Sprite image loading error - shipAv Player 2");
             }
@@ -77,41 +80,37 @@ public final class Ship implements Drawable {
     /**
      * Will decrease y by 1 px by default, thus moving object 1px on screen
      */
-    @Override
     public void moveUp() {
-        yPos = yPos-2;
+        yPos = yPos-5;
         
     }
     
     /**
      * Will increase y by 1 px by default, thus moving object 1px on screen
      */
-    @Override
     public void moveDown() {
-        yPos = yPos+2;
+        yPos = yPos+5;
         
     }
     
     /**
      * Will increase x by 1 px by default, thus moving object 1px on screen
      */
-    @Override
     public void moveRight() {
-        xPos = xPos+2;
+        xPos = xPos+5;
        
     }
     
     /**
      * Will decrease x by 1 px by default, thus moving object 1px on screen
      */
-    @Override
     public void moveLeft() {
-         xPos = xPos-2;
+         xPos = xPos-5;
          
     }
     
     public void shoot() {
-        //this would create an instance of the bullet class
+        list.add( new Bullet (xPos, yPos, 20, 20, 3, 5));
     }
     
     public void takeDamage(int damage) {
@@ -146,13 +145,11 @@ public final class Ship implements Drawable {
     @Override
     public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
-        
-      
     }
 
     @Override
     public void animate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }
