@@ -24,6 +24,8 @@ import java.util.logging.Logger;
 public class Game extends Canvas {
     int player;
     Ship avatar;
+    animateThread thread;
+    ArrayList<Drawable> list = new ArrayList<Drawable>();
     
     
     boolean window = true;
@@ -38,6 +40,7 @@ public class Game extends Canvas {
         setSize(800,450);
         
         avatar = new Ship(player);
+        list.add(avatar);
         repaint();
         
        
@@ -183,7 +186,10 @@ public class Game extends Canvas {
     @Override
     public void paint(Graphics g) {
         
-        avatar.draw(g);
+        for ( Drawable a : list)
+        {
+            a.draw(g);
+        }
         
        
     }
