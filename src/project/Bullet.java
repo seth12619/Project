@@ -34,7 +34,11 @@ public class Bullet implements Drawable{
         } 
   }
 
-  @Override
+    /**
+     *
+     * @param g
+     */
+    @Override
         public void draw(Graphics g) {
         g.drawImage(bulAv, xPos, yPos, null);
     }

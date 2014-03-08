@@ -21,20 +21,23 @@ import java.util.*;
 public final class Ship implements Drawable {
     Color shipColor;
     private BufferedImage shipAv; //Ship's image
+    private BufferedImage bullet; //bullet's image
     
-    
+    int bulletNu;
     int xPos; //x position of image
     int yPos; // y position of image
     int hBLength; //length of hit box
     int hBWidth; //width of hit box
     int health; //how much damage before going dead
     int player;
-    ArrayList<Drawable> list;
+    public ArrayList<Drawable> list = new ArrayList<>();
     
-
+   
     
     //parameter - ArrayList<Drawable> a
     public Ship(int hum) {
+        bulletNu = 0;
+        
         player = hum;
         if (player == 1) {
         this.xPos = 20;
@@ -64,11 +67,9 @@ public final class Ship implements Drawable {
             } catch (IOException e) {
                 System.out.println("Sprite image loading error - shipAv Player 2");
             }
-            
-     
         }
         
-        
+         
         //draw the hitbox here
     }
     
@@ -115,7 +116,9 @@ public final class Ship implements Drawable {
     }
     
     public void shoot() {
-        list.add( new Bullet (xPos, yPos, 20, 20, 3, 5));
+        list.add( new Bullet (xPos -1, yPos + 1, 20, 20, 3, 5));
+        
+        
     }
     
     public void takeDamage(int damage) {
@@ -150,6 +153,10 @@ public final class Ship implements Drawable {
     @Override
         public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
+        
+        for (int i = 0; i < list.size(); i++) {
+        list.get(i).draw(g);
+                }
     }
 
     @Override

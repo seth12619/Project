@@ -100,9 +100,11 @@ public class Game extends Canvas {
                     } */
                     repaint();        
                 }
-                 if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
+                 else if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
                     avatar.shoot();
-                    System.out.println("Sex");
+                    
+                    System.out.println("Pew Pew Pew!");
+                    repaint();
                 }
                 
                  
@@ -110,19 +112,6 @@ public class Game extends Canvas {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-              keysPressed.remove(KeyEvent.VK_UP);
-                }
-                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                  keysPressed.remove(KeyEvent.VK_DOWN);
-                }
-                else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                  keysPressed.remove(KeyEvent.VK_RIGHT);
-                }
-                else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                  keysPressed.remove(KeyEvent.VK_LEFT);
-                }
-
                 
             }
       
