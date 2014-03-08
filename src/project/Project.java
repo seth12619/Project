@@ -48,13 +48,9 @@ public class Project extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     (new Thread(new createThread("client"))).start();
-                    try { 
-                        final Game start = new Game(2);
-                        start.join();
-                        add(start, BorderLayout.NORTH);
-                    } catch (IOException ex) {
-                        System.out.println("Fatal Error!");
-                    }
+                    final Game start = new Game(2);
+                    start.join();
+                    add(start, BorderLayout.NORTH);
                     
                     menu.setVisible(false);
                 }
@@ -64,27 +60,16 @@ public class Project extends JFrame {
             create.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    
-                      try {
-                            //should start up server
-                            
-                            (new Thread(new createThread("server"))).start();
-                          //  (new Thread(new createThread("client"))).start(); //create client for server
-                            final Game start = new Game(1); 
-                            start.create();
-                            add(start, BorderLayout.NORTH);
-                            
-                            //Should set WindowStatus to false upon closing
-                               addWindowListener(new WindowAdapter() {
-                                     @Override
-                                     public void windowClosing(WindowEvent e) {
-                                         start.setWindowStatus();
-                                       }
-                                     });
-                            
-                      } catch (IOException ex) {
-                         System.out.println("Error");
-                       }
+                    (new Thread(new createThread("server"))).start();
+                    final Game start = new Game(1);
+                    start.create();
+                    add(start, BorderLayout.NORTH);
+                    addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosing(WindowEvent e) {
+                            start.setWindowStatus();
+                        }
+                    });
                       
                     menu.setVisible(false);
                     

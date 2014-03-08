@@ -32,7 +32,7 @@ public class Game extends Canvas {
     
   //  final Ship avatar = new Ship();
     
-    public Game(int person) throws IOException {
+    public Game(int person) {
         player = person;
         
         setBackground(Color.WHITE);
@@ -120,20 +120,12 @@ public class Game extends Canvas {
                 else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                   keysPressed.remove(KeyEvent.VK_LEFT);
                 }
-                for (int i = 0; i == keysPressed.size(); i++) {
-                    System.out.println(keysPressed.get(i));
-                }
-                
-                
+
                 
             }
-           
-           
-           
+      
        });
-        
-        
-     
+
        setVisible(true);
     }
     
