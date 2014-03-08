@@ -1,6 +1,10 @@
+package project;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.*;
+
+
 
 /**
  *
@@ -19,6 +23,7 @@ ArrayList <Drawable> list;
     @Override
     public void run() { 
             //stub stuff it should do
+        while (true) {
             for ( Drawable a : list)
             {
                 a.animate();
@@ -27,6 +32,7 @@ ArrayList <Drawable> list;
                 Thread.sleep(1);  //will make thread sleep
             } catch (InterruptedException ex) {
                 System.out.println("Thread's sleep thingie was interrupted");
+         }
         }
         
         
