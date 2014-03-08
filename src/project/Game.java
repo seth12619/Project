@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -95,9 +96,12 @@ public class Game extends Canvas {
                     if (keysPressed.contains(KeyEvent.VK_RIGHT)) {
                         avatar.moveRight();
                     }
-                    repaint();
-                
-                } 
+                    repaint();        
+                }
+                 else if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
+                    avatar.shoot();
+                    System.out.println("Sex");
+                }
                 
                  
             }
