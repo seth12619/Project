@@ -6,9 +6,6 @@
 
 package project;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -20,9 +17,7 @@ import java.net.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
+
 
 /**
  *
@@ -30,56 +25,29 @@ import org.lwjgl.opengl.DisplayMode;
  */
 
 
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas {
     int player;
     Ship avatar;
     animateThread thread;
     ArrayList<Drawable> list = new ArrayList<Drawable>();
    
+
+    boolean window = true;
+   
     
-    public Game(int person) throws LWJGLException {
+    public Game(int person) {
         player = person;
         
         setBackground(Color.WHITE);
         setSize(800,450);
-       
-
         
         avatar = new Ship(player);
         list.add(avatar);
         repaint();
-        ///
-        try {
-	    Display.setDisplayMode(new DisplayMode(800, 600));
-	    Display.create();
-	} catch (LWJGLException e) {
-	    e.printStackTrace();
-	    System.exit(0);
-	}
-
-	
-
-        while (!Display.isCloseRequested()) {
- 
-	    
-	    Display.update();
-            
-	}
-
-	Display.destroy();
-        System.exit(1);
+        
+   
         
         
-        
-        ///
-      
-        
-       while(Keyboard.next()) {
-           processArrowKeys();
-       }
-       
-       
-
         /**
          * Note: Add collision so the avatar sprite ship won't go over bounds.
          */
@@ -93,7 +61,27 @@ public class Game extends Canvas implements Runnable {
             @Override
             public void keyPressed(KeyEvent e) {
                 
-                if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
+                    avatar.moveLeft();       
+                  
+                    repaint();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    avatar.moveRight();
+              
+                    repaint();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    avatar.moveUp();
+                
+                    repaint();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    avatar.moveDown();
+                
+                    repaint();        
+                }
+                 else if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
                     avatar.shoot();
                     
                     System.out.println("Pew Pew Pew!");
@@ -145,29 +133,6 @@ public class Game extends Canvas implements Runnable {
         repaint();
     }
     
-    /**
-     * Method below makes use of the LWJGT third party library's arrow key constructors
-     */
-     public final void processArrowKeys() {
-    if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-     avatar.moveDown();
-     repaint();      
-    }
-    if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-      avatar.moveUp();
-      repaint();
-    }
-    
-    if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-     avatar.moveLeft();       
-     repaint();
-    }
-    if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-     avatar.moveRight();
-     repaint();
-    }
-  }
-    
     
     public String Test(String Input) {
         String potato;
@@ -181,7 +146,9 @@ public class Game extends Canvas implements Runnable {
     /**
      * This method will setWindow status to false upon closing of the JFrame, to stop all threads or servers
      */
-   
+    public void setWindowStatus() {
+    window = false;
+}
     
     /**
      * The two methods below will set what player this is; it will also help in movement methods
@@ -204,11 +171,6 @@ public class Game extends Canvas implements Runnable {
         }
         
        
-    }
-
-    @Override
-    public void run() {
-         processArrowKeys();
     }
 
 }

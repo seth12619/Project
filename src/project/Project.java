@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.*;
-import org.lwjgl.LWJGLException;
 
 /**
  *
@@ -48,18 +47,12 @@ public class Project extends JFrame {
             join.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    setVisible(false);
                     (new Thread(new createThread("client"))).start();
-                    Game start = null;
-                    try {
-                        start = new Game(2);
-                    } catch (LWJGLException ex) {
-                        System.out.println("LWJGLE Error!");
-                    }
+                    final Game start = new Game(2);
                     start.join();
                     add(start, BorderLayout.NORTH);
                     
-                    
+                    menu.setVisible(false);
                 }
             });
         
@@ -67,19 +60,18 @@ public class Project extends JFrame {
             create.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    setVisible(false);
                     (new Thread(new createThread("server"))).start();
-                    Game start = null;
-                    try {
-                        start = new Game(1);
-                    } catch (LWJGLException ex) {
-                        System.out.println("LWJGLE Error!");
-                    }
+                    final Game start = new Game(1);
                     start.create();
                     add(start, BorderLayout.NORTH);
-                    
+                    addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosing(WindowEvent e) {
+                            start.setWindowStatus();
+                        }
+                    });
                       
-                    
+                    menu.setVisible(false);
                     
                 }
             });
