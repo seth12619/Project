@@ -24,11 +24,10 @@ import java.util.logging.Logger;
 public class Game extends Canvas {
     int player;
     Ship avatar;
-    private final Action right;
-    private final Action up;
+    
     
     boolean window = true;
-    
+    ArrayList keysPressed = new ArrayList<>();
     
   //  final Ship avatar = new Ship();
     
@@ -41,9 +40,7 @@ public class Game extends Canvas {
         avatar = new Ship(player);
         repaint();
         
-        right = new RightKey();
-        up = new UpKey();
-        
+       
        
         
         /**
@@ -58,28 +55,73 @@ public class Game extends Canvas {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    avatar.moveLeft();
-
+                keysPressed.add(e.getKeyCode());
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
+                    avatar.moveLeft();       
+                    if (keysPressed.contains(KeyEvent.VK_UP)) {
+                        avatar.moveUp();
+                    }
+                    if (keysPressed.contains(KeyEvent.VK_DOWN)) {
+                        avatar.moveDown();
+                    }
+                    
                     repaint();
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     avatar.moveRight();
+                    if (keysPressed.contains(KeyEvent.VK_UP)) {
+                        avatar.moveUp();
+                    }
+                    if (keysPressed.contains(KeyEvent.VK_DOWN)) {
+                        avatar.moveDown();
+                    }  
                     repaint();
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_UP) {
                     avatar.moveUp();
+                    if (keysPressed.contains(KeyEvent.VK_LEFT)) {
+                        avatar.moveLeft();
+                    }
+                    if (keysPressed.contains(KeyEvent.VK_RIGHT)) {
+                        avatar.moveRight();
+                    }
                     repaint();
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     avatar.moveDown();
+                    if (keysPressed.contains(KeyEvent.VK_LEFT)) {
+                        avatar.moveLeft();
+                    }
+                    if (keysPressed.contains(KeyEvent.VK_RIGHT)) {
+                        avatar.moveRight();
+                    }
                     repaint();
-                }
+                
+                } 
+                
+                 
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-              
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+              keysPressed.remove(KeyEvent.VK_UP);
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                  keysPressed.remove(KeyEvent.VK_DOWN);
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                  keysPressed.remove(KeyEvent.VK_RIGHT);
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                  keysPressed.remove(KeyEvent.VK_LEFT);
+                }
+                for (int i = 0; i == keysPressed.size(); i++) {
+                    System.out.println(keysPressed.get(i));
+                }
+                
+                
+                
             }
            
            
@@ -132,25 +174,6 @@ public class Game extends Canvas {
     public void setWindowStatus() {
     window = false;
 }
-    
-    /**
-     * the ones below help in KeyBinding, they should define what happens when certain keys are presed
-     */
-    public class RightKey extends AbstractAction {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-           avatar.moveRight();
-        }
-    }
-    
-        public class UpKey extends AbstractAction {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-           avatar.moveUp();
-        }
-    }
     
     /**
      * The two methods below will set what player this is; it will also help in movement methods
