@@ -6,14 +6,23 @@
 
 package project;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.*;
 import javax.swing.*;
-import java.awt.*;
+
 import java.awt.event.*;
 import java.net.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 
 /**
  *
@@ -21,33 +30,56 @@ import java.util.logging.Logger;
  */
 
 
-public class Game extends Canvas {
+public class Game extends Canvas implements Runnable {
     int player;
     Ship avatar;
     animateThread thread;
     ArrayList<Drawable> list = new ArrayList<Drawable>();
+   
     
-    private KeyState[] keys = null;
-    
-    
-    boolean window = true;
-    ArrayList keysPressed = new ArrayList<>();
-    
-  //  final Ship avatar = new Ship();
-    
-    public Game(int person) {
+    public Game(int person) throws LWJGLException {
         player = person;
         
         setBackground(Color.WHITE);
         setSize(800,450);
+       
+
         
         avatar = new Ship(player);
         list.add(avatar);
         repaint();
+        ///
+        try {
+	    Display.setDisplayMode(new DisplayMode(800, 600));
+	    Display.create();
+	} catch (LWJGLException e) {
+	    e.printStackTrace();
+	    System.exit(0);
+	}
+
+	
+
+        while (!Display.isCloseRequested()) {
+ 
+	    
+	    Display.update();
+            
+	}
+
+	Display.destroy();
+        System.exit(1);
         
+        
+        
+        ///
+      
+        
+       while(Keyboard.next()) {
+           processArrowKeys();
+       }
        
        
-        
+
         /**
          * Note: Add collision so the avatar sprite ship won't go over bounds.
          */
@@ -60,49 +92,8 @@ public class Game extends Canvas {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                keysPressed.add(e.getKeyCode());
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
-                    avatar.moveLeft();       
-                   /* if (keysPressed.contains(KeyEvent.VK_UP)) {
-                        avatar.moveUp();
-                    }
-                    if (keysPressed.contains(KeyEvent.VK_DOWN)) {
-                        avatar.moveDown();
-                    } */
-                    
-                    repaint();
-                }
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    avatar.moveRight();
-                /*    if (keysPressed.contains(KeyEvent.VK_UP)) {
-                        avatar.moveUp();
-                    }
-                    if (keysPressed.contains(KeyEvent.VK_DOWN)) {
-                        avatar.moveDown();
-                    }  */
-                    repaint();
-                }
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    avatar.moveUp();
-                  /*  if (keysPressed.contains(KeyEvent.VK_LEFT)) {
-                        avatar.moveLeft();
-                    }
-                    if (keysPressed.contains(KeyEvent.VK_RIGHT)) {
-                        avatar.moveRight();
-                    } */
-                    repaint();
-                }
-                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    avatar.moveDown();
-                  /*  if (keysPressed.contains(KeyEvent.VK_LEFT)) {
-                        avatar.moveLeft();
-                    }
-                    if (keysPressed.contains(KeyEvent.VK_RIGHT)) {
-                        avatar.moveRight();
-                    } */
-                    repaint();        
-                }
-                 else if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
+                
+                if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
                     avatar.shoot();
                     
                     System.out.println("Pew Pew Pew!");
@@ -117,10 +108,11 @@ public class Game extends Canvas {
                 
             }
       
-       });
+       }); 
 
        setVisible(true);
-    }
+      }
+
     
      /**
       * This method will set Player as player one
@@ -136,6 +128,12 @@ public class Game extends Canvas {
         repaint();
     }
     
+   
+    
+    
+        
+   
+    
     /**
      * This method will set player as player two
      * 
@@ -146,6 +144,29 @@ public class Game extends Canvas {
         avatar.setPlayer(player);
         repaint();
     }
+    
+    /**
+     * Method below makes use of the LWJGT third party library's arrow key constructors
+     */
+     public final void processArrowKeys() {
+    if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+     avatar.moveDown();
+     repaint();      
+    }
+    if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+      avatar.moveUp();
+      repaint();
+    }
+    
+    if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+     avatar.moveLeft();       
+     repaint();
+    }
+    if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+     avatar.moveRight();
+     repaint();
+    }
+  }
     
     
     public String Test(String Input) {
@@ -160,9 +181,7 @@ public class Game extends Canvas {
     /**
      * This method will setWindow status to false upon closing of the JFrame, to stop all threads or servers
      */
-    public void setWindowStatus() {
-    window = false;
-}
+   
     
     /**
      * The two methods below will set what player this is; it will also help in movement methods
@@ -185,6 +204,11 @@ public class Game extends Canvas {
         }
         
        
+    }
+
+    @Override
+    public void run() {
+         processArrowKeys();
     }
 
 }
