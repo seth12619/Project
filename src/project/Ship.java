@@ -120,7 +120,7 @@ public final class Ship implements Drawable {
     
     public void shoot() {
         bulletxPos = xPos +5; bulletyPos = yPos+2;
-        list.add( new Bullet (bulletxPos, bulletyPos, 20, 20, 3, 5));
+        list.add( new Bullet (bulletxPos, bulletyPos, 20, 20, 2, 5));
         
         
         
