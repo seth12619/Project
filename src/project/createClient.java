@@ -61,12 +61,7 @@ public class createClient implements Runnable {
            } catch (IOException ex) {
                System.out.println("Error in making Socket");
            }
-        
-          
-            //end of stuff to send
-         
-           
-           
+     
              try {
             in = new Scanner(new InputStreamReader(sock.getInputStream()));
         } catch (IOException ex) {
