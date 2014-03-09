@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 public class Game extends Canvas{
     int player;
     Ship avatar;
+    Ship avatarTwo;
     animateThread thread;
     ArrayList<Drawable> list = new ArrayList<Drawable>();
    
@@ -48,8 +49,13 @@ public class Game extends Canvas{
         setBackground(Color.WHITE);
         setSize(800,450);
         
-        avatar = new Ship(player, list);
+        
+        avatar = new Ship(1, list);
+        
+        avatarTwo = new Ship(2, list);
+        
         list.add(avatar);
+        list.add(avatarTwo);
         
         if (player == 1) {
             create();
@@ -96,30 +102,60 @@ t.start();
             public void keyPressed(KeyEvent e) {
                 
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
-                    avatar.moveLeft();       
+                    if (player == 1) {
+                        avatar.moveLeft();
+                        serve.setActionDone("moveLeft");
+                    }
+                    else if (player == 2) {
+                        avatarTwo.moveLeft();
+                        client.setCommand("moveLeft");
+                    }   
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    avatar.moveRight();
+                    
                     if (player == 1) {
+                        avatar.moveRight();
                         serve.setActionDone("moveRight");
                     }
                     else if (player == 2) {
+                        avatarTwo.moveRight();
                         client.setCommand("moveRight");
                     }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    avatar.moveUp();
+                    if (player == 1) {
+                        avatar.moveUp();
+                        serve.setActionDone("moveUp");
+                    }
+                    else if (player == 2) {
+                        avatarTwo.moveUp();
+                        client.setCommand("moveUp");
+                    }
                 
                     //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    avatar.moveDown();
+                    if (player == 1) {
+                        avatar.moveDown();
+                        serve.setActionDone("moveDown");
+                    }
+                    else if (player == 2) {
+                        avatarTwo.moveDown();
+                        client.setCommand("moveDown");
+                    }
                 
                     //repaint();        
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
 
-                     avatar.shoot();
+                     if (player == 1) {
+                        avatar.shoot();
+                        serve.setActionDone("shoot");
+                    }
+                    else if (player == 2) {
+                        avatarTwo.shoot();
+                        client.setCommand("shoot");
+                    }
 
                 }
                      
