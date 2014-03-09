@@ -23,14 +23,11 @@ public class createClient implements Runnable {
     Socket sock;
     PrintStream testOut;
     Scanner in;
-    InetAddress ip = null;
+    private String ip;
+    
     
     String command;
     
-    
-      
-        ObjectOutputStream sendCommand = null; //stuff to be sent
-        ObjectInputStream receiveCommand = null; //stuff to receive
 
     public createClient(String comm) {
         
@@ -41,63 +38,30 @@ public class createClient implements Runnable {
     @Override
     public void run() {
        //Client below
-           
-        
-        
+        InetAddress host;
+        host = null;
         try {
-            ip = InetAddress.getLocalHost();
+            host = InetAddress.getLocalHost();
         } catch (UnknownHostException ex) {
-            System.out.println("Error in obtaining local IP address");
+            System.out.println("Error in getting InetAddress;");
         }
+        ip = host.getHostAddress();
+        
+       
+        
+       
                
-               while (true) {
-            try {
-                sendCommand = new ObjectOutputStream(sock.getOutputStream());
-            } catch (IOException ex) {
-                System.out.println("Error in Client - sendCommand/Outputstream");
-            }
-            try {
-                //stuff to send
-           
-            sendCommand.writeObject(command);
-            } catch (IOException ex) {
-               System.out.println("Error in sending Command - Client");
-            }
-            try {
-                //read stuff from server
-                receiveCommand = new ObjectInputStream(sock.getInputStream());
-            } catch (IOException ex) {
-                System.out.println("Error in receiving command - client");
-            }
-            String action = null;
-            try {
-                action = (String)receiveCommand.readObject();
-            } catch (IOException ex) {
-                System.out.println("Error - receiving command - IOException");
-            } catch (ClassNotFoundException ex) {
-                System.out.println("Error - receiving command - ClassNotFoundException");;
-            }
-            if (action.equals("moveRight")) {
-                System.out.println("right");
-            }
-            if (action.equals("moveLeft")) {
-                
-            }
-            if (action.equals("moveUp")) {
-                
-            }
-            if (action.equals("moveDown")) {
-                
-            }
-            
-            
-            //end of stuff to send
-         
-           try {
+               while (true) {           
+              try {
                sock = new Socket(ip, 8888);
            } catch (IOException ex) {
                System.out.println("Error in making Socket");
            }
+        
+          
+            //end of stuff to send
+         
+           
            
              try {
             in = new Scanner(new InputStreamReader(sock.getInputStream()));
@@ -113,8 +77,18 @@ public class createClient implements Runnable {
        testOut.println("Test hello");
        testOut.flush();
        String t = in.nextLine(); //test message from server
+       
+       if (t.equals("moveRight")) {
+           System.out.println("right");
+       }
+       
        System.out.println(t);
-      
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+               System.out.println("Thread sleep - client interrupted");
+            }
+        
                    
            }
                    

@@ -62,6 +62,11 @@ public class Project extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     
                     final Game start = new Game(1);
+                    try {
+                        start.create();
+                    } catch (IOException ex) {
+                        System.out.println("Fatal Error - create game error");
+                    }
                     add(start, BorderLayout.NORTH);
                     addWindowListener(new WindowAdapter() {
                         @Override

@@ -90,13 +90,10 @@ t.start();
                 
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
                     avatar.moveLeft();       
-                    
-                    //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     avatar.moveRight();
                     setCommand("moveRight");
-                    //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     avatar.moveUp();
@@ -109,25 +106,9 @@ t.start();
                     //repaint();        
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
-                     //int delay = 50;
+
                      avatar.shoot();
-                    // ActionListener doIt = new ActionListener() {
-                       
-                        /*
-                         @Override
-                         public void actionPerformed(ActionEvent e) {
-                            avatar.animate();
-                             repaint();
-                         }
-                     };
-                      if (timeCheck.equals("okay")) { 
-                       myTimer = new javax.swing.Timer(delay, doIt);
-                        timeCheck = "NO";
-                        System.out.println("Pew Pew Pew!");
-                        repaint();
-                      }
-                      myTimer.start();
-                      */
+
                 }
                      
                 
@@ -158,10 +139,20 @@ t.start();
          setPlayerOne();
          String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
          avatar.setPlayer(player);
+       Thread j = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    serve = new Server(command);
+                } catch (IOException ex) {
+                    System.out.println("Error IOException Server");
+                }
+            }
+        };
+       j.start();
+         
        
-         serve = new Server(command);
-       
-        repaint();
+        
     }
     
    
@@ -178,9 +169,15 @@ t.start();
         setPlayerTwo();
         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
         avatar.setPlayer(player);
-        client = new createClient("client");
+        Thread j = new Thread() {
+            @Override
+            public void run() {
+                 client = new createClient("client");
+            }
+        };
+       j.start();
         
-        repaint();
+        
     }
     
     
