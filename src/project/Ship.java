@@ -30,7 +30,7 @@ public final class Ship implements Drawable {
     int hBWidth; //width of hit box
     int health; //how much damage before going dead
     int player;
-    public ArrayList<Drawable> list = new ArrayList<>();
+    public ArrayList<Drawable> list;
     
    int bulletxPos;
    int bulletyPos;
@@ -38,9 +38,10 @@ public final class Ship implements Drawable {
    
     
     //parameter - ArrayList<Drawable> a
-    public Ship(int hum) {
+    public Ship(int hum, ArrayList<Drawable> a) {
         bulletNu = -1;
         
+        this.list = a;
         player = hum;
         if (player == 1) {
         this.xPos = 20;
@@ -119,14 +120,9 @@ public final class Ship implements Drawable {
     }
     
     public void shoot() {
-        bulletxPos = xPos +5; bulletyPos = yPos+2;
-        list.add( new Bullet (bulletxPos, bulletyPos, 20, 20, 2, 5));
-        
-        
-        
-        bulletNu++;
-        
-        
+        //bulletxPos = xPos +5; bulletyPos = yPos+2;
+        list.add( new Bullet (xPos +90, yPos+45, 20, 20, 10, 5, list)); 
+        //bulletNu++;
     }
     
     public void takeDamage(int damage) {
@@ -162,15 +158,14 @@ public final class Ship implements Drawable {
         public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
         
-        for (int i = 0; i < list.size(); i++) {
-        list.get(i).draw(g);
-                }
+        /*for (int i = 0; i < list.size(); i++) {
+            list.get(i).draw(g);
+                }*/
     }
 
     @Override
         public void animate() {
-            
-        list.get(bulletNu).animate();
+        //list.get(bulletNu).animate();
     }
     
 }
