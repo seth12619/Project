@@ -42,7 +42,7 @@ public class Game extends Canvas{
     String command;
    
     
-    public Game(int person) {
+    public Game(int person) throws IOException {
         player = person;
         
         setBackground(Color.WHITE);
@@ -50,6 +50,13 @@ public class Game extends Canvas{
         
         avatar = new Ship(player, list);
         list.add(avatar);
+        
+        if (player == 1) {
+            create();
+        }
+        else if (player == 2) {
+            join();
+        }
    
          Thread t = new Thread(){
     @Override
@@ -93,7 +100,12 @@ t.start();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     avatar.moveRight();
-                    setCommand("moveRight");
+                    if (player == 1) {
+                        serve.setActionDone("moveRight");
+                    }
+                    else if (player == 2) {
+                        client.setCommand("moveRight");
+                    }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     avatar.moveUp();
@@ -143,7 +155,7 @@ t.start();
             @Override
             public void run() {
                 try {
-                    serve = new Server(command);
+                    serve = new Server();
                 } catch (IOException ex) {
                     System.out.println("Error IOException Server");
                 }

@@ -48,8 +48,13 @@ public class Project extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     
-                    final Game start = new Game(2);
-                    start.join();
+                    Game start = null;
+                    try {
+                        start = new Game(2);
+                    } catch (IOException ex) {
+                        
+                    }
+                 
                     add(start, BorderLayout.NORTH);
                     
                     menu.setVisible(false);
@@ -61,20 +66,15 @@ public class Project extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     
-                    final Game start = new Game(1);
+                    Game start = null;
                     try {
-                        start.create();
+                        start = new Game(1);
                     } catch (IOException ex) {
-                        System.out.println("Fatal Error - create game error");
-                    }
-                    add(start, BorderLayout.NORTH);
-                    addWindowListener(new WindowAdapter() {
-                        @Override
-                        public void windowClosing(WindowEvent e) {
-                            start.setWindowStatus();
-                        }
-                    });
                       
+                    }
+                 
+                    add(start, BorderLayout.NORTH);
+ 
                     menu.setVisible(false);
                     
                 }

@@ -24,12 +24,16 @@ public final class Server implements Runnable {
      Scanner sc;
      PrintStream out;
   
-    public Server(String action) throws IOException {
+    public Server() throws IOException {
         
-        actionDone = action;
+        actionDone = "waiting...";
         Scanner sc = null;
         PrintStream out = null;
         run();
+    }
+    
+    public void setActionDone(String act) {
+        actionDone = act;
     }
    
     @Override
@@ -68,7 +72,7 @@ public final class Server implements Runnable {
             
             String lala = sc.nextLine();
             System.out.println(lala);
-            out.println("connect success");
+            out.println(actionDone);
             out.flush();
               try {
                   Thread.sleep(100);

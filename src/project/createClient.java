@@ -35,6 +35,10 @@ public class createClient implements Runnable {
         run();
     }
     
+    public void setCommand (String act) {
+        command = act;
+    }
+    
     @Override
     public void run() {
        //Client below
