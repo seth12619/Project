@@ -35,6 +35,10 @@ public final class Server implements Runnable {
     public void setActionDone(String act) {
         actionDone = act;
     }
+    
+    public String getAction () {
+        return actionDone;
+    }
    
     @Override
     public void run() {
@@ -72,7 +76,7 @@ public final class Server implements Runnable {
             
             String lala = sc.nextLine();
             System.out.println(lala);
-            out.println(actionDone);
+            out.println(getAction());
             out.flush();
               try {
                   Thread.sleep(100);

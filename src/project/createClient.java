@@ -82,9 +82,7 @@ public class createClient implements Runnable {
        testOut.flush();
        String t = in.nextLine(); //test message from server
        
-       if (t.equals("moveRight")) {
-           System.out.println("right");
-       }
+       
        
        System.out.println(t);
             try {

@@ -157,10 +157,7 @@ public final class Ship implements Drawable {
     @Override
         public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
-        
-        /*for (int i = 0; i < list.size(); i++) {
-            list.get(i).draw(g);
-                }*/
+      
     }
 
     @Override

@@ -44,6 +44,7 @@ public class Game extends Canvas{
    
     
     public Game(int person) throws IOException {
+        
         player = person;
         
         setBackground(Color.WHITE);
@@ -51,7 +52,6 @@ public class Game extends Canvas{
         
         
         avatar = new Ship(1, list);
-        
         avatarTwo = new Ship(2, list);
         
         list.add(avatar);
@@ -63,7 +63,7 @@ public class Game extends Canvas{
         else if (player == 2) {
             join();
         }
-   
+  
          Thread t = new Thread(){
     @Override
     public void run() { 
