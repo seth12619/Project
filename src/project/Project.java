@@ -47,7 +47,7 @@ public class Project extends JFrame {
             join.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    (new Thread(new createThread("client"))).start();
+                    
                     final Game start = new Game(2);
                     start.join();
                     add(start, BorderLayout.NORTH);
@@ -60,9 +60,8 @@ public class Project extends JFrame {
             create.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    (new Thread(new createThread("server"))).start();
+                    
                     final Game start = new Game(1);
-                    start.create();
                     add(start, BorderLayout.NORTH);
                     addWindowListener(new WindowAdapter() {
                         @Override

@@ -61,13 +61,13 @@ public final class Ship implements Drawable {
        // list = a;
         if (player == 1) {
          try {    
-        shipAv = ImageIO.read(getClass().getResource("playerOne.jpg"));
+        shipAv = ImageIO.read(getClass().getResource("playerOne.png"));
         } catch (IOException e) {
             System.out.println("Sprite image loading error - shipAv Player 1");
         } }
         else if (player == 2) {
             try {
-        shipAv = ImageIO.read(getClass().getResource("playerTwo.jpg"));
+        shipAv = ImageIO.read(getClass().getResource("playerTwo.png"));
             } catch (IOException e) {
                 System.out.println("Sprite image loading error - shipAv Player 2");
             }

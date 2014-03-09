@@ -36,7 +36,10 @@ public class Game extends Canvas{
     
     boolean window = true;
    
+    Server serve;
+    createClient client;
     
+    String command;
    
     
     public Game(int person) {
@@ -87,12 +90,12 @@ t.start();
                 
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
                     avatar.moveLeft();       
-                  
+                    
                     //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     avatar.moveRight();
-              
+                    setCommand("moveRight");
                     //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -140,18 +143,23 @@ t.start();
 
        setVisible(true);
       }
+    
+    public void setCommand(String action) {
+        command = action;
+    }
 
     
      /**
       * This method will set Player as player one
      * 
+     * @throws java.io.IOException
      */
-    public void create() {
+    public void create() throws IOException {
          setPlayerOne();
          String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
          avatar.setPlayer(player);
-        
        
+         serve = new Server(command);
        
         repaint();
     }
@@ -170,6 +178,8 @@ t.start();
         setPlayerTwo();
         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
         avatar.setPlayer(player);
+        client = new createClient("client");
+        
         repaint();
     }
     
