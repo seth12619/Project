@@ -52,7 +52,7 @@ public final class Ship implements Drawable {
         } 
         else if (player == 2) {
         this.xPos = 20;
-        this.yPos = 120;
+        this.yPos = 280;
         this.hBLength =60;
         this.hBWidth = 60;
         this.health = 100;
