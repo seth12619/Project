@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  */
 
 
-public class Game extends Canvas {
+public class Game extends Canvas{
     int player;
     Ship avatar;
     animateThread thread;
@@ -37,18 +37,40 @@ public class Game extends Canvas {
     boolean window = true;
    
     
+   
+    
     public Game(int person) {
         player = person;
         
         setBackground(Color.WHITE);
         setSize(800,450);
         
-        avatar = new Ship(player);
+        avatar = new Ship(player, list);
         list.add(avatar);
-        repaint();
-        
    
+         Thread t = new Thread(){
+    @Override
+    public void run() { 
+            //stub stuff it should do
+        while (true) {
+           for ( Drawable a : list)
+            {
+                a.animate();
+            }
+            repaint();
+            try {
+                Thread.sleep(10);  //will make thread sleep
+            } catch (InterruptedException ex) {
+                System.out.println("Thread's sleep thingie was interrupted");
+         }
+        }
         
+        
+    }
+    
+};
+
+t.start();
         
         /**
          * Note: Add collision so the avatar sprite ship won't go over bounds.
@@ -66,29 +88,29 @@ public class Game extends Canvas {
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
                     avatar.moveLeft();       
                   
-                    repaint();
+                    //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     avatar.moveRight();
               
-                    repaint();
+                    //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     avatar.moveUp();
                 
-                    repaint();
+                    //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     avatar.moveDown();
                 
-                    repaint();        
+                    //repaint();        
                 }
-                 else if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
-                     int delay = 50;
+                if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
+                     //int delay = 50;
                      avatar.shoot();
-                     ActionListener doIt = new ActionListener() {
+                    // ActionListener doIt = new ActionListener() {
                        
-
+                        /*
                          @Override
                          public void actionPerformed(ActionEvent e) {
                             avatar.animate();
@@ -96,12 +118,13 @@ public class Game extends Canvas {
                          }
                      };
                       if (timeCheck.equals("okay")) { 
-                   myTimer = new javax.swing.Timer(delay, doIt);
-                    timeCheck = "NO";
-                    System.out.println("Pew Pew Pew!");
-                    repaint();
+                       myTimer = new javax.swing.Timer(delay, doIt);
+                        timeCheck = "NO";
+                        System.out.println("Pew Pew Pew!");
+                        repaint();
                       }
                       myTimer.start();
+                      */
                 }
                      
                 
