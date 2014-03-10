@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package project;
+ package project;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -30,6 +30,7 @@ public class Game extends Canvas{
     int player;
     Ship avatar;
     Ship avatarTwo;
+    
     animateThread thread;
     ArrayList<Drawable> list = new ArrayList<Drawable>();
    
@@ -40,20 +41,15 @@ public class Game extends Canvas{
     
     boolean window = true;
    
-    Server serve;
-    createClient client;
     
-    String command;
    
     
-    public Game(int person) throws IOException {
-        
+    public Game(int person) {
         player = person;
         
         backbuffer = createImage(800, 450);
         setBackground(Color.WHITE);
         setSize(800,450);
-        
         
         avatar = new Ship(1, list);
         avatarTwo = new Ship(2, list);
@@ -61,30 +57,29 @@ public class Game extends Canvas{
         list.add(avatar);
         list.add(avatarTwo);
         
-        if (player == 1) {
+         if (player == 1) {
             create();
         }
         else if (player == 2) {
             join();
         }
-  
+   
          Thread t = new Thread(){
     @Override
     public void run() { 
             //stub stuff it should do
         while (true) {
-            try
-            {
-               for ( Drawable a : list)
-                {
-                    a.animate();
-                }
-            }
             
-            catch (ConcurrentModificationException ex)
+            try{
+           for ( Drawable a : list)
             {
-                
+                a.animate();
             }
+        }
+        catch (ConcurrentModificationException ex)
+        {
+            
+        }
             repaint();
             try {
                 Thread.sleep(10);  //will make thread sleep
@@ -114,61 +109,54 @@ t.start();
             public void keyPressed(KeyEvent e) {
                 
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
-                    if (player == 1) {
-                        avatar.moveLeft();
-                        serve.setActionDone("moveLeft");
+                    if (avatar.getXPos() >0)
+                    {
+                        avatar.moveLeft();   
                     }
-                    else if (player == 2) {
-                        avatarTwo.moveLeft();
-                        client.setCommand("moveLeft");
-                    }   
+                  
+                    //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    
-                    if (player == 1) {
+                    if (avatar.getXPos() +118 < 800)
+                    {
                         avatar.moveRight();
-                        serve.setActionDone("moveRight");
                     }
-                    else if (player == 2) {
-                        avatarTwo.moveRight();
-                        client.setCommand("moveRight");
-                    }
+                    //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    if (player == 1) {
+                    if(avatar.getYPos() > 0)
+                    {
                         avatar.moveUp();
-                        serve.setActionDone("moveUp");
                     }
-                    else if (player == 2) {
-                        avatarTwo.moveUp();
-                        client.setCommand("moveUp");
-                    }
-                
                     //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    if (player == 1) {
+                    if (avatar.getYPos() + 88 <= 450)
+                    {
                         avatar.moveDown();
-                        serve.setActionDone("moveDown");
                     }
-                    else if (player == 2) {
-                        avatarTwo.moveDown();
-                        client.setCommand("moveDown");
-                    }
-                
                     //repaint();        
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
-
-                     if (player == 1) {
-                        avatar.shoot();
-                        serve.setActionDone("shoot");
-                    }
-                    else if (player == 2) {
-                        avatarTwo.shoot();
-                        client.setCommand("shoot");
-                    }
-
+                     //int delay = 50;
+                     avatar.shoot();
+                    // ActionListener doIt = new ActionListener() {
+                       
+                        /*
+                         @Override
+                         public void actionPerformed(ActionEvent e) {
+                            avatar.animate();
+                             repaint();
+                         }
+                     };
+                      if (timeCheck.equals("okay")) { 
+                       myTimer = new javax.swing.Timer(delay, doIt);
+                        timeCheck = "NO";
+                        System.out.println("Pew Pew Pew!");
+                        repaint();
+                      }
+                      myTimer.start();
+                      */
                 }
                      
                 
@@ -184,39 +172,24 @@ t.start();
 
        setVisible(true);
       }
-      
-      public void update(Graphics g) {
+
+    
+    public void update(Graphics g) {
         paint(g);
     }
-    
-    public void setCommand(String action) {
-        command = action;
-    }
-
     
      /**
       * This method will set Player as player one
      * 
-     * @throws java.io.IOException
      */
-    public void create() throws IOException {
+    public void create() {
          setPlayerOne();
          String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
          avatar.setPlayer(player);
-       Thread j = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    serve = new Server();
-                } catch (IOException ex) {
-                    System.out.println("Error IOException Server");
-                }
-            }
-        };
-       j.start();
-         
-       
         
+       
+       
+        repaint();
     }
     
    
@@ -233,15 +206,7 @@ t.start();
         setPlayerTwo();
         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
         avatar.setPlayer(player);
-        Thread j = new Thread() {
-            @Override
-            public void run() {
-                 client = new createClient("client");
-            }
-        };
-       j.start();
-        
-        
+        repaint();
     }
     
     
@@ -276,23 +241,23 @@ t.start();
     @Override
     public void paint(Graphics g) {
         
+        //if(backbuffer==null) 
         backbuffer = createImage(800, 450);
         Graphics backg = backbuffer.getGraphics();
         
-        
         try
         {
-            for ( Drawable a : list)
-            {
-                a.draw(g);
-            }
-        }
-        
-        catch (ConcurrentModificationException ex)
+        for ( Drawable a : list)
         {
+            a.draw(backg);
         }
+    }
+    
+    catch (ConcurrentModificationException ex)
+    {
+    }
         
-        g.drawImage(backbuffer, 0, 0, this);
+    g.drawImage(backbuffer, 0, 0, this);
        
     }
 

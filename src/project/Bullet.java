@@ -1,6 +1,4 @@
 package project;
-
-
 import java.awt.Graphics;
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +19,7 @@ public class Bullet implements Drawable{
   private int damage;
   private BufferedImage bulAv;
   ArrayList<Drawable> list;
-  static int bulletNumber;
+  static int bulletNumber = 0;
   private int whichBullet;
   
   public Bullet(int xPos, int yPos, int length, int width, int speed, int damage, ArrayList<Drawable> a){
@@ -32,8 +30,8 @@ public class Bullet implements Drawable{
     this.speed = speed;
     this.damage = damage;
     this.list = a;
-    bulletNumber = bulletNumber +1;
     whichBullet = bulletNumber;
+    bulletNumber = bulletNumber +1;
     try {    
         bulAv = ImageIO.read(getClass().getResource("Bullet.png"));
         } catch (IOException e) {

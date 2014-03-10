@@ -42,7 +42,7 @@ public final class Server implements Runnable {
    
     @Override
     public void run() {
-         
+         Socket client = null; //creates socket
           try {
                 server = new ServerSocket( 8888 );
                 
@@ -51,7 +51,7 @@ public final class Server implements Runnable {
             }
         while(true) {
            
-            Socket client = null; //creates socket
+            
           
             
             try {

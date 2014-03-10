@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
- package project;
+package project;
+  
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,9 +52,9 @@ public final class Ship implements Drawable {
         } 
         else if (player == 2) {
         this.xPos = 20;
-        this.yPos = 280;
-        this.hBLength =60;
-        this.hBWidth = 60;
+        this.yPos = 290;
+        this.hBLength =50;
+        this.hBWidth = 100;
         this.health = 100;
         }
         
@@ -121,7 +121,7 @@ public final class Ship implements Drawable {
     
     public void shoot() {
         //bulletxPos = xPos +5; bulletyPos = yPos+2;
-        list.add( new Bullet (xPos +90, yPos+45, 20, 20, 10, 5, list)); 
+        list.add( new Bullet (xPos +90, yPos+30, 40, 20, 15, 10, list)); 
         //bulletNu++;
     }
     
@@ -157,7 +157,10 @@ public final class Ship implements Drawable {
     @Override
         public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
-      
+        
+        /*for (int i = 0; i < list.size(); i++) {
+            list.get(i).draw(g);
+                }*/
     }
 
     @Override
