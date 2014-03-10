@@ -121,9 +121,11 @@ t.start();
                        
                     }
                     else if (player == 2) {
+                         if (avatar.getXPos() >0) {
                         avatarTwo.moveLeft();
                         client.setCommand("moveLeft");
                     }   
+               }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     
@@ -136,38 +138,42 @@ t.start();
                         
                     }
                     else if (player == 2) {
+                        if (avatarTwo.getXPos() +118 < 800) {
                         avatarTwo.moveRight();
                         client.setCommand("moveRight");
+                     }
                     }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     if (player == 1) {
-                       if(avatar.getYPos() > 0)
-                    {
+                       if(avatar.getYPos() > 0) {
                         avatar.moveUp();
                         serve.setActionDone("moveUp");
                     }
                         
                     }
                     else if (player == 2) {
+                        if(avatar.getYPos() > 0) {
                         avatarTwo.moveUp();
                         client.setCommand("moveUp");
+                        }
                     }
                 
                     //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     if (player == 1) {
-                        if (avatar.getYPos() + 88 <= 450)
-                    {
+                        if (avatar.getYPos() + 88 <= 450) {
                         avatar.moveDown();
                         serve.setActionDone("moveDown");
                     }
                         
                     }
                     else if (player == 2) {
+                        if (avatar.getYPos() + 88 <= 450) {
                         avatarTwo.moveDown();
                         client.setCommand("moveDown");
+                        }
                     }
                 
                     //repaint();        
@@ -203,6 +209,7 @@ t.start();
       }
 
     
+    @Override
     public void update(Graphics g) {
         paint(g);
     }
@@ -210,6 +217,7 @@ t.start();
      /**
       * This method will set Player as player one
      * 
+     * @throws java.io.IOException
      */
     public void create() throws IOException {
          setPlayerOne();
