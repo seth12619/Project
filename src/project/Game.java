@@ -121,7 +121,7 @@ t.start();
                        
                     }
                     else if (player == 2) {
-                         if (avatar.getXPos() >0) {
+                         if (avatarTwo.getXPos() >0) {
                         avatarTwo.moveLeft();
                         client.setCommand("moveLeft");
                     }   
@@ -153,7 +153,7 @@ t.start();
                         
                     }
                     else if (player == 2) {
-                        if(avatar.getYPos() > 0) {
+                        if(avatarTwo.getYPos() > 0) {
                         avatarTwo.moveUp();
                         client.setCommand("moveUp");
                         }
@@ -170,7 +170,7 @@ t.start();
                         
                     }
                     else if (player == 2) {
-                        if (avatar.getYPos() + 88 <= 450) {
+                        if (avatarTwo.getYPos() + 88 <= 450) {
                         avatarTwo.moveDown();
                         client.setCommand("moveDown");
                         }
