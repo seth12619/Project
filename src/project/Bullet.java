@@ -57,24 +57,23 @@ public class Bullet implements Drawable{
             }*/
             
             xPos = xPos + speed;
-            /*if (xPos >= 800)
+            if (xPos >= 800)
             {
                 Bullet temp = null;
-                int number = 0;
                 for ( Drawable a : list)
                 {
                     if (a instanceof Bullet)
                     {
                         temp = (Bullet)a;
-                        if (temp.getBullet() == this.whichBullet)
+                        if (temp.getBullet() == this.getBullet())
                         {
-                            list.remove(number);
+                            list.remove(temp);
+                            //System.out.println("Deleted.");
                             break;
                         }
-                        number = number + 1;
                     }
                 }
-            }*/
+            }
     }
     
     public int getBullet()
