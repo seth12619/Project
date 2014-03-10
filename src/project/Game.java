@@ -13,6 +13,7 @@ import java.util.*;
 import javax.swing.*;
 
 import java.awt.event.*;
+import java.awt.Image;
 import java.net.*;
 import java.io.*;
 import java.util.logging.Level;
@@ -35,6 +36,8 @@ public class Game extends Canvas{
     javax.swing.Timer myTimer;
     String timeCheck = "okay";
     
+    Image backbuffer;
+    
     boolean window = true;
    
     Server serve;
@@ -47,6 +50,7 @@ public class Game extends Canvas{
         
         player = person;
         
+        backbuffer = createImage(800, 450);
         setBackground(Color.WHITE);
         setSize(800,450);
         
@@ -69,9 +73,17 @@ public class Game extends Canvas{
     public void run() { 
             //stub stuff it should do
         while (true) {
-           for ( Drawable a : list)
+            try
             {
-                a.animate();
+               for ( Drawable a : list)
+                {
+                    a.animate();
+                }
+            }
+            
+            catch (ConcurrentModificationException ex)
+            {
+                
             }
             repaint();
             try {
@@ -172,6 +184,10 @@ t.start();
 
        setVisible(true);
       }
+      
+      public void update(Graphics g) {
+        paint(g);
+    }
     
     public void setCommand(String action) {
         command = action;
@@ -260,11 +276,23 @@ t.start();
     @Override
     public void paint(Graphics g) {
         
-        for ( Drawable a : list)
+        backbuffer = createImage(800, 450);
+        Graphics backg = backbuffer.getGraphics();
+        
+        
+        try
         {
-            a.draw(g);
+            for ( Drawable a : list)
+            {
+                a.draw(g);
+            }
         }
         
+        catch (ConcurrentModificationException ex)
+        {
+        }
+        
+        g.drawImage(backbuffer, 0, 0, this);
        
     }
 
