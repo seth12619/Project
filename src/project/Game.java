@@ -41,10 +41,14 @@ public class Game extends Canvas{
     
     boolean window = true;
    
+    Server serve;
+    createClient client;
     
+    String command;
+   
    
     
-    public Game(int person) {
+    public Game(int person) throws IOException {
         player = person;
         
         backbuffer = createImage(800, 450);
@@ -107,56 +111,78 @@ t.start();
 
             @Override
             public void keyPressed(KeyEvent e) {
-                
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
-                    if (avatar.getXPos() >0)
+                    if (player == 1) {
+                        if (avatar.getXPos() >0)
                     {
-                        avatar.moveLeft();   
+                        avatar.moveLeft();  
+                        serve.setActionDone("moveLeft");
                     }
-                  
-                    //repaint();
+                       
+                    }
+                    else if (player == 2) {
+                        avatarTwo.moveLeft();
+                        client.setCommand("moveLeft");
+                    }   
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    if (avatar.getXPos() +118 < 800)
+                    
+                    if (player == 1) {
+                         if (avatar.getXPos() +118 < 800)
                     {
                         avatar.moveRight();
+                        serve.setActionDone("moveRight");
                     }
-                    //repaint();
+                        
+                    }
+                    else if (player == 2) {
+                        avatarTwo.moveRight();
+                        client.setCommand("moveRight");
+                    }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    if(avatar.getYPos() > 0)
+                    if (player == 1) {
+                       if(avatar.getYPos() > 0)
                     {
                         avatar.moveUp();
+                        serve.setActionDone("moveUp");
                     }
+                        
+                    }
+                    else if (player == 2) {
+                        avatarTwo.moveUp();
+                        client.setCommand("moveUp");
+                    }
+                
                     //repaint();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    if (avatar.getYPos() + 88 <= 450)
+                    if (player == 1) {
+                        if (avatar.getYPos() + 88 <= 450)
                     {
                         avatar.moveDown();
+                        serve.setActionDone("moveDown");
                     }
+                        
+                    }
+                    else if (player == 2) {
+                        avatarTwo.moveDown();
+                        client.setCommand("moveDown");
+                    }
+                
                     //repaint();        
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
-                     //int delay = 50;
-                     avatar.shoot();
-                    // ActionListener doIt = new ActionListener() {
-                       
-                        /*
-                         @Override
-                         public void actionPerformed(ActionEvent e) {
-                            avatar.animate();
-                             repaint();
-                         }
-                     };
-                      if (timeCheck.equals("okay")) { 
-                       myTimer = new javax.swing.Timer(delay, doIt);
-                        timeCheck = "NO";
-                        System.out.println("Pew Pew Pew!");
-                        repaint();
-                      }
-                      myTimer.start();
-                      */
+
+                     if (player == 1) {
+                        avatar.shoot();
+                        serve.setActionDone("shoot");
+                    }
+                    else if (player == 2) {
+                        avatarTwo.shoot();
+                        client.setCommand("shoot");
+                    }
+
                 }
                      
                 
@@ -169,6 +195,9 @@ t.start();
             }
       
        }); 
+                
+
+         
 
        setVisible(true);
       }
@@ -182,14 +211,22 @@ t.start();
       * This method will set Player as player one
      * 
      */
-    public void create() {
+    public void create() throws IOException {
          setPlayerOne();
          String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
          avatar.setPlayer(player);
-        
-       
-       
-        repaint();
+       Thread j = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    serve = new Server();
+                } catch (IOException ex) {
+                    System.out.println("Error IOException Server");
+                }
+            }
+        };
+       j.start();
+   
     }
     
    
@@ -202,11 +239,19 @@ t.start();
      * This method will set player as player two
      * 
      */
-    public void join() {
+   public void join() {
         setPlayerTwo();
         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
         avatar.setPlayer(player);
-        repaint();
+        Thread j = new Thread() {
+            @Override
+            public void run() {
+                 client = new createClient("client");
+            }
+        };
+       j.start();
+        
+        
     }
     
     
