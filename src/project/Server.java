@@ -27,8 +27,6 @@ public final class Server implements Runnable {
     public Server() throws IOException {
         
         actionDone = null;
-        Scanner sc = null;
-        PrintStream out = null;
         run();
     }
     
@@ -51,7 +49,7 @@ public final class Server implements Runnable {
             } catch (IOException ex) {
                 System.out.println("Error -- ServerSocket");
             }
-        while( actionDone != null ) { //while (command != null)
+        while( getAction() != null ) { //while (command != null)
            
             
           

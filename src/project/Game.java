@@ -311,16 +311,9 @@ d.start();
    public void join() {
         setPlayerTwo();
         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
-        avatar.setPlayer(player);
-        Thread j = new Thread() {
-            @Override
-            public void run() {
-                 client = new createClient("client");
-            }
-        };
-       j.start();
-        
-        
+        avatar.setPlayer(player); 
+                 client = new createClient();
+
     }
     
     
@@ -358,7 +351,7 @@ d.start();
             serve.setActionDone("moveLeft"); //fix error with server and client
         }
         else if (player == 2) {
-       //     client.setCommand("moveLeft");
+            client.setCommand("moveLeft");
         }
         
             }
@@ -376,7 +369,7 @@ d.start();
             serve.setActionDone("moveRight");
         }
         else if (player == 2) {
-           // client.setCommand("moveRight");
+            client.setCommand("moveRight");
         }
             }
         };
@@ -390,7 +383,7 @@ d.start();
             serve.setActionDone("moveUp");
         }
         else if (player == 2) {
-           // client.setCommand("moveUp");
+            client.setCommand("moveUp");
         }
             }
         };
@@ -406,7 +399,7 @@ d.start();
             serve.setActionDone("moveDown");
         }
         else if (player == 2) {
-          //  client.setCommand("moveDown");
+            client.setCommand("moveDown");
         }
             }
         };
@@ -421,7 +414,7 @@ d.start();
                         serve.setActionDone("shoot");
                     }
                     else if (player == 2) {
-                    //    client.setCommand("shoot");
+                        client.setCommand("shoot");
                     }
                  }
         };

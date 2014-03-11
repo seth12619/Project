@@ -29,14 +29,19 @@ public class createClient implements Runnable {
     String command;
     
 
-    public createClient(String comm) {
+    public createClient() {
         
-        command = comm;
+        command = null;
         run();
     }
     
     public void setCommand (String act) {
         command = act;
+        run();
+    }
+    
+    public String getCommand() {
+        return command;
     }
     
     @Override
@@ -51,16 +56,16 @@ public class createClient implements Runnable {
         }
         ip = host.getHostAddress();
         
-       
-        
-       
-               
-               while (true) {           
-              try {
+        try {
                sock = new Socket(ip, 8888);
            } catch (IOException ex) {
                System.out.println("Error in making Socket");
            }
+        
+       
+               
+               while (getCommand() != null) {           
+             
      
              try {
             in = new Scanner(new InputStreamReader(sock.getInputStream()));
@@ -73,7 +78,7 @@ public class createClient implements Runnable {
         } catch (IOException ex) {
             System.out.println("Error in getting OutputStream");
         }
-       testOut.println("Test hello");
+       testOut.println(getCommand());
        testOut.flush();
        String t = in.nextLine(); //test message from server
        
@@ -85,7 +90,7 @@ public class createClient implements Runnable {
             } catch (InterruptedException ex) {
                System.out.println("Thread sleep - client interrupted");
             }
-        
+        command = null;
                    
            }
                    
