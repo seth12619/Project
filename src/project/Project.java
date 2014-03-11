@@ -49,8 +49,11 @@ public class Project extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     
                     Game start = null;
-                    
+                    try {                    
                         start = new Game(2);
+                    } catch (IOException ex) {
+                        System.out.println("Fatal Error!");
+                    }
                     
                  
                     add(start, BorderLayout.NORTH);
@@ -65,8 +68,11 @@ public class Project extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     
                     Game start = null;
-                    
+                    try {                    
                         start = new Game(1);
+                    } catch (IOException ex) {
+                        System.out.println("Fatal Error!");
+                    }
                    
                  
                     add(start, BorderLayout.NORTH);

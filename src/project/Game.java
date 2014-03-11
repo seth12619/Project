@@ -294,17 +294,9 @@ d.start();
          setPlayerOne();
          String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
          avatar.setPlayer(player);
-       //Thread j = new Thread() {
-          //  @Override
-           // public void run() {
-             //   try {
+     
                     serve = new Server();
-             //   } catch (IOException ex) {
-             //       System.out.println("Error IOException Server");
-             //   }
-          //  }
-       // };
-     //  j.start();
+         
    
     }
     
@@ -370,8 +362,10 @@ d.start();
         else if (player == 2) {
        //     client.setCommand("moveLeft");
         }
+        
             }
         };
+        l.start();
     }
     /**
      * actions
