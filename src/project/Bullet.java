@@ -32,6 +32,7 @@ public class Bullet implements Drawable{
     this.list = a;
     whichBullet = bulletNumber;
     bulletNumber = bulletNumber +1;
+    boolean colliding = false;
     try {    
         bulAv = ImageIO.read(getClass().getResource("Bullet.png"));
         } catch (IOException e) {
@@ -50,26 +51,28 @@ public class Bullet implements Drawable{
 
   @Override
         public void animate() {
-            /*for (int i = 0; i < 100; i=i+2) {
-                xPos = xPos + speed;
-            }*/
             
             xPos = xPos + speed;
             if (xPos >= 800)
             {
-                Bullet temp = null;
-                for ( Drawable a : list)
+                list.remove(this);
+            }
+            
+            Enemy place = null;
+            for (Drawable e : list)
+            {
+                if (e instanceof Enemy)
                 {
-                    if (a instanceof Bullet)
-                    {
-                        temp = (Bullet)a;
-                        if (temp.getBullet() == this.getBullet())
+                    place = (Enemy) e;
+                    if (place.getYPos() - this.width/4  <= this.yPos && place.getYPos() + place.getWidth() + 
+                        this.width/4 >= this.yPos)
                         {
-                            list.remove(temp);
-                            //System.out.println("Deleted.");
-                            break;
+                            if (this.xPos + this.length > place.getXPos())
+                            {
+                                place.getHit(this.damage);
+                                list.remove(this);
+                            }
                         }
-                    }
                 }
             }
     }
