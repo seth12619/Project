@@ -49,7 +49,7 @@ public final class Server implements Runnable {
             } catch (IOException ex) {
                 System.out.println("Error -- ServerSocket");
             }
-        while(true) {
+        while(true) { //while (command != null)
            
             
           
