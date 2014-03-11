@@ -24,11 +24,16 @@ public class createClient implements Runnable {
     PrintStream testOut;
     Scanner in;
     private String ip;
+    int player;
     
     
     String command;
     
+    String order;
 
+    /**
+     *
+     */
     public createClient() {
         
         command = null;
@@ -42,6 +47,10 @@ public class createClient implements Runnable {
     
     public String getCommand() {
         return command;
+    }
+    
+    public String getOrder() {
+        return order; //should be called by Game class
     }
     
     @Override
@@ -78,6 +87,9 @@ public class createClient implements Runnable {
         } catch (IOException ex) {
             System.out.println("Error in getting OutputStream");
         }
+        
+       order = getCommand();
+        
        testOut.println(getCommand());
        testOut.flush();
        String t = in.nextLine(); //test message from server
