@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author Seth Legaspi/Marco Santos
+ * Left is not working
  */
 
 
@@ -40,6 +41,11 @@ public class Game extends Canvas{
     Image backbuffer;
     
     boolean window = true;
+    boolean movingUp = false;
+    boolean movingDown = false;
+    boolean movingLeft = false;
+    boolean movingRight = false;
+    boolean isShooting = false;
    
     Server serve;
     createClient client;
@@ -96,8 +102,102 @@ public class Game extends Canvas{
     }
     
 };
+         
+         Thread d = new Thread() {
+             
+             @Override
+             public void run() {
+                 while (true) {
+                     
+                if (movingLeft == true) { //movingLeft
+                     if (player == 1) {
+                        if (avatar.getXPos() >0)
+                    {
+                        avatar.moveLeft();  
+                        left();
+                    }
+                       
+                    }
+                    else if (player == 2) {
+                         if (avatarTwo.getXPos() >0) {
+                        avatarTwo.moveLeft();
+                        left();
+                    }   
+                    }
+                }
+                 if (movingRight == true) { //moveRight
+                     if (player == 1) {
+                        if (avatar.getXPos() +118 < 800)
+                    {
+                        avatar.moveRight();  
+                        right();
+                    }
+                       
+                    }
+                    else if (player == 2) {
+                         if (avatarTwo.getXPos() +118 < 800) {
+                        avatarTwo.moveRight();
+                        right();
+                    }   
+                  }
+                 }
+                 if (movingUp == true) {  //moveUp
+                  if (player == 1) { 
+                       if(avatar.getYPos() > 0) {
+                        avatar.moveUp();
+                        up();
+                    }
+                        
+                    }
+                    else if (player == 2) {
+                        if(avatarTwo.getYPos() > 0) {
+                        avatarTwo.moveUp();
+                        up();
+                        }
+                    }
+                 }
+                 
+                 if (movingDown == true) { //moveDown
+                 
+                 if (player == 1) {
+                        if (avatar.getYPos() + 88 <= 450) {
+                        avatar.moveDown();
+                        down();
+                    }
+                        
+                    }
+                    else if (player == 2) {
+                        if (avatarTwo.getYPos() + 88 <= 450) {
+                        avatarTwo.moveDown();
+                        down();
+                        }
+                    }
+                 }
+                 
+                 if (isShooting == true) { //shooting
+                 if (player == 1) {
+                        avatar.shoot();
+                        shoot();
+                    }
+                    else if (player == 2) {
+                        avatarTwo.shoot();
+                        shoot();
+                    }
+                 }
+                 
+                 try {
+                     Thread.sleep(20);
+                 } catch (InterruptedException ex) {
+                     System.out.println("Thread sleep - actions Interrupted");
+                 }
+             }
+             
+             
+             }
+         };
 
 t.start();
+d.start();
         
         /**
          * Note: Add collision so the avatar sprite ship won't go over bounds.
@@ -112,82 +212,26 @@ t.start();
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
-                    if (player == 1) {
-                        if (avatar.getXPos() >0)
-                    {
-                        avatar.moveLeft();  
-                        serve.setActionDone("moveLeft");
-                    }
-                       
-                    }
-                    else if (player == 2) {
-                         if (avatarTwo.getXPos() >0) {
-                        avatarTwo.moveLeft();
-                        client.setCommand("moveLeft");
-                    }   
-               }
+                    movingLeft = true;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    
-                    if (player == 1) {
-                         if (avatar.getXPos() +118 < 800)
-                    {
-                        avatar.moveRight();
-                        serve.setActionDone("moveRight");
-                    }
-                        
-                    }
-                    else if (player == 2) {
-                        if (avatarTwo.getXPos() +118 < 800) {
-                        avatarTwo.moveRight();
-                        client.setCommand("moveRight");
-                     }
-                    }
+                   
+                    movingRight = true;
+                   
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    if (player == 1) {
-                       if(avatar.getYPos() > 0) {
-                        avatar.moveUp();
-                        serve.setActionDone("moveUp");
-                    }
-                        
-                    }
-                    else if (player == 2) {
-                        if(avatarTwo.getYPos() > 0) {
-                        avatarTwo.moveUp();
-                        client.setCommand("moveUp");
-                        }
-                    }
-                
-                    //repaint();
+                   
+                    movingUp = true;
+                    
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    if (player == 1) {
-                        if (avatar.getYPos() + 88 <= 450) {
-                        avatar.moveDown();
-                        serve.setActionDone("moveDown");
-                    }
-                        
-                    }
-                    else if (player == 2) {
-                        if (avatarTwo.getYPos() + 88 <= 450) {
-                        avatarTwo.moveDown();
-                        client.setCommand("moveDown");
-                        }
-                    }
-                
-                    //repaint();        
+                    
+                    movingDown = true;
+                     
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
 
-                     if (player == 1) {
-                        avatar.shoot();
-                        serve.setActionDone("shoot");
-                    }
-                    else if (player == 2) {
-                        avatarTwo.shoot();
-                        client.setCommand("shoot");
-                    }
+                     isShooting = true;
 
                 }
                      
@@ -197,7 +241,30 @@ t.start();
 
             @Override
             public void keyReleased(KeyEvent e) {
-                
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
+                    movingLeft = false;
+               
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                   
+                    movingRight = false;
+                   
+                }
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                   
+                    movingUp = false;
+                    
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    
+                    movingDown = false;
+                     
+                }
+                if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
+
+                     isShooting = false;
+
+                }
             }
       
        }); 
@@ -223,17 +290,17 @@ t.start();
          setPlayerOne();
          String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
          avatar.setPlayer(player);
-       Thread j = new Thread() {
-            @Override
-            public void run() {
-                try {
+       //Thread j = new Thread() {
+          //  @Override
+           // public void run() {
+             //   try {
                     serve = new Server();
-                } catch (IOException ex) {
-                    System.out.println("Error IOException Server");
-                }
-            }
-        };
-       j.start();
+             //   } catch (IOException ex) {
+             //       System.out.println("Error IOException Server");
+             //   }
+          //  }
+       // };
+     //  j.start();
    
     }
     
@@ -287,6 +354,83 @@ t.start();
     }
     public void setPlayerTwo() {
         player = 2;  
+    }
+    
+    public void left() {
+        Thread l = new Thread() {
+            @Override
+            public void run() {
+        if (player == 1) {
+            serve.setActionDone("moveLeft"); //fix error with server and client
+        }
+        else if (player == 2) {
+       //     client.setCommand("moveLeft");
+        }
+            }
+        };
+    }
+    /**
+     * actions
+     */
+    public void right() {
+        Thread g = new Thread() {
+            @Override
+            public void run() {
+        if (player == 1) {
+            serve.setActionDone("moveRight");
+        }
+        else if (player == 2) {
+           // client.setCommand("moveRight");
+        }
+            }
+        };
+        g.start();
+    }
+    public void up () {
+        Thread u = new Thread() {
+            @Override
+            public void run() {
+        if (player == 1) {
+            serve.setActionDone("moveUp");
+        }
+        else if (player == 2) {
+           // client.setCommand("moveUp");
+        }
+            }
+        };
+        u.start();
+    }
+    
+    public void down() {
+        Thread d = new Thread() {
+            
+            @Override
+            public void run() {
+        if (player == 1) {
+            serve.setActionDone("moveDown");
+        }
+        else if (player == 2) {
+          //  client.setCommand("moveDown");
+        }
+            }
+        };
+        d.start();
+    }
+    
+    public void shoot() {
+        Thread s = new Thread() {
+            @Override
+            public void run() {
+        if (player == 1) {
+                        serve.setActionDone("shoot");
+                    }
+                    else if (player == 2) {
+                    //    client.setCommand("shoot");
+                    }
+                 }
+        };
+       
+                s.start();
     }
     
     
