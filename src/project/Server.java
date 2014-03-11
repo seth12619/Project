@@ -26,7 +26,7 @@ public final class Server implements Runnable {
   
     public Server() throws IOException {
         
-        actionDone = "waiting...";
+        actionDone = null;
         Scanner sc = null;
         PrintStream out = null;
         run();
@@ -34,6 +34,8 @@ public final class Server implements Runnable {
     
     public void setActionDone(String act) {
         actionDone = act;
+        run();
+        
     }
     
     public String getAction () {
@@ -49,7 +51,7 @@ public final class Server implements Runnable {
             } catch (IOException ex) {
                 System.out.println("Error -- ServerSocket");
             }
-        while(true) { //while (command != null)
+        while( actionDone != null ) { //while (command != null)
            
             
           
@@ -83,8 +85,11 @@ public final class Server implements Runnable {
               } catch (InterruptedException ex) {
                  System.out.println("Thread sleep - client interrupted");
               }
-             
+            actionDone = null;
+            
         }
+        //Thread.currentThread().interrupt();
+        
     }
     
 }
