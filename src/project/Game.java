@@ -265,6 +265,10 @@ d.start();
                      isShooting = false;
 
                 }
+                
+                if (e.getKeyCode() == KeyEvent.VK_V ) {
+                    list.add(new Enemy(800, 50, 100, 50, 1, 5, list, 50));
+                }
             }
       
        }); 
