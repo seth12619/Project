@@ -49,18 +49,15 @@ public final class Server implements Runnable {
             } catch (IOException ex) {
                 System.out.println("Error -- ServerSocket");
             }
-        while( getAction() != null ) { //while (command != null)
-           
-            
-          
-            
-            try {
+           try {
                 System.out.println("Waiting for client request");
                 //waits for client request
                 client = server.accept();
             } catch (IOException ex) {
                 System.out.println("Error in accepting request from client");;
             }
+        while( getAction() != null ) { //while (command != null)
+           
             try {
                 sc = new Scanner( new InputStreamReader(client.getInputStream()));
             } catch (IOException ex) {
