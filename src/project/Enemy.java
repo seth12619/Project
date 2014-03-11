@@ -44,7 +44,7 @@ public class Enemy implements Drawable{
     try {    
         enAv = ImageIO.read(getClass().getResource("Enemy.png"));
         } catch (IOException e) {
-            System.out.println("Bullet image loading error");
+            System.out.println("Enemy sprite loading error");
         } 
   }
   

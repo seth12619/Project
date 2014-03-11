@@ -111,66 +111,64 @@ public class Game extends Canvas{
                      
                 if (movingLeft == true) { //movingLeft
                      if (player == 1) {
-                        if (avatar.getXPos() >0)
-                    {
+                       
                         avatar.moveLeft();  
                         left();
-                    }
+                  
                        
                     }
                     else if (player == 2) {
-                         if (avatarTwo.getXPos() >0) {
+                        
                         avatarTwo.moveLeft();
                         left();
-                    }   
+                    
                     }
                 }
                  if (movingRight == true) { //moveRight
                      if (player == 1) {
-                        if (avatar.getXPos() +118 < 800)
-                    {
+                       
                         avatar.moveRight();  
                         right();
-                    }
+                    
                        
                     }
                     else if (player == 2) {
-                         if (avatarTwo.getXPos() +118 < 800) {
+                        
                         avatarTwo.moveRight();
                         right();
-                    }   
+                    
                   }
                  }
                  if (movingUp == true) {  //moveUp
                   if (player == 1) { 
-                       if(avatar.getYPos() > 0) {
+                     
                         avatar.moveUp();
                         up();
-                    }
+                    
                         
                     }
                     else if (player == 2) {
-                        if(avatarTwo.getYPos() > 0) {
+                       
                         avatarTwo.moveUp();
                         up();
-                        }
+                        
                     }
                  }
                  
                  if (movingDown == true) { //moveDown
                  
                  if (player == 1) {
-                        if (avatar.getYPos() + 88 <= 450) {
+                        
                         avatar.moveDown();
                         down();
-                    }
+                    
                         
                     }
                     else if (player == 2) {
-                        if (avatarTwo.getYPos() + 88 <= 450) {
+                       
                         avatarTwo.moveDown();
                         down();
-                        }
+                        
                     }
                  }
                  

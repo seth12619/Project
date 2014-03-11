@@ -88,7 +88,9 @@ public final class Ship implements Drawable {
      */
     @Override
     public void moveUp() {
+        if (yPos > 0) {
         yPos = yPos-5;
+        }
         
     }
     
@@ -97,7 +99,9 @@ public final class Ship implements Drawable {
      */
     @Override
     public void moveDown() {
+        if (yPos + 50 < 410) {
         yPos = yPos+5;
+        }
         
     }
     
@@ -106,7 +110,9 @@ public final class Ship implements Drawable {
      */
     @Override
     public void moveRight() {
+        if (xPos + 100 < 785) {
         xPos = xPos+5;
+        }
        
     }
     
@@ -115,7 +121,9 @@ public final class Ship implements Drawable {
      */
     @Override
     public void moveLeft() {
+        if (xPos > 0) {
          xPos = xPos-5;
+        }
          
     }
     
@@ -158,9 +166,7 @@ public final class Ship implements Drawable {
         public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
         
-        /*for (int i = 0; i < list.size(); i++) {
-            list.get(i).draw(g);
-                }*/
+       
     }
 
     @Override
