@@ -195,7 +195,7 @@ public class Game extends Canvas{
          };
          
          
-                 int delay = 1; //in mill. sec.
+                 int delay = 10; //in mill. sec.
                  ActionListener refresh = new ActionListener() {
                     
                      @Override
@@ -206,7 +206,7 @@ public class Game extends Canvas{
                          }
                          if (player == 2) {
                              avatar.setPos(client.getXOrder(), client.getYOrder());
-                             System.out.println("client xPos for player1: " + client.getXOrder());
+                          //   System.out.println("client xPos for player1: " + client.getXOrder());
                          }
                         
                      }

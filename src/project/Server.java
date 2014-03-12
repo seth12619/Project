@@ -24,12 +24,12 @@ public final class Server implements Runnable {
      Scanner sc;
      PrintStream out;
      
-     Socket client = null; //creates socket
+     Socket client; //creates socket
      
      int XAct;
      int YAct;
      
-      DataOutputStream XDOut; //stuff that is sent out
+      //stuff that is sent out
       DataOutputStream YDOut;
     
       DataInputStream XDIn; //stuff that is received
@@ -39,18 +39,16 @@ public final class Server implements Runnable {
      int ySend;
   
     public Server() throws IOException {
-        
+        xSend = 2;
+        ySend = 2;
         actionDone = null;
-          try {
-                server = new ServerSocket( 8888 );
-                
-            } catch (IOException ex) {
-                System.out.println("Error -- ServerSocket");
-            }
+          
            
         
-        run();
-    }
+                 run();
+            
+     
+                 }
     
     public void setActionDone(String act) {
         actionDone = act;
@@ -61,7 +59,7 @@ public final class Server implements Runnable {
     public void setPosition(int xP, int yP) {
         xSend = xP;
         ySend = yP;
-        
+        run();
     }
     
     public String getAction () {
@@ -79,56 +77,57 @@ public final class Server implements Runnable {
     public void run() {
          
         Thread  s = new Thread() {
+            
+            
             @Override
             public void run() {
-        while( true ) { //while (command != null)
+                
+                try {
+                server = new ServerSocket( 8888 );
+            } catch (IOException ex) {
+                System.out.println("Error -- ServerSocket");
+            }
            try {
                 //waits for client request
                 client = server.accept();
             } catch (IOException ex) {
                 System.out.println("Error in accepting request from client");;
             }
+                
+        while( actionDone != null ) { 
+           
            try {
-                       XDIn = new DataInputStream(client.getInputStream());
+                      XDIn = new DataInputStream(client.getInputStream());
                    } catch (IOException ex) {
                        System.out.println("Fatal Error -XDin - Client");
                    }
-                   try {
-                       YDIn = new DataInputStream(client.getInputStream());
-                   } catch (IOException ex) {
-                       System.out.println("Fatal Error - YDin - Client");
-                   }
+               
                    try {
                        XAct = XDIn.readInt();
                    } catch (IOException ex) {
                        System.out.println("Error in reading XDIn as int");
                    }
-                   try {
-                       YAct = YDIn.readInt();
-                   } catch (IOException ex) {
-                       System.out.println("Error in reading YDIn as int");
-                   }
+                 
 
        
                        try {
                   
-                               XDOut = new DataOutputStream(client.getOutputStream());
-                               YDOut = new DataOutputStream(client.getOutputStream());
+                           DataOutputStream XDOut = new DataOutputStream(client.getOutputStream());
+                               
                           
                            XDOut.writeInt(xSend);
-                           YDOut.writeInt(ySend);
+                          
                            XDOut.flush();
-                           YDOut.flush();
+                          
                        } catch (IOException ex) {
                            System.out.println("Error!");
                        }
-            }
-
-            
+                       actionDone = null;
         }
-            
-        };
-        s.start();
+            }
+             };
+          s.start();
+       
     }
     
 }

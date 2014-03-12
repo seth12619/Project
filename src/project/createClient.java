@@ -52,19 +52,8 @@ public class createClient implements Runnable {
         
         
         command = null;
-         try {
-            host = InetAddress.getLocalHost();
-        } catch (UnknownHostException ex) {
-            System.out.println("Error in getting InetAddress;");
-        }
-        ip = host.getHostAddress();
-        
-         try {
-               sock = new Socket(ip, 8888);
-               System.out.println("success");
-           } catch (IOException ex) {
-               System.out.println("Error in making Socket");
-           }
+         
+         
         run();
     }
     
@@ -76,7 +65,7 @@ public class createClient implements Runnable {
     public void setPosition(int xP, int yP) {
         xSend = xP;
         ySend = yP;
-        
+       run();
     }
     
     public String getCommand() {
@@ -98,49 +87,56 @@ public class createClient implements Runnable {
         Thread c = new Thread() {
                @Override
                public void run() {
-               while (true) {           
+                   
+                   try {
+            host = InetAddress.getLocalHost();
+        } catch (UnknownHostException ex) {
+            System.out.println("Error in getting InetAddress;");
+        }
+        ip = host.getHostAddress();
+        
+         try {
+               sock = new Socket(ip, 8888);
+               
+           } catch (IOException ex) {
+               System.out.println("Error in making Socket");
+           }
+                   
+                          while(command != null) {
                    try {
                        XDIn = new DataInputStream(sock.getInputStream());
                    } catch (IOException ex) {
                        System.out.println("Fatal Error -XDin - Client");
                    }
-                   try {
-                       YDIn = new DataInputStream(sock.getInputStream());
-                   } catch (IOException ex) {
-                       System.out.println("Fatal Error - YDin - Client");
-                   }
+                  
                    try {
                        xOrder = XDIn.readInt();
                    } catch (IOException ex) {
                        System.out.println("Error in reading XDIn as int");
                    }
-                   try {
-                       yOrder = YDIn.readInt();
-                   } catch (IOException ex) {
-                       System.out.println("Error in reading YDIn as int");
-                   }
+                  System.out.println("xOrder is: " + xOrder);
        
             
                        try {
                   
-                               XDOut = new DataOutputStream(sock.getOutputStream());
-                               YDOut = new DataOutputStream(sock.getOutputStream());
+                           XDOut = new DataOutputStream(sock.getOutputStream());
+                              
                           
                            XDOut.writeInt(xSend);
-                           YDOut.writeInt(ySend);
+                          
                            XDOut.flush();
-                           YDOut.flush();
+                           
                        } catch (IOException ex) {
                            System.out.println("Error!");
                        }
+                       
+                       command = null;
             }
+               }
             
-         
-       
-                   
-           }
                
         };
+        c.start();
       }     
 }
        
