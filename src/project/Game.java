@@ -230,25 +230,25 @@ d.start();
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
+                if (e.getKeyCode() == KeyEvent.VK_A) {   
                     movingLeft = true;
                 }
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                if (e.getKeyCode() == KeyEvent.VK_D) {
                    
                     movingRight = true;
                    
                 }
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                if (e.getKeyCode() == KeyEvent.VK_W) {
                    
                     movingUp = true;
                     
                 }
-                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                if (e.getKeyCode() == KeyEvent.VK_S) {
                     
                     movingDown = true;
                      
                 }
-                if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
+                if (e.getKeyCode() == KeyEvent.VK_M ) {
 
                      isShooting = true;
 
@@ -260,26 +260,26 @@ d.start();
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) {   
+                if (e.getKeyCode() == KeyEvent.VK_A) {   
                     movingLeft = false;
                
                 }
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                if (e.getKeyCode() == KeyEvent.VK_D) {
                    
                     movingRight = false;
                    
                 }
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                if (e.getKeyCode() == KeyEvent.VK_W) {
                    
                     movingUp = false;
                     
                 }
-                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                if (e.getKeyCode() == KeyEvent.VK_S) {
                     
                     movingDown = false;
                      
                 }
-                if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
+                if (e.getKeyCode() == KeyEvent.VK_M ) {
 
                      isShooting = false;
 
