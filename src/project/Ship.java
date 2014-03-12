@@ -94,6 +94,11 @@ public final class Ship implements Drawable {
         
     }
     
+    public void setPos(int xP, int yP) {
+        xPos = xP;
+        yPos = yP;
+    }
+    
     /**
      * Will increase y by 1 px by default, thus moving object 1px on screen
      */

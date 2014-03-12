@@ -23,68 +23,112 @@ public final class Server implements Runnable {
      
      Scanner sc;
      PrintStream out;
+     
+     Socket client = null; //creates socket
+     
+     int XAct;
+     int YAct;
+     
+      DataOutputStream XDOut; //stuff that is sent out
+      DataOutputStream YDOut;
+    
+      DataInputStream XDIn; //stuff that is received
+      DataInputStream YDIn;
+      
+     int xSend;
+     int ySend;
   
     public Server() throws IOException {
         
         actionDone = null;
-        run();
-    }
-    
-    public void setActionDone(String act) {
-        actionDone = act;
-        run();
-        
-    }
-    
-    public String getAction () {
-        return actionDone;
-    }
-   
-    @Override
-    public void run() {
-         Socket client = null; //creates socket
           try {
                 server = new ServerSocket( 8888 );
                 
             } catch (IOException ex) {
                 System.out.println("Error -- ServerSocket");
             }
+           
+        
+        run();
+    }
+    
+    public void setActionDone(String act) {
+        actionDone = act;
+        
+        
+    }
+    
+    public void setPosition(int xP, int yP) {
+        xSend = xP;
+        ySend = yP;
+        
+    }
+    
+    public String getAction () {
+        return actionDone;
+    }
+    
+    public int getXAction () {
+        return XAct;
+    }
+    public int getYAction() {
+        return YAct;
+    }
+   
+    @Override
+    public void run() {
+         
+        Thread  s = new Thread() {
+            @Override
+            public void run() {
+        while( true ) { //while (command != null)
            try {
-                System.out.println("Waiting for client request");
                 //waits for client request
                 client = server.accept();
             } catch (IOException ex) {
                 System.out.println("Error in accepting request from client");;
             }
-        while( getAction() != null ) { //while (command != null)
-           
-            try {
-                sc = new Scanner( new InputStreamReader(client.getInputStream()));
-            } catch (IOException ex) {
-               System.out.println("Scanner error");
-            }
-            try {
-                out = new PrintStream(client.getOutputStream());
-            } catch (IOException ex) {
-               System.out.println("printstream client error");
+           try {
+                       XDIn = new DataInputStream(client.getInputStream());
+                   } catch (IOException ex) {
+                       System.out.println("Fatal Error -XDin - Client");
+                   }
+                   try {
+                       YDIn = new DataInputStream(client.getInputStream());
+                   } catch (IOException ex) {
+                       System.out.println("Fatal Error - YDin - Client");
+                   }
+                   try {
+                       XAct = XDIn.readInt();
+                   } catch (IOException ex) {
+                       System.out.println("Error in reading XDIn as int");
+                   }
+                   try {
+                       YAct = YDIn.readInt();
+                   } catch (IOException ex) {
+                       System.out.println("Error in reading YDIn as int");
+                   }
+
+       
+                       try {
+                  
+                               XDOut = new DataOutputStream(client.getOutputStream());
+                               YDOut = new DataOutputStream(client.getOutputStream());
+                          
+                           XDOut.writeInt(xSend);
+                           YDOut.writeInt(ySend);
+                           XDOut.flush();
+                           YDOut.flush();
+                       } catch (IOException ex) {
+                           System.out.println("Error!");
+                       }
             }
 
-           
-            
-            String lala = sc.nextLine();
-            System.out.println(lala);
-            out.println(getAction());
-            out.flush();
-              try {
-                  Thread.sleep(100);
-              } catch (InterruptedException ex) {
-                 System.out.println("Thread sleep - client interrupted");
-              }
-            actionDone = null;
             
         }
-        //Thread.currentThread().interrupt();
-        
+            
+        };
+        s.start();
     }
     
 }

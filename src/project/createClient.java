@@ -26,86 +26,121 @@ public class createClient implements Runnable {
     private String ip;
     int player;
     
+    DataOutputStream XDOut; //stuff that is sent out
+    DataOutputStream YDOut;
+    
+    DataInputStream XDIn; //stuff that is received
+    DataInputStream YDIn;
     
     String command;
     
-    String order;
+    int xOrder;
+    int yOrder;
+    
+    int xSend;
+    int ySend;
+    
+    InetAddress host = null;
 
     /**
      *
      */
     public createClient() {
+        xOrder = 1;
+        yOrder = 1;
+        
+        
         
         command = null;
-        run();
-    }
-    
-    public void setCommand (String act) {
-        command = act;
-        run();
-    }
-    
-    public String getCommand() {
-        return command;
-    }
-    
-    public String getOrder() {
-        return order; //should be called by Game class
-    }
-    
-    @Override
-    public void run() {
-       //Client below
-        InetAddress host;
-        host = null;
-        try {
+         try {
             host = InetAddress.getLocalHost();
         } catch (UnknownHostException ex) {
             System.out.println("Error in getting InetAddress;");
         }
         ip = host.getHostAddress();
         
-        try {
+         try {
                sock = new Socket(ip, 8888);
+               System.out.println("success");
            } catch (IOException ex) {
                System.out.println("Error in making Socket");
            }
+        run();
+    }
+    
+    public void setCommand (String act) {
+        command = act;
         
-       
-               
-               while (getCommand() != null) {           
-             
-     
-             try {
-            in = new Scanner(new InputStreamReader(sock.getInputStream()));
-        } catch (IOException ex) {
-            System.out.println("Error in getting InputStream");
-        } 
-             
-        try {
-            testOut = new PrintStream(sock.getOutputStream());
-        } catch (IOException ex) {
-            System.out.println("Error in getting OutputStream");
-        }
+    }
+    
+    public void setPosition(int xP, int yP) {
+        xSend = xP;
+        ySend = yP;
         
-       order = getCommand();
+    }
+    
+    public String getCommand() {
+        return command;
+    }
+    
+    public int getXOrder() {
+        return xOrder; //should be called by Game class
+    }
+    
+    public int getYOrder() {
+        return yOrder;
+    }
+    
+    @Override
+    public void run() {
+       //Client below
         
-       testOut.println(getCommand());
-       testOut.flush();
-       String t = in.nextLine(); //test message from server
+        Thread c = new Thread() {
+               @Override
+               public void run() {
+               while (true) {           
+                   try {
+                       XDIn = new DataInputStream(sock.getInputStream());
+                   } catch (IOException ex) {
+                       System.out.println("Fatal Error -XDin - Client");
+                   }
+                   try {
+                       YDIn = new DataInputStream(sock.getInputStream());
+                   } catch (IOException ex) {
+                       System.out.println("Fatal Error - YDin - Client");
+                   }
+                   try {
+                       xOrder = XDIn.readInt();
+                   } catch (IOException ex) {
+                       System.out.println("Error in reading XDIn as int");
+                   }
+                   try {
+                       yOrder = YDIn.readInt();
+                   } catch (IOException ex) {
+                       System.out.println("Error in reading YDIn as int");
+                   }
        
-       
-       
-       System.out.println(t);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-               System.out.println("Thread sleep - client interrupted");
+            
+                       try {
+                  
+                               XDOut = new DataOutputStream(sock.getOutputStream());
+                               YDOut = new DataOutputStream(sock.getOutputStream());
+                          
+                           XDOut.writeInt(xSend);
+                           YDOut.writeInt(ySend);
+                           XDOut.flush();
+                           YDOut.flush();
+                       } catch (IOException ex) {
+                           System.out.println("Error!");
+                       }
             }
-        command = null;
+            
+         
+       
                    
            }
-                   
+               
+        };
       }     
 }
        

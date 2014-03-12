@@ -51,6 +51,7 @@ public class Game extends Canvas{
     createClient client;
     
     String command;
+    String order;
    
    
     
@@ -114,6 +115,7 @@ public class Game extends Canvas{
                        
                         avatar.moveLeft();  
                         left();
+                        
                   
                        
                     }
@@ -121,6 +123,7 @@ public class Game extends Canvas{
                         
                         avatarTwo.moveLeft();
                         left();
+                        
                     
                     }
                 }
@@ -193,9 +196,30 @@ public class Game extends Canvas{
              
              }
          };
+         
+         
+                 int delay = 1; //in mill. sec.
+                 ActionListener refresh = new ActionListener() {
+                    
+                     @Override
+                     public void actionPerformed(ActionEvent ae) {
+                         
+                         if (player == 1) {
+                             avatarTwo.setPos(serve.getXAction(), serve.getYAction());
+                         }
+                         if (player == 2) {
+                             avatar.setPos(client.getXOrder(), client.getYOrder());
+                             System.out.println("client xPos for player1: " + client.getXOrder());
+                         }
+                        
+                     }
+                 };
+                 new javax.swing.Timer(delay, refresh).start();
+            
 
 t.start();
 d.start();
+
         
         /**
          * Note: Add collision so the avatar sprite ship won't go over bounds.
@@ -344,82 +368,67 @@ d.start();
     }
     
     public void left() {
-        Thread l = new Thread() {
-            @Override
-            public void run() {
         if (player == 1) {
-            serve.setActionDone("moveLeft"); //fix error with server and client
+            serve.setPosition(avatar.getXPos(), avatar.getYPos());
         }
         else if (player == 2) {
             client.setCommand("moveLeft");
+            client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
+            
         }
         
-            }
-        };
-        l.start();
     }
     /**
      * actions
      */
     public void right() {
-        Thread g = new Thread() {
-            @Override
-            public void run() {
+       
         if (player == 1) {
             serve.setActionDone("moveRight");
+            serve.setPosition(avatar.getXPos(), avatar.getYPos());
         }
         else if (player == 2) {
             client.setCommand("moveRight");
+            client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
+            System.out.println("client sprite: " + avatarTwo.getXPos() + " , " + avatarTwo.getYPos());
         }
-            }
-        };
-        g.start();
+         
     }
     public void up () {
-        Thread u = new Thread() {
-            @Override
-            public void run() {
+       
         if (player == 1) {
             serve.setActionDone("moveUp");
+            serve.setPosition(avatar.getXPos(), avatar.getYPos());
         }
         else if (player == 2) {
             client.setCommand("moveUp");
+            client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
         }
-            }
-        };
-        u.start();
+      
     }
     
     public void down() {
-        Thread d = new Thread() {
-            
-            @Override
-            public void run() {
+      
         if (player == 1) {
             serve.setActionDone("moveDown");
+            serve.setPosition(avatar.getXPos(), avatar.getYPos());
         }
         else if (player == 2) {
             client.setCommand("moveDown");
+            client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
         }
-            }
-        };
-        d.start();
+         
     }
     
     public void shoot() {
-        Thread s = new Thread() {
-            @Override
-            public void run() {
+       
         if (player == 1) {
                         serve.setActionDone("shoot");
                     }
                     else if (player == 2) {
                         client.setCommand("shoot");
                     }
-                 }
-        };
-       
-                s.start();
+              
     }
     
     
