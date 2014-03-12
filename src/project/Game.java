@@ -35,7 +35,6 @@ public class Game extends Canvas{
     animateThread thread;
     ArrayList<Drawable> list = new ArrayList<Drawable>();
    
-    javax.swing.Timer myTimer;
     String timeCheck = "okay";
     
     Image backbuffer;
@@ -78,7 +77,7 @@ public class Game extends Canvas{
          Thread t = new Thread(){
     @Override
     public void run() { 
-            //stub stuff it should do
+           
         while (true) {
             
             try{
@@ -114,9 +113,7 @@ public class Game extends Canvas{
                      if (player == 1) {
                        
                         avatar.moveLeft();  
-                        left();
-                        
-                  
+                        left();        
                        
                     }
                     else if (player == 2) {
@@ -341,22 +338,6 @@ d.start();
     }
     
     
-    public String Test(String Input) {
-        String potato;
-        
-        potato = (Input + " is a potato.");
-        
-        return potato;
-        
-    }
-    
-    /**
-     * This method will setWindow status to false upon closing of the JFrame, to stop all threads or servers
-     */
-    public void setWindowStatus() {
-    window = false;
-}
-    
     /**
      * The two methods below will set what player this is; it will also help in movement methods
      */
@@ -435,8 +416,7 @@ d.start();
     
     @Override
     public void paint(Graphics g) {
-        
-        //if(backbuffer==null) 
+   
         backbuffer = createImage(800, 450);
         Graphics backg = backbuffer.getGraphics();
         

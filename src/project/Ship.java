@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project;
-  
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +28,9 @@ public final class Ship implements Drawable {
     
    int bulletxPos;
    int bulletyPos;
-   
+   int delay = 7;
+   boolean wasHit = false;
+   int immunity = 0;
    
     
     //parameter - ArrayList<Drawable> a
@@ -94,11 +90,6 @@ public final class Ship implements Drawable {
         
     }
     
-    public void setPos(int xP, int yP) {
-        xPos = xP;
-        yPos = yP;
-    }
-    
     /**
      * Will increase y by 1 px by default, thus moving object 1px on screen
      */
@@ -134,7 +125,13 @@ public final class Ship implements Drawable {
     
     public void shoot() {
         //bulletxPos = xPos +5; bulletyPos = yPos+2;
-        list.add( new Bullet (xPos +90, yPos+30, 40, 20, 15, 10, list)); 
+        
+        if (delay == 7)
+        {
+            list.add( new Bullet (xPos +90, yPos+30, 40, 20, 15, 10, list)); 
+            delay = 0;
+        }
+        delay = delay + 1;
         //bulletNu++;
     }
     
@@ -144,6 +141,11 @@ public final class Ship implements Drawable {
         {
             //dies
         }
+    }
+	
+	public void setPos(int xP, int yP) {
+        xPos = xP;
+        yPos = yP;
     }
     
     public int getXPos(){
@@ -166,6 +168,10 @@ public final class Ship implements Drawable {
         return health;
     }
     
+    public void resetFire()
+    {
+        delay = 7;
+    }
 
     @Override
         public void draw(Graphics g) {
@@ -177,6 +183,40 @@ public final class Ship implements Drawable {
     @Override
         public void animate() {
         //list.get(bulletNu).animate();
+        Enemy place = null;
+        if(immunity == 150)
+        {
+            wasHit = false;
+            immunity = 0;
+        }
+        
+        if (wasHit == false)
+        {
+            for (Drawable e : list)
+            {
+                if (e instanceof Enemy)
+                {
+                    place = (Enemy) e;
+                    if (place.getYPos()  <= this.yPos + this.hBWidth&& place.getYPos() + place.getWidth() 
+                        >= this.yPos + this.hBWidth/8)
+                        {
+                            if (this.xPos + this.hBLength > place.getXPos() && this.xPos < place.getXPos()
+                            + place.getLength())
+                            {
+                                health = health - place.getDamage();
+                                wasHit = true;
+                                System.out.println("Took Damage");
+                                if (health <= 0)
+                                {
+                                    list.remove(this);
+                                }
+                            }
+                        }
+                }
+            }
+        }
+        
+        immunity = immunity + 1;
     }
     
 }
