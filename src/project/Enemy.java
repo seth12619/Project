@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package project;
 
 import java.awt.Graphics;
@@ -44,7 +38,7 @@ public class Enemy implements Drawable{
     try {    
         enAv = ImageIO.read(getClass().getResource("Enemy.png"));
         } catch (IOException e) {
-            System.out.println("Enemy sprite loading error");
+            System.out.println("Bullet image loading error");
         } 
   }
   
@@ -60,7 +54,7 @@ public class Enemy implements Drawable{
             }*/
             
             xPos = xPos - speed;
-            if (xPos <= 0)
+            if (xPos + this.length <= 0)
             {
                 Enemy temp = null;
                 for ( Drawable a : list)
@@ -106,6 +100,16 @@ public class Enemy implements Drawable{
         {
             list.remove(this);
         }
+    }
+    
+    public int getLength()
+    {
+        return length;
+    }
+    
+    public int getDamage()
+    {
+        return damage;
     }
     
     @Override
