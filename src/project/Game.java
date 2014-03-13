@@ -188,7 +188,7 @@ public class Game extends Canvas{
          };
          
        
-                 int delay = 10; //in mill. sec.
+                 int delay = 1; //in mill. sec.
                  ActionListener refresh = new ActionListener() {
                     
                      @Override
