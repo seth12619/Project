@@ -50,11 +50,9 @@ public class createClient implements Runnable {
       
        
                ip = host.getHostAddress();
-        
        
                sock = new Socket(ip, 8888);
                
-          
         sendOut = new PrintStream(sock.getOutputStream());
         in = new Scanner(new InputStreamReader(sock.getInputStream()));
         
@@ -66,15 +64,17 @@ public class createClient implements Runnable {
     public void sendCommand (String act) {
         sendOut.println(act);
     }
+    
+     public void setCommand(String d) {
+        command = d;
+    }
 
     
     public String getCommand() {
         return command;
     }
     
-    public void setCommand(String d) {
-        command = d;
-    }
+   
     
    
     

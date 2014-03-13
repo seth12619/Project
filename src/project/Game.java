@@ -46,13 +46,17 @@ public class Game extends Canvas{
     boolean movingRight = false;
     boolean isShooting = false;
     
-    
-    boolean windowTwo = true;
     boolean movingUpTwo = false;
     boolean movingDownTwo = false;
     boolean movingLeftTwo = false;
     boolean movingRightTwo = false;
     boolean isShootingTwo = false;
+    
+    boolean movingUpRel = false;
+    boolean movingDownRel = false;
+    boolean movingLeftRel = false;
+    boolean movingRightRel = false;
+    boolean isShootingRel = false;
    
     Server serve;
     createClient client;
@@ -110,13 +114,67 @@ public class Game extends Canvas{
     }
     
 };
+         Thread two = new Thread() {
+             @Override
+             public void run() {
+                 while (true) {
+                     if (movingLeftTwo= true) { //movingLeft
+                     if (player == 1) {
+                        avatarTwo.moveLeft();  
+                    }
+                    else if (player == 2) {           
+                        avatar.moveLeft();
+                    }
+                     if (movingRightTwo == true) { //moveRight
+                     if (player == 1) {     
+                        avatarTwo.moveRight();  
+      
+                    }
+                    else if (player == 2) {   
+                        avatar.moveRight();
+        
+                  }
+                 }
+                      if (movingUpTwo == true) {  //moveUp
+                  if (player == 1) { 
+                        avatarTwo.moveUp();  
+                    }
+                    else if (player == 2) {               
+                        avatar.moveUp();     
+                    }
+                 }
+                      if (movingDownTwo == true) { //moveDown      
+                 if (player == 1) {                 
+                        avatarTwo.moveDown();
+
+                    }
+                    else if (player == 2) {      
+                        avatar.moveDown();
+                    }
+                 }
+                      if (isShootingTwo == true) { //shooting
+                 if (player == 1) {
+                        avatarTwo.shoot();
+                      
+                    }
+                    else if (player == 2) {
+                        avatar.shoot();
+                        
+                    }
+                 }
+                     
+                }
+                     
+                 }
+             }
+         };
+         two.start();
 
          Thread d = new Thread() {
              
              @Override
              public void run() {
-                 while (true) {
-                     
+                 while (true) {     
                 if (movingLeft == true) { //movingLeft
                      if (player == 1) {
                         avatar.moveLeft();  
@@ -127,6 +185,7 @@ public class Game extends Canvas{
                         left();
                     }
                 }
+                 
                  if (movingRight == true) { //moveRight
                      if (player == 1) {     
                         avatar.moveRight();  
@@ -137,6 +196,7 @@ public class Game extends Canvas{
                         right();     
                   }
                  }
+                
                  if (movingUp == true) {  //moveUp
                   if (player == 1) { 
                      
@@ -149,7 +209,8 @@ public class Game extends Canvas{
                         avatarTwo.moveUp();
                         up();           
                     }
-                 }              
+                 }             
+                 
                  if (movingDown == true) { //moveDown      
                  if (player == 1) {
                         
@@ -164,6 +225,7 @@ public class Game extends Canvas{
                         
                     }
                  }
+                 
                  
                  if (isShooting == true) { //shooting
                  if (player == 1) {
@@ -189,6 +251,7 @@ public class Game extends Canvas{
          
        
                  int delay = 1; //in mill. sec.
+                 
                  ActionListener refresh = new ActionListener() {
                     
                      @Override
@@ -215,28 +278,45 @@ public class Game extends Canvas{
                              
                              // avatarTwo.setPos(serve.getXAction(), serve.getYAction());
                             //  serve.setPosition(avatar.getXPos(), avatar.getYPos());
-                           
+                        
                          }
                          else if (player == 2) {
                              String checker;
                              checker = client.getCommand();
                              
                              if (checker.equals("moveLeft")) {
-                                 avatar.moveLeft();
+                                 movingLeftTwo = true;
                              }
                              if (checker.equals("moveRight")) {
-                                 avatar.moveRight();
+                                 movingRightTwo = true;
                              }
                              if (checker.equals("moveUp")) {
-                                 avatar.moveUp();
+                                 movingUpTwo = true;
                              }
                              if (checker.equals("moveDown")) {
-                                 avatar.moveDown();
+                                 movingDownTwo = true;
                              }
                              if (checker.equals("shoot")) {
-                                 avatar.shoot();
+                                 isShootingTwo = true;
                              }
-                             
+                             //Ones below are when false
+                             if (checker.equals("moveLeftFalse")) {
+                                 movingLeftTwo = false;
+                             }
+                             if (checker.equals("moveRightFalse")) {
+                                 movingRightTwo = false;
+                             }
+                             if (checker.equals("moveUpFalse")) {
+                                 movingUpTwo = false;
+                             }
+                             if (checker.equals("moveDownFalse")) {
+                                 movingDownTwo = false;
+                             }
+                             if (checker.equals("shootFalse")) {
+                                isShootingTwo = false;
+                             }
+                     
+                           
                             // avatar.setPos(client.getXOrder(), client.getYOrder());
                             // client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
                          }
@@ -281,7 +361,7 @@ d.start();
                      isShooting = true;
 
                 }
-                     
+              
                 
                  
             }
@@ -290,27 +370,52 @@ d.start();
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_A) {   
                     movingLeft = false;
-               
+                    if (player == 1) {
+                    serve.sendCommand("moveLeftFalse");
+                    }
+                    if (player == 2) {
+                    client.sendCommand("moveLeftFalse");
+                    }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_D) {
                    
                     movingRight = false;
-                   
+                   if (player == 1) {
+                    serve.sendCommand("moveDownFalse");
+                    }
+                    if (player == 2) {
+                    client.sendCommand("moveDownFalse");
+                    }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_W) {
                    
                     movingUp = false;
-                    
+                    if (player == 1) {
+                    serve.sendCommand("moveUpFalse");
+                    }
+                    if (player == 2) {
+                    client.sendCommand("moveUpFalse");
+                    }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_S) {
                     
                     movingDown = false;
-                     
+                    if (player == 1) {
+                    serve.sendCommand("moveDownFalse");
+                    }
+                    if (player == 2) {
+                    client.sendCommand("moveDownFalse");
+                    }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_M ) {
 
                      isShooting = false;
-
+                     if (player == 1) {
+                    serve.sendCommand("shootFalse");
+                    }
+                    if (player == 2) {
+                    client.sendCommand("shootFalse");
+                    }
                 }
                 
                 if (e.getKeyCode() == KeyEvent.VK_V ) {
