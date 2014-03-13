@@ -58,6 +58,14 @@ public final class Server implements Runnable {
         run();
     }
     
+    public int getXSend () {
+        return xSend;
+    }
+    
+    public int getYSend () {
+        return ySend;
+    }
+    
     public String getAction () {
         return actionDone;
     }
@@ -116,7 +124,7 @@ public final class Server implements Runnable {
                            XDOut = new DataOutputStream(client.getOutputStream());
                                
                           
-                           XDOut.writeInt(xSend);
+                           XDOut.writeInt(getXSend());
                           
                            XDOut.flush();
                           

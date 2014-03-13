@@ -62,6 +62,14 @@ public class createClient implements Runnable {
         xSend = xP;
         ySend = yP;
         run();
+    }    
+    
+    public int getXSend () {
+        return xSend;
+    }
+    
+    public int getYSend () {
+        return ySend;
     }
     
     public String getCommand() {
@@ -124,7 +132,7 @@ public class createClient implements Runnable {
                            XDOut = new DataOutputStream(sock.getOutputStream());
                               
                           
-                           XDOut.writeInt(xSend);
+                           XDOut.writeInt(getXSend());
                           
                            XDOut.flush();
                            
