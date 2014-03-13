@@ -194,7 +194,7 @@ public class Game extends Canvas{
              }
          };
          
-         
+       
                  int delay = 10; //in mill. sec.
                  ActionListener refresh = new ActionListener() {
                     
@@ -203,17 +203,21 @@ public class Game extends Canvas{
                          
                          if (player == 1) {
                              avatarTwo.setPos(serve.getXAction(), serve.getYAction());
+                             
+                              serve.setActionDone("refresh");
+                              serve.setPosition(avatar.getXPos(), avatar.getYPos());
+                           
                          }
                          if (player == 2) {
                              avatar.setPos(client.getXOrder(), client.getYOrder());
                           //   System.out.println("client xPos for player1: " + client.getXOrder());
+                             client.setCommand("refresh");
+                             client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
                          }
-                        
                      }
                  };
                  new javax.swing.Timer(delay, refresh).start();
-            
-
+         
 t.start();
 d.start();
 
@@ -350,11 +354,11 @@ d.start();
     
     public void left() {
         if (player == 1) {
-            serve.setPosition(avatar.getXPos(), avatar.getYPos());
+            serve.setActionDone("moveLeft");
         }
         else if (player == 2) {
             client.setCommand("moveLeft");
-            client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
+          
             
         }
         
@@ -366,12 +370,11 @@ d.start();
        
         if (player == 1) {
             serve.setActionDone("moveRight");
-            serve.setPosition(avatar.getXPos(), avatar.getYPos());
+            
         }
         else if (player == 2) {
             client.setCommand("moveRight");
-            client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
-            System.out.println("client sprite: " + avatarTwo.getXPos() + " , " + avatarTwo.getYPos());
+           
         }
          
     }
@@ -379,11 +382,11 @@ d.start();
        
         if (player == 1) {
             serve.setActionDone("moveUp");
-            serve.setPosition(avatar.getXPos(), avatar.getYPos());
+            
         }
         else if (player == 2) {
             client.setCommand("moveUp");
-            client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
+            
         }
       
     }
@@ -392,11 +395,11 @@ d.start();
       
         if (player == 1) {
             serve.setActionDone("moveDown");
-            serve.setPosition(avatar.getXPos(), avatar.getYPos());
+           
         }
         else if (player == 2) {
             client.setCommand("moveDown");
-            client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
+           
         }
          
     }

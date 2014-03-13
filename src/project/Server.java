@@ -29,21 +29,17 @@ public final class Server implements Runnable {
      int XAct;
      int YAct;
      
-      //stuff that is sent out
-      DataOutputStream YDOut;
-    
-      DataInputStream XDIn; //stuff that is received
-      DataInputStream YDIn;
+      
       
      int xSend;
      int ySend;
   
     public Server() throws IOException {
-        xSend = 2;
-        ySend = 2;
+        xSend = 1;
+        ySend = 1;
         actionDone = null;
           
-           
+            
         
                  run();
             
@@ -77,12 +73,16 @@ public final class Server implements Runnable {
     public void run() {
          
         Thread  s = new Thread() {
-            
+            //stuff that is sent out
+      DataOutputStream XDOut;
+      DataOutputStream YDOut;
+    
+      DataInputStream XDIn; //stuff that is received
+      DataInputStream YDIn;
             
             @Override
             public void run() {
-                
-                try {
+                 try {
                 server = new ServerSocket( 8888 );
             } catch (IOException ex) {
                 System.out.println("Error -- ServerSocket");
@@ -91,12 +91,9 @@ public final class Server implements Runnable {
                 //waits for client request
                 client = server.accept();
             } catch (IOException ex) {
-                System.out.println("Error in accepting request from client");;
+                System.out.println("Error in accepting request from client");
             }
-                
-        while( actionDone != null ) { 
-           
-           try {
+                try {
                       XDIn = new DataInputStream(client.getInputStream());
                    } catch (IOException ex) {
                        System.out.println("Fatal Error -XDin - Client");
@@ -107,12 +104,16 @@ public final class Server implements Runnable {
                    } catch (IOException ex) {
                        System.out.println("Error in reading XDIn as int");
                    }
+                
+       
+           
+         
                  
 
        
                        try {
                   
-                           DataOutputStream XDOut = new DataOutputStream(client.getOutputStream());
+                           XDOut = new DataOutputStream(client.getOutputStream());
                                
                           
                            XDOut.writeInt(xSend);
@@ -124,7 +125,7 @@ public final class Server implements Runnable {
                        }
                        actionDone = null;
         }
-            }
+            
              };
           s.start();
        

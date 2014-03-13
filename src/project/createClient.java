@@ -26,11 +26,7 @@ public class createClient implements Runnable {
     private String ip;
     int player;
     
-    DataOutputStream XDOut; //stuff that is sent out
-    DataOutputStream YDOut;
     
-    DataInputStream XDIn; //stuff that is received
-    DataInputStream YDIn;
     
     String command;
     
@@ -65,7 +61,7 @@ public class createClient implements Runnable {
     public void setPosition(int xP, int yP) {
         xSend = xP;
         ySend = yP;
-       run();
+        run();
     }
     
     public String getCommand() {
@@ -83,10 +79,18 @@ public class createClient implements Runnable {
     @Override
     public void run() {
        //Client below
+   
         
         Thread c = new Thread() {
+    DataOutputStream XDOut; //stuff that is sent out
+    DataOutputStream YDOut;
+    
+    DataInputStream XDIn; //stuff that is received
+    DataInputStream YDIn;
+            
                @Override
                public void run() {
+    
                    
                    try {
             host = InetAddress.getLocalHost();
@@ -101,9 +105,7 @@ public class createClient implements Runnable {
            } catch (IOException ex) {
                System.out.println("Error in making Socket");
            }
-                   
-                          while(command != null) {
-                   try {
+          try {
                        XDIn = new DataInputStream(sock.getInputStream());
                    } catch (IOException ex) {
                        System.out.println("Fatal Error -XDin - Client");
@@ -114,9 +116,9 @@ public class createClient implements Runnable {
                    } catch (IOException ex) {
                        System.out.println("Error in reading XDIn as int");
                    }
-                  System.out.println("xOrder is: " + xOrder);
-       
-            
+                   
+                          
+
                        try {
                   
                            XDOut = new DataOutputStream(sock.getOutputStream());
@@ -131,8 +133,9 @@ public class createClient implements Runnable {
                        }
                        
                        command = null;
+                       
             }
-               }
+               
             
                
         };
