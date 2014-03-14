@@ -114,7 +114,7 @@ public class Game extends Canvas{
     }
     
 };
-         Thread two = new Thread() {
+         Thread two = new Thread() { //Thread two is for the stuff given to this certain client
              @Override
              public void run() {
                  while (true) {
@@ -125,14 +125,13 @@ public class Game extends Canvas{
                     else if (player == 2) {           
                         avatar.moveLeft();
                     }
+                     }
                      if (movingRightTwo == true) { //moveRight
                      if (player == 1) {     
                         avatarTwo.moveRight();  
-      
                     }
                     else if (player == 2) {   
                         avatar.moveRight();
-        
                   }
                  }
                       if (movingUpTwo == true) {  //moveUp
@@ -146,7 +145,6 @@ public class Game extends Canvas{
                       if (movingDownTwo == true) { //moveDown      
                  if (player == 1) {                 
                         avatarTwo.moveDown();
-
                     }
                     else if (player == 2) {      
                         avatar.moveDown();
@@ -155,74 +153,125 @@ public class Game extends Canvas{
                       if (isShootingTwo == true) { //shooting
                  if (player == 1) {
                         avatarTwo.shoot();
-                      
                     }
                     else if (player == 2) {
-                        avatar.shoot();
-                        
+                        avatar.shoot();     
                     }
                  }
-                     
+                      try {
+                     Thread.sleep(20);
+                 } catch (InterruptedException ex) {
+                     System.out.println("Thread sleep - actions Interrupted");
+                 }
                 }
                      
                  }
-             }
+             
          };
          two.start();
-
-         Thread d = new Thread() {
+         
+          Thread twoFalse = new Thread() { //Thread two is for the stuff given to this certain client
+             @Override
+             public void run() {
+                 while (true) {
+                     if (movingLeftRel== true) { //movingLeft
+                            if (player == 1) {
+                           serve.sendCommand("moveLeftFalse");
+                           }
+                           else if (player == 2) {
+                           client.sendCommand("moveLeftFalse");
+                           }
+                     }
+                     if (movingRightRel == true) { //moveRight
+                           if (player == 1) {
+                           serve.sendCommand("moveRightFalse");
+                           }
+                           else if (player == 2) {
+                           client.sendCommand("moveRightFalse");
+                           }
+                 }
+                      if (movingUpRel == true) {  //moveUp
+                            if (player == 1) {
+                            serve.sendCommand("moveUpFalse");
+                            }
+                            else if (player == 2) {
+                            client.sendCommand("moveUpFalse");
+                            }
+                 }
+                      if (movingDownRel == true) { //moveDown      
+                                if (player == 1) {
+                                serve.sendCommand("moveDownFalse");
+                                }
+                                else if (player == 2) {
+                                client.sendCommand("moveDownFalse");
+                                }
+                 }
+                      if (isShootingRel == true) { //shooting
+                                if (player == 1) {
+                               serve.sendCommand("shootFalse");
+                               }
+                               else if (player == 2) {
+                               client.sendCommand("shootFalse");
+                               }
+                 }
+                      try {
+                     Thread.sleep(20);
+                 } catch (InterruptedException ex) {
+                     System.out.println("Thread sleep - actions Interrupted");
+                 }
+                }
+                     
+                 }
              
+         };
+         twoFalse.start();
+
+
+         Thread d = new Thread() {    // Thread d is for actions in this certain client.        
              @Override
              public void run() {
                  while (true) {     
                 if (movingLeft == true) { //movingLeft
                      if (player == 1) {
                         avatar.moveLeft();  
-                        left();
+                        serve.sendCommand("moveLeft");
                     }
                     else if (player == 2) {           
                         avatarTwo.moveLeft();
-                        left();
+                        client.sendCommand("moveLeft");
                     }
                 }
                  
                  if (movingRight == true) { //moveRight
                      if (player == 1) {     
                         avatar.moveRight();  
-                        right();
+                        serve.sendCommand("moveRight");
                     }
                     else if (player == 2) {   
                         avatarTwo.moveRight();
-                        right();     
+                        client.sendCommand("moveRight");    
                   }
                  }
                 
                  if (movingUp == true) {  //moveUp
-                  if (player == 1) { 
-                     
+                  if (player == 1) {                  
                         avatar.moveUp();
-                        up();
-                        
+                        serve.sendCommand("moveUp");     
                     }
-                    else if (player == 2) {
-                       
+                    else if (player == 2) { 
                         avatarTwo.moveUp();
-                        up();           
+                        client.sendCommand("moveUp");           
                     }
                  }             
                  
                  if (movingDown == true) { //moveDown      
-                 if (player == 1) {
-                        
+                 if (player == 1) {  
                         avatar.moveDown();
-                        down();
-
+                        serve.sendCommand("moveDown");
                     }
-                    else if (player == 2) {
-                       
+                    else if (player == 2) {      
                         avatarTwo.moveDown();
-                        down();
-                        
+                        client.sendCommand("moveDown");                    
                     }
                  }
                  
@@ -230,11 +279,11 @@ public class Game extends Canvas{
                  if (isShooting == true) { //shooting
                  if (player == 1) {
                         avatar.shoot();
-                        shoot();
+                        serve.sendCommand("shoot");
                     }
-                    else if (player == 2) {
+                 else if (player == 2) {
                         avatarTwo.shoot();
-                        shoot();
+                        client.sendCommand("shoot");
                     }
                  }
                  
@@ -248,80 +297,78 @@ public class Game extends Canvas{
              
              }
          };
-         
-       
-                 int delay = 1; //in mill. sec.
-                 
+ 
+                 int delay = 1; //in mill. sec.      
                  ActionListener refresh = new ActionListener() {
                     
                      @Override
                      public void actionPerformed(ActionEvent ae) {
-                         
-                         if (player == 1) {
                              String checker;
-                             checker = serve.getAction();
-                             if (checker.equals("moveLeft")) {
-                                 avatarTwo.moveLeft();
-                             }
-                             if (checker.equals("moveRight")) {
-                                 avatarTwo.moveRight();
-                             }
-                             if (checker.equals("moveUp")) {
-                                 avatarTwo.moveUp();
-                             }
-                             if (checker.equals("moveDown")) {
-                                 avatarTwo.moveDown();
-                             }
-                             if (checker.equals("shoot")) {
-                                 avatarTwo.shoot();
-                             }
+                             boolean shootChecker;
+                             boolean leftChecker;
+                             boolean rightChecker;
+                             boolean upChecker;
+                             boolean downChecker;
                              
-                             // avatarTwo.setPos(serve.getXAction(), serve.getYAction());
-                            //  serve.setPosition(avatar.getXPos(), avatar.getYPos());
-                        
-                         }
-                         else if (player == 2) {
-                             String checker;
-                             checker = client.getCommand();
-                             
-                             if (checker.equals("moveLeft")) {
+                             checker = "";
+                             shootChecker = false;
+                             leftChecker = false;
+                             rightChecker = false;
+                             upChecker = false;
+                             downChecker = false;
+                            
+                              if (player == 1) {
+                             checker = serve.getAction();    
+                             shootChecker = serve.getShoot();
+                             leftChecker = serve.getLeft();
+                             rightChecker = serve.getRight();
+                             upChecker = serve.getUp();
+                             downChecker =  serve.getDown();
+                              }
+                              
+                              
+                               if (player == 2) {
+                             checker = client.getCommand();       
+                             shootChecker = client.getShoot();
+                             leftChecker = client.getLeft();
+                             rightChecker = client.getRight();
+                             upChecker = client.getUp();
+                             downChecker = client.getUp();
+                              }
+                               
+                               
+                             if (leftChecker == true) {
                                  movingLeftTwo = true;
                              }
-                             if (checker.equals("moveRight")) {
+                             if (rightChecker == true) {
                                  movingRightTwo = true;
                              }
-                             if (checker.equals("moveUp")) {
+                             if (upChecker == true) {
                                  movingUpTwo = true;
                              }
-                             if (checker.equals("moveDown")) {
+                             if (downChecker == true) {
                                  movingDownTwo = true;
                              }
-                             if (checker.equals("shoot")) {
+                             if (shootChecker == true) {
                                  isShootingTwo = true;
                              }
-                             //Ones below are when false
-                             if (checker.equals("moveLeftFalse")) {
-                                 movingLeftTwo = false;
-                             }
-                             if (checker.equals("moveRightFalse")) {
-                                 movingRightTwo = false;
-                             }
-                             if (checker.equals("moveUpFalse")) {
-                                 movingUpTwo = false;
-                             }
-                             if (checker.equals("moveDownFalse")) {
+                             //ones below are false  
+                             if (downChecker == false) {
                                  movingDownTwo = false;
                              }
-                             if (checker.equals("shootFalse")) {
-                                isShootingTwo = false;
+                             if (upChecker == false) {
+                                 movingUpTwo = false;
                              }
-                     
-                           
-                            // avatar.setPos(client.getXOrder(), client.getYOrder());
-                            // client.setPosition(avatarTwo.getXPos(), avatarTwo.getYPos());
-                         }
-                         
-                     }
+                             if (leftChecker == false) {
+                                 movingLeftTwo = false;
+                             }
+                             if (rightChecker == false) {
+                                 movingRightTwo = false;
+                             }
+                             if (shootChecker == false) {
+                                 isShootingTwo = false;
+                             }
+                          }
                  };
                  new javax.swing.Timer(delay, refresh).start();
          
@@ -339,27 +386,28 @@ d.start();
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_A) {   
-                    movingLeft = true;             
+                    movingLeft = true;       
+                    movingLeftRel= false;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_D) {
                    
                     movingRight = true;
-                   
+                    movingRightRel= false;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_W) {
                    
                     movingUp = true;
-                    
+                    movingUpRel= false;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_S) {
                     
                     movingDown = true;
-                     
+                    movingDownRel= false;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_M ) {
 
                      isShooting = true;
-
+                     isShootingRel= false;
                 }
               
                 
@@ -370,52 +418,28 @@ d.start();
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_A) {   
                     movingLeft = false;
-                    if (player == 1) {
-                    serve.sendCommand("moveLeftFalse");
-                    }
-                    if (player == 2) {
-                    client.sendCommand("moveLeftFalse");
-                    }
+                    movingLeftRel= true;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_D) {
                    
                     movingRight = false;
-                   if (player == 1) {
-                    serve.sendCommand("moveDownFalse");
-                    }
-                    if (player == 2) {
-                    client.sendCommand("moveDownFalse");
-                    }
+                    movingRightRel = true;
+                   
                 }
                 if (e.getKeyCode() == KeyEvent.VK_W) {
                    
                     movingUp = false;
-                    if (player == 1) {
-                    serve.sendCommand("moveUpFalse");
-                    }
-                    if (player == 2) {
-                    client.sendCommand("moveUpFalse");
-                    }
+                    movingUpRel = true;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_S) {
                     
                     movingDown = false;
-                    if (player == 1) {
-                    serve.sendCommand("moveDownFalse");
-                    }
-                    if (player == 2) {
-                    client.sendCommand("moveDownFalse");
-                    }
+                    movingDownRel = true;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_M ) {
 
                      isShooting = false;
-                     if (player == 1) {
-                    serve.sendCommand("shootFalse");
-                    }
-                    if (player == 2) {
-                    client.sendCommand("shootFalse");
-                    }
+                     isShootingRel = true;
                 }
                 
                 if (e.getKeyCode() == KeyEvent.VK_V ) {
@@ -485,17 +509,16 @@ d.start();
         if (player == 1) {
             serve.sendCommand("moveLeft");
         }
-        else if (player == 2) {
+        if (player == 2) {
             client.sendCommand("moveLeft");
         }
     }
     
     public void right() {
-       
         if (player == 1) {
             serve.sendCommand("moveRight");
         }
-        else if (player == 2) {
+        if (player == 2) {
             client.sendCommand("moveRight");
         }
          
@@ -504,37 +527,29 @@ d.start();
        
         if (player == 1) {
             serve.sendCommand("moveUp");
-            
         }
-        else if (player == 2) {
-            client.sendCommand("moveUp");
-            
+        if (player == 2) {
+            client.sendCommand("moveUp");      
         }
       
     }
     
     public void down() {
-      
         if (player == 1) {
-            serve.sendCommand("moveDown");
-           
+            serve.sendCommand("moveDown");   
         }
-        else if (player == 2) {
-            client.sendCommand("moveDown");
-           
-        }
-         
+        if (player == 2) {
+            client.sendCommand("moveDown");       
+        }     
     }
     
     public void shoot() {
-       
-        if (player == 1) {
+                    if (player == 1) {
                         serve.sendCommand("shoot");
                     }
-                    else if (player == 2) {
+                    if (player == 2) {
                         client.sendCommand("shoot");
                     }
-              
     }
     
     

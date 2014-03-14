@@ -18,7 +18,6 @@ import java.util.logging.Logger;
  * @author Seth Legaspi/Marco Santos
  */
 public class createClient implements Runnable {
-    String checker;
     
     Socket sock;
     PrintStream sendOut;
@@ -30,6 +29,8 @@ public class createClient implements Runnable {
     
     String command;
     String receivedCommand;
+    String stopCommand;
+    String checker;
     
     int xOrder;
     int yOrder;
@@ -40,6 +41,12 @@ public class createClient implements Runnable {
     InetAddress host = null;
     
     boolean wait = true;
+    
+    boolean shoot =  false;
+    boolean left = false;
+    boolean right = false;
+    boolean up = false;
+    boolean down = false;
     
 
     /**
@@ -63,20 +70,74 @@ public class createClient implements Runnable {
     
     public void sendCommand (String act) {
         sendOut.println(act);
+        sendOut.flush();
     }
     
      public void setCommand(String d) {
         command = d;
     }
 
-    
     public String getCommand() {
         return command;
     }
     
+    public void setCommandToStop(String d) {
+        stopCommand = d;
+    }
    
-    
-   
+    public String getCommandToStop() {
+        return stopCommand;
+    }
+    //shoot
+    public void setShootTrue() {
+        shoot = true;
+    }
+    public void setShootFalse() {
+        shoot = false;
+    }
+    public boolean getShoot() {
+        return shoot;
+    }
+    //left
+    public void setLeftTrue() {
+        left = true;
+    }
+    public void setLeftFalse() {
+        left = false;
+    }
+    public boolean getLeft() {
+        return left;
+    }
+    //right
+    public void setRightTrue() {
+        right = true;
+    }
+    public void setRightFalse() {
+        right = false;
+    }
+    public boolean getRight() {
+        return right;
+    }
+    //up
+    public void setUpTrue() {
+        up = true;
+    }
+    public void setUpFalse() {
+        up = false;
+    }
+    public boolean getUp() {
+        return up;
+    }
+    //down
+    public void setDownTrue() {
+        down = true;
+    }
+    public void setDownFalse() {
+        down = false;
+    }
+    public boolean getDown() {
+        return down;
+    }
     
     @Override
     public void run() {
@@ -84,15 +145,45 @@ public class createClient implements Runnable {
         
        while (wait) {
            command = "";
-           
-           
+           checker = "";
            try {
-           setCommand(in.nextLine());
+               checker = in.nextLine();
+               if (checker.equals("shootFalse")) {
+                   setShootFalse();
+               }
+               if (checker.equals("shoot")) {
+                   setShootTrue();
+               }
+               if (checker.equals("moveLeftFalse")) {
+                   setLeftFalse();
+               }
+               if (checker.equals("moveLeft")) {
+                   setLeftTrue();
+               }
+               if (checker.equals("moveRightFalse")) {
+                   setRightFalse();
+               }
+               if (checker.equals("moveRight")) {
+                   setRightTrue();
+               }
+               if (checker.equals("moveUpFalse")) {
+                   setUpFalse();
+               }
+               if (checker.equals("moveUp")) {
+                   setUpTrue();
+               }
+               if (checker.equals("moveDownFalse")) {
+                   setDownFalse();
+               }
+               if (checker.equals("moveDown")) {
+                   setDownTrue();
+               }
+         
            } catch (Exception e) {
                wait = false;
                break;
            }
-      System.out.println("the command: " + command);
+      System.out.println("the command: " + checker);
            
        }
 
