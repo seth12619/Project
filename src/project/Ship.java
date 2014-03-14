@@ -73,6 +73,10 @@ public final class Ship implements Drawable {
         //draw the hitbox here
     }
     
+    public void setDelay() {
+        delay = 7;
+    }
+    
     
     public void setPlayer(int hum) {
         player = hum;

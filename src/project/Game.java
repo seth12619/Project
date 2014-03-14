@@ -158,6 +158,14 @@ public class Game extends Canvas{
                         avatar.shoot();     
                     }
                  }
+                      if (isShootingTwo == false) {
+                          if (player == 1) {
+                        avatarTwo.setDelay();
+                    }
+                    else if (player == 2) {
+                        avatar.setDelay();
+                    }
+                      }
                       try {
                      Thread.sleep(20);
                  } catch (InterruptedException ex) {
@@ -277,13 +285,14 @@ public class Game extends Canvas{
                  
                  
                  if (isShooting == true) { //shooting
-                 if (player == 1) {
+                 if (player == 1) {     
                         avatar.shoot();
-                        serve.sendCommand("shoot");
+                        serve.sendCommand("shoot");  
                     }
                  else if (player == 2) {
                         avatarTwo.shoot();
                         client.sendCommand("shoot");
+                        
                     }
                  }
                  
@@ -417,6 +426,7 @@ d.start();
                 if (e.getKeyCode() == KeyEvent.VK_A) {   
                     movingLeft = false;
                     movingLeftRel= true;
+                    
                 }
                 if (e.getKeyCode() == KeyEvent.VK_D) {
                    
@@ -438,6 +448,12 @@ d.start();
 
                      isShooting = false;
                      isShootingRel = true;
+                                                if (player == 1) {      
+                                               avatar.setDelay();
+                                              }
+                                              if (player == 2) {   
+                                               avatarTwo.setDelay();
+                                              }
                 }
                 
                 if (e.getKeyCode() == KeyEvent.VK_V ) {
@@ -544,9 +560,11 @@ d.start();
     public void shoot() {
                     if (player == 1) {
                         serve.sendCommand("shoot");
+                      //  avatar.setDelay();
                     }
                     if (player == 2) {
                         client.sendCommand("shoot");
+                     //   avatarTwo.setDelay();
                     }
     }
     
