@@ -51,11 +51,7 @@ public final class Server implements Runnable {
                  Thread s = new Thread(this);
                  s.start();
                  }
-    
-    public void setActionDone(String act) {
-        actionDone = act;  
-    }
-    
+   
     public void sendCommand (String act) {
         out.println(act);
         out.flush();
@@ -119,30 +115,35 @@ public final class Server implements Runnable {
           checker = "";
            try {
                checker = sc.nextLine();
+               //shoot
                if (checker.equals("shootFalse")) {
                    setShootFalse();
                }
                if (checker.equals("shoot")) {
                    setShootTrue();
                }
+               //left
                if (checker.equals("moveLeftFalse")) {
                    setLeftFalse();
                }
                if (checker.equals("moveLeft")) {
                    setLeftTrue();
                }
+               //right
                if (checker.equals("moveRightFalse")) {
                    setRightFalse();
                }
                if (checker.equals("moveRight")) {
                    setRightTrue();
                }
+               //up
                if (checker.equals("moveUpFalse")) {
                    setUpFalse();
                }
                if (checker.equals("moveUp")) {
                    setUpTrue();
                }
+               //down
                if (checker.equals("moveDownFalse")) {
                    setDownFalse();
                }

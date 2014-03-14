@@ -67,13 +67,6 @@ public class createClient implements Runnable {
         sendOut.flush();
     }
    
-    public void setCommandToStop(String d) {
-        stopCommand = d;
-    }
-   
-    public String getCommandToStop() {
-        return stopCommand;
-    }
     //shoot
     public void setShootTrue() {
         shoot = true;
