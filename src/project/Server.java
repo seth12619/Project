@@ -17,7 +17,7 @@ import java.util.*;
  * @author Seth Legaspi/Marco Santos
  */
 public final class Server implements Runnable {
-     private static ServerSocket server = null; 
+     private static ServerSocket server; 
      private static int portNu = 8888;
      
      String actionDone;
@@ -28,21 +28,14 @@ public final class Server implements Runnable {
      PrintStream out;
      
      Socket client; //creates socket
-     
-     int XAct;
-     int YAct;
-     
-      
-      
-     int xSend;
-     int ySend;
+
      
      boolean wait = true;
-     boolean shoot = false;
-     boolean left = false;
-     boolean right = false;
-     boolean up = false;
-     boolean down = false;
+     boolean shoot;
+     boolean left;
+     boolean right;
+     boolean up;
+     boolean down;
   
     public Server() throws IOException {
           
@@ -67,19 +60,7 @@ public final class Server implements Runnable {
         out.println(act);
         out.flush();
     }
-    
-    public String getAction () {
-        return actionDone;
-    }
-    
-    public String getActionToStop() {
-        return actionToStop;
-    }
-    
-    public void setActionToStop(String d) {
-        actionToStop = d;
-    }
-    
+
     public void setShootTrue() {
         shoot = true;
     }
@@ -132,11 +113,7 @@ public final class Server implements Runnable {
     
     @Override
     public void run() {
-         
-    
-            
-       
-      
+
       while (wait) {
           actionDone = "";
           checker = "";

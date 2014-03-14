@@ -31,22 +31,17 @@ public class createClient implements Runnable {
     String receivedCommand;
     String stopCommand;
     String checker;
-    
-    int xOrder;
-    int yOrder;
-    
-    int xSend;
-    int ySend;
+
     
     InetAddress host = null;
     
     boolean wait = true;
     
-    boolean shoot =  false;
-    boolean left = false;
-    boolean right = false;
-    boolean up = false;
-    boolean down = false;
+    boolean shoot;
+    boolean left;
+    boolean right;
+    boolean up;
+    boolean down;
     
 
     /**
@@ -54,8 +49,7 @@ public class createClient implements Runnable {
      */
     public createClient() throws UnknownHostException, IOException {
                host = InetAddress.getLocalHost();
-      
-       
+
                ip = host.getHostAddress();
        
                sock = new Socket(ip, 8888);
@@ -72,15 +66,7 @@ public class createClient implements Runnable {
         sendOut.println(act);
         sendOut.flush();
     }
-    
-     public void setCommand(String d) {
-        command = d;
-    }
-
-    public String getCommand() {
-        return command;
-    }
-    
+   
     public void setCommandToStop(String d) {
         stopCommand = d;
     }

@@ -143,10 +143,6 @@ public final class Ship implements Drawable {
         }
     }
 	
-	public void setPos(int xP, int yP) {
-        xPos = xP;
-        yPos = yP;
-    }
     
     public int getXPos(){
         return xPos;

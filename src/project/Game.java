@@ -118,7 +118,7 @@ public class Game extends Canvas{
              @Override
              public void run() {
                  while (true) {
-                     if (movingLeftTwo= true) { //movingLeft
+                     if (movingLeftTwo == true) { //movingLeft
                      if (player == 1) {
                         avatarTwo.moveLeft();  
                     }
@@ -303,14 +303,13 @@ public class Game extends Canvas{
                     
                      @Override
                      public void actionPerformed(ActionEvent ae) {
-                             String checker;
+    
                              boolean shootChecker;
                              boolean leftChecker;
                              boolean rightChecker;
                              boolean upChecker;
                              boolean downChecker;
-                             
-                             checker = "";
+                     
                              shootChecker = false;
                              leftChecker = false;
                              rightChecker = false;
@@ -318,7 +317,7 @@ public class Game extends Canvas{
                              downChecker = false;
                             
                               if (player == 1) {
-                             checker = serve.getAction();    
+            
                              shootChecker = serve.getShoot();
                              leftChecker = serve.getLeft();
                              rightChecker = serve.getRight();
@@ -327,8 +326,7 @@ public class Game extends Canvas{
                               }
                               
                               
-                               if (player == 2) {
-                             checker = client.getCommand();       
+                               if (player == 2)     {
                              shootChecker = client.getShoot();
                              leftChecker = client.getLeft();
                              rightChecker = client.getRight();
