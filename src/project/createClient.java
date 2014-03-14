@@ -23,12 +23,9 @@ public class createClient implements Runnable {
     PrintStream sendOut;
     Scanner in;
     private String ip;
-    int player;
+
     
-    
-    
-    String command;
-    String receivedCommand;
+
     String stopCommand;
     String checker;
 
@@ -36,7 +33,6 @@ public class createClient implements Runnable {
     InetAddress host = null;
     
     boolean wait = true;
-    
     boolean shoot;
     boolean left;
     boolean right;
@@ -46,6 +42,7 @@ public class createClient implements Runnable {
 
     /**
      *
+     * @throws java.net.UnknownHostException
      */
     public createClient() throws UnknownHostException, IOException {
                host = InetAddress.getLocalHost();
@@ -123,34 +120,38 @@ public class createClient implements Runnable {
        //Client below
         
        while (wait) {
-           command = "";
            checker = "";
            try {
                checker = in.nextLine();
+               //shoot
                if (checker.equals("shootFalse")) {
                    setShootFalse();
                }
                if (checker.equals("shoot")) {
                    setShootTrue();
                }
+               //left
                if (checker.equals("moveLeftFalse")) {
                    setLeftFalse();
                }
                if (checker.equals("moveLeft")) {
                    setLeftTrue();
                }
+               //right
                if (checker.equals("moveRightFalse")) {
                    setRightFalse();
                }
                if (checker.equals("moveRight")) {
                    setRightTrue();
                }
+               //up
                if (checker.equals("moveUpFalse")) {
                    setUpFalse();
                }
                if (checker.equals("moveUp")) {
                    setUpTrue();
                }
+               //down
                if (checker.equals("moveDownFalse")) {
                    setDownFalse();
                }

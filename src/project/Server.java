@@ -18,9 +18,7 @@ import java.util.*;
  */
 public final class Server implements Runnable {
      private static ServerSocket server; 
-     private static int portNu = 8888;
-     
-     String actionDone;
+
      String actionToStop;
      String checker;
      
@@ -56,7 +54,7 @@ public final class Server implements Runnable {
         out.println(act);
         out.flush();
     }
-
+   //shoot
     public void setShootTrue() {
         shoot = true;
     }
@@ -111,7 +109,6 @@ public final class Server implements Runnable {
     public void run() {
 
       while (wait) {
-          actionDone = "";
           checker = "";
            try {
                checker = sc.nextLine();

@@ -331,7 +331,7 @@ public class Game extends Canvas{
                              leftChecker = client.getLeft();
                              rightChecker = client.getRight();
                              upChecker = client.getUp();
-                             downChecker = client.getUp();
+                             downChecker = client.getDown();
                               }
                                
                                

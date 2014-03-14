@@ -32,7 +32,7 @@ public class Project extends JFrame {
     public Project() throws IOException {
         
         
-        setTitle("Project version 0.000000000012");
+        setTitle("Project version 0.012");
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800,450);
@@ -47,7 +47,7 @@ public class Project extends JFrame {
             join.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    
+                    setTitle("Project version 0.012 - Join");
                     Game start = null;
                     try {                    
                         start = new Game(2);
@@ -66,7 +66,7 @@ public class Project extends JFrame {
             create.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    
+                    setTitle("Project version 0.012 - create");
                     Game start = null;
                     try {                    
                         start = new Game(1);
