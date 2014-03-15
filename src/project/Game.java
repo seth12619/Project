@@ -1,4 +1,3 @@
-
  package project;
 
   
@@ -31,7 +30,7 @@ public class Game extends Canvas{
     
     animateThread thread;
     ArrayList<Drawable> list = new ArrayList<Drawable>();
-    EnemyGenerator g = new EnemyGenerator(list);
+    EnemyGenerator g;
    
     String timeCheck = "okay";
     
@@ -76,6 +75,7 @@ public class Game extends Canvas{
         
         list.add(avatar);
         list.add(avatarTwo);
+        g = new EnemyGenerator (list);
         
          if (player == 1) {
             create();
@@ -96,9 +96,9 @@ public class Game extends Canvas{
             int one = EnemyGenerator.getYPosA();
             int two = EnemyGenerator.getYPosB();
             int type = EnemyGenerator.getType();     
-            
-            g.generate(one, two, type);
             g.setDelay();
+            g.generate(one, two, type);
+            
             
             String oneNet = Integer.toString(one);
             String twoNet = Integer.toString(two);
@@ -117,7 +117,6 @@ public class Game extends Canvas{
             //stuff that client-side does
         } 
                         
-            repaint();
             try {
                 Thread.sleep(10);  //will make thread sleep
             } catch (InterruptedException ex) {
