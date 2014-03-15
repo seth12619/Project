@@ -34,6 +34,10 @@ public final class Server implements Runnable {
      boolean right;
      boolean up;
      boolean down;
+     
+     String one;
+     String two;
+     String type;
   
     public Server() throws IOException {
           
@@ -104,6 +108,7 @@ public final class Server implements Runnable {
     public boolean getDown() {
         return down;
     }
+    
     
     @Override
     public void run() {

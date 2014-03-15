@@ -39,6 +39,10 @@ public class createClient implements Runnable {
     boolean up;
     boolean down;
     
+    String one;
+    String two;
+    String type;
+    
 
     /**
      *
@@ -114,6 +118,13 @@ public class createClient implements Runnable {
     public boolean getDown() {
         return down;
     }
+    //type - for enemy generator
+    public void setType(String a) {
+        type = a;
+    }
+    public String getType() {
+        return type;
+    }
     
     @Override
     public void run() {
@@ -158,6 +169,21 @@ public class createClient implements Runnable {
                if (checker.equals("moveDown")) {
                    setDownTrue();
                }
+               //types
+               if (checker.equals("1")) {
+                   setType("1");
+               }
+               if (checker.equals("2")) {
+                   setType("2");
+               }
+               if (checker.equals("3")) {
+                   setType("3");
+               }
+               if (checker.equals("4")) {
+                   setType("4");
+               }
+               
+               //for yPoses
          
            } catch (Exception e) {
                wait = false;

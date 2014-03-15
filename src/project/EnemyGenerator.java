@@ -19,10 +19,14 @@ public class EnemyGenerator
      * @param delay -
      * @param list - 
      */
-    public EnemyGenerator(int delay, ArrayList<Drawable> list)
-    {
-        this.delay = delay;
+    public EnemyGenerator(ArrayList<Drawable> list)
+    {   
+      
         this.list = list;
+    }
+    
+    public void setDelay() {
+        delay = 250;
     }
 
 
