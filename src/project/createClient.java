@@ -223,6 +223,7 @@ public class createClient implements Runnable {
                wait = false;
                break;
            }
+           
       System.out.println("the command: " + checker);
            
        }

@@ -55,7 +55,8 @@ public class Game extends Canvas{
     boolean movingRightRel = false;
     boolean isShootingRel = false;
     
-    boolean generatorBool = false;
+    boolean refresherDone = false;
+    
    
     Server serve;
     createClient client;
@@ -63,8 +64,10 @@ public class Game extends Canvas{
     String command;
     String order;
     
+
     public Game(int person) throws IOException {
         player = person;
+        
         
         backbuffer = createImage(800, 480);
         setBackground(Color.WHITE);
@@ -87,17 +90,19 @@ public class Game extends Canvas{
          Thread generate = new Thread() {
              @Override
              public void run() {
-                 while (true) {
+                 
         //do something here to generate the enemies
         //listed here is how I generate the enemies on the SERVER side.
         //the variables "one" "two" and "type" over to the CLIENT
+                             
+                
                  if (player == 1) {
 
             int one = EnemyGenerator.getYPosA();
             int two = EnemyGenerator.getYPosB();
             int type = EnemyGenerator.getType();     
             g.setDelay();
-            g.generate(one, two, type);
+            
             if (type == 1) {
                  serve.sendCommand("one");
             }
@@ -110,7 +115,7 @@ public class Game extends Canvas{
             if (type == 4) {
                  serve.sendCommand("four");
             }
-            
+           
             
             String oneNet = Integer.toString(one);
             String twoNet = Integer.toString(two);
@@ -118,7 +123,7 @@ public class Game extends Canvas{
             
             serve.sendCommand(oneNet);
             serve.sendCommand(twoNet);
-           
+            g.generate(one, two, type);
         }
         
         if (player == 2) { 
@@ -130,14 +135,12 @@ public class Game extends Canvas{
             g.generate(one, two, type);
             //stuff that client-side does
         } 
-                   
+             
             try {
-                Thread.sleep(20);  //will make thread sleep
+                Thread.sleep(10);  //will make thread sleep
             } catch (InterruptedException ex) {
                 System.out.println("Thread's sleep thingie was interrupted");
-         }
-
-                 }
+                } 
              }
          };
          generate.start();
@@ -434,7 +437,10 @@ public class Game extends Canvas{
                              }
                           }
                  };
+                 if (refresherDone == false) {
                  new javax.swing.Timer(delay, refresh).start();
+                 refresherDone = true;
+                 }
          
 t.start();
 d.start();
