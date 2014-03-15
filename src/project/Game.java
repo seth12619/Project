@@ -31,6 +31,7 @@ public class Game extends Canvas{
     
     animateThread thread;
     ArrayList<Drawable> list = new ArrayList<Drawable>();
+    EnemyGenerator g = new EnemyGenerator(list);
    
     String timeCheck = "okay";
     
@@ -54,6 +55,8 @@ public class Game extends Canvas{
     boolean movingLeftRel = false;
     boolean movingRightRel = false;
     boolean isShootingRel = false;
+    
+    boolean generatorBool = false;
    
     Server serve;
     createClient client;
@@ -80,6 +83,51 @@ public class Game extends Canvas{
         else if (player == 2) {
             join();
         }
+         //Thread that generates the eneeemyyy
+         Thread generate = new Thread() {
+             @Override
+             public void run() {
+                 while (true) {
+        //do something here to generate the enemies
+        //listed here is how I generate the enemies on the SERVER side.
+        //the variables "one" "two" and "type" over to the CLIENT
+                 if (player == 1) {
+
+            int one = EnemyGenerator.getYPosA();
+            int two = EnemyGenerator.getYPosB();
+            int type = EnemyGenerator.getType();     
+            
+            g.generate(one, two, type);
+            g.setDelay();
+            
+            String oneNet = Integer.toString(one);
+            String twoNet = Integer.toString(two);
+            String typeNet = Integer.toString(type);
+            
+          //  serve.sendCommand(oneNet);
+          //  serve.sendCommand(twoNet);
+         //   serve.sendCommand(typeNet);
+        }
+        
+        if (player == 2) {
+       //     String typeChecker = client.getType();
+            
+            
+          //  int type = Integer.parseInt(typeChecker);
+            //stuff that client-side does
+        } 
+                        
+            repaint();
+            try {
+                Thread.sleep(10);  //will make thread sleep
+            } catch (InterruptedException ex) {
+                System.out.println("Thread's sleep thingie was interrupted");
+         }
+
+                 }
+             }
+         };
+         generate.start();
    
          Thread t = new Thread(){
     @Override
@@ -97,34 +145,7 @@ public class Game extends Canvas{
         {
             
         }
-        
-        //do something here to generate the enemies
-        //listed here is how I generate the enemies on the SERVER side.
-        //the variables "one" "two" and "type" over to the CLIENT
-       /** if (player == 1) {
-        EnemyGenerator g = new EnemyGenerator(list);
-        
-            
-            int one = EnemyGenerator.getYPosA();
-            int two = EnemyGenerator.getYPosB();
-            int type = EnemyGenerator.getType();
-            
-            g.generate(one, two, type);
-            g.setDelay();
-            
-            String oneNet = Integer.toString(one);
-            String twoNet = Integer.toString(two);
-            String typeNet = Integer.toString(type);
-            
-          //  serve.sendCommand(oneNet);
-          //  serve.sendCommand(twoNet);
-            serve.sendCommand(typeNet);
-        }
-        
-        if (player == 2) {
-            //stuff that client-side does
-        } */
-        
+ 
             repaint();
             try {
                 Thread.sleep(10);  //will make thread sleep
@@ -405,6 +426,7 @@ public class Game extends Canvas{
 t.start();
 d.start();
 
+
         
        addKeyListener(new KeyListener() {
 
@@ -438,6 +460,7 @@ d.start();
 
                      isShooting = true;
                      isShootingRel= false;
+                
                 }
               
                 
@@ -477,6 +500,7 @@ d.start();
                                               if (player == 2) {   
                                                avatarTwo.setDelay();
                                               }
+                                              
                 }
                 
             }
