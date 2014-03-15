@@ -42,7 +42,7 @@ public class EnemyGenerator
     
     public static int getType()
     {
-       return (0 + (int) (Math.random() * ((4 - 0 ) +1))); 
+       return (1 + (int) (Math.random() * ((4 - 1 ) +1))); 
     }
     
     public void generate(int yPosA, int yPosB, int type)
