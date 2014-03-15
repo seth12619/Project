@@ -1,4 +1,4 @@
-package project;
+package project; 
 
 import java.awt.Graphics;
 import javax.swing.*;
@@ -21,9 +21,11 @@ public class Enemy implements Drawable{
   static int enemyNumber = 0;
   private int whichEnemy;
   private int health;
+  private boolean killedBy;
+  private Enemy linkedTo;
   
   public Enemy(int xPos, int yPos, int length, int width, int speed, int damage, ArrayList<Drawable> a,
-               int health)
+               int health, boolean killedBy)
   {
     this.xPos = xPos;
     this.yPos = yPos;
@@ -33,8 +35,7 @@ public class Enemy implements Drawable{
     this.damage = damage;
     this.list = a;
     this.health = health;
-    whichEnemy = enemyNumber;
-    enemyNumber = enemyNumber +1;
+    this.killedBy = killedBy;
     try {    
         enAv = ImageIO.read(getClass().getResource("Enemy.png"));
         } catch (IOException e) {
@@ -56,20 +57,7 @@ public class Enemy implements Drawable{
             xPos = xPos - speed;
             if (xPos + this.length <= 0)
             {
-                Enemy temp = null;
-                for ( Drawable a : list)
-                {
-                    if (a instanceof Enemy)
-                    {
-                        temp = (Enemy)a;
-                        if (temp.getEnemy() == this.getEnemy())
-                        {
-                            list.remove(temp);
-                            //System.out.println("Deleted.");
-                            break;
-                        }
-                    }
-                }
+                list.remove(this);
             }
     }
     
@@ -93,10 +81,14 @@ public class Enemy implements Drawable{
         return width;
     }
     
-    public void getHit(int damage)
+    public void getHit(int damage, boolean flag)
     {
-        health = health - damage;
-        if (health <= 0)
+        if( flag != killedBy)
+        {
+            health = health - damage;
+        }
+        
+        if (health <= 0 && flag == killedBy)
         {
             list.remove(this);
         }

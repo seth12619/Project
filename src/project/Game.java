@@ -457,7 +457,7 @@ d.start();
                 }
                 
                 if (e.getKeyCode() == KeyEvent.VK_V ) {
-                    list.add(new Enemy(800, 50, 100, 50, 1, 5, list, 50));
+                    list.add(new EnemyLinker(100, 300, true, 60, 0, 1, 100, 50, list));
                 }
             }
       
@@ -560,11 +560,11 @@ d.start();
     public void shoot() {
                     if (player == 1) {
                         serve.sendCommand("shoot");
-                      //  avatar.setDelay();
+                    
                     }
                     if (player == 2) {
                         client.sendCommand("shoot");
-                     //   avatarTwo.setDelay();
+                   
                     }
     }
     

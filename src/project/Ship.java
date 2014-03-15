@@ -129,12 +129,21 @@ public final class Ship implements Drawable {
     
     public void shoot() {
         //bulletxPos = xPos +5; bulletyPos = yPos+2;
-        
+        if ( player == 1) {
         if (delay == 7)
         {
-            list.add( new Bullet (xPos +90, yPos+30, 40, 20, 15, 10, list)); 
+            list.add( new Bullet (xPos +90, yPos+30, 40, 20, 15, 10, list , true)); 
             delay = 0;
+            }
         }
+        if ( player == 2) {
+        if (delay == 7)
+        {
+            list.add( new Bullet (xPos +90, yPos+30, 40, 20, 15, 10, list , false)); 
+            delay = 0;
+            }
+        }
+        
         delay = delay + 1;
         //bulletNu++;
     }

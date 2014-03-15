@@ -1,4 +1,5 @@
 package project;
+
 import java.awt.Graphics;
 import javax.swing.*;
 import java.awt.*;
@@ -21,8 +22,10 @@ public class Bullet implements Drawable{
   ArrayList<Drawable> list;
   static int bulletNumber = 0;
   private int whichBullet;
+  private boolean flagger;
   
-  public Bullet(int xPos, int yPos, int length, int width, int speed, int damage, ArrayList<Drawable> a){
+  public Bullet(int xPos, int yPos, int length, int width, int speed, int damage, ArrayList<Drawable> a,
+                boolean flagger){
     this.xPos = xPos;
     this.yPos = yPos;
     this.length = length;
@@ -30,6 +33,7 @@ public class Bullet implements Drawable{
     this.speed = speed;
     this.damage = damage;
     this.list = a;
+    this.flagger = flagger;
     whichBullet = bulletNumber;
     bulletNumber = bulletNumber +1;
     boolean colliding = false;
@@ -51,10 +55,14 @@ public class Bullet implements Drawable{
 
   @Override
         public void animate() {
+            /*for (int i = 0; i < 100; i=i+2) {
+                xPos = xPos + speed;
+            }*/
             
             xPos = xPos + speed;
             if (xPos >= 800)
             {
+               
                 list.remove(this);
             }
             
@@ -69,7 +77,7 @@ public class Bullet implements Drawable{
                         {
                             if (this.xPos + this.length > place.getXPos())
                             {
-                                place.getHit(this.damage);
+                                place.getHit(this.damage, this.flagger);
                                 list.remove(this);
                             }
                         }
