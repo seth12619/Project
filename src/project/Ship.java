@@ -88,8 +88,15 @@ public final class Ship implements Drawable {
      */
     @Override
     public void moveUp() {
+        if (player == 1) {
         if (yPos > 0) {
         yPos = yPos-5;
+        }
+        }
+        if (player == 2) {
+            if (yPos >= 215) {
+        yPos = yPos-5;
+        }
         }
         
     }
@@ -99,8 +106,15 @@ public final class Ship implements Drawable {
      */
     @Override
     public void moveDown() {
-        if (yPos + 50 < 410) {
+        if (player == 1) {
+        if (yPos + 50 < 210) {
         yPos = yPos+5;
+        }
+        }
+        if (player == 2) {
+            if (yPos + 50 < 450) {
+        yPos = yPos+5;
+        }
         }
         
     }
@@ -186,7 +200,7 @@ public final class Ship implements Drawable {
         public void draw(Graphics g) {
         g.drawImage(shipAv, xPos, yPos, null);
         
-       
+    //   g.drawRect(0,0, 785, 205);  //these are the borders of the canvas for ship class
     }
 
     @Override

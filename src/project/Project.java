@@ -40,6 +40,7 @@ public class Project extends JFrame {
         setSize(800,480);
         
         setLayout(new BorderLayout());
+        setResizable(false);
         
         final JPanel menu = new JPanel();
         menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));

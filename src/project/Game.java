@@ -10,10 +10,12 @@ import javax.swing.*;
 
 import java.awt.event.*;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.net.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 
 /**
@@ -64,10 +66,17 @@ public class Game extends Canvas{
     String command;
     String order;
     
+    private BufferedImage gameBorder;
+    
 
     public Game(int person) throws IOException {
         player = person;
         
+         try {    
+        gameBorder = ImageIO.read(getClass().getResource("middleBorder.png"));
+        } catch (IOException e) {
+            System.out.println("Sprite image loading error - shipAv Player 1");
+        }
         
         backbuffer = createImage(800, 480);
         setBackground(Color.WHITE);
@@ -94,7 +103,7 @@ public class Game extends Canvas{
         //do something here to generate the enemies
         //listed here is how I generate the enemies on the SERVER side.
         //the variables "one" "two" and "type" over to the CLIENT
-                             
+              while (true) {               
                 
                  if (player == 1) {
 
@@ -141,6 +150,7 @@ public class Game extends Canvas{
             } catch (InterruptedException ex) {
                 System.out.println("Thread's sleep thingie was interrupted");
                 } 
+             }
              }
          };
          generate.start();
@@ -546,7 +556,7 @@ d.start();
     public void create() throws IOException {
          setPlayerOne();
          String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
-         avatar.setPlayer(player);
+         
      
                     serve = new Server();
          
@@ -562,7 +572,7 @@ d.start();
    public void join() throws IOException {
         setPlayerTwo();
         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
-        avatar.setPlayer(player); 
+        
         client = new createClient();
 
     }
@@ -645,6 +655,9 @@ d.start();
         {
             a.draw(backg);
         }
+     //   g.drawRect(0,0, 785, 210);
+        
+        backg.drawImage(gameBorder,0, 210, null); //draws game border
     }
     
     catch (ConcurrentModificationException ex)
