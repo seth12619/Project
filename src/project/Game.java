@@ -6,6 +6,14 @@
 
  package project;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+  
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -63,15 +71,13 @@ public class Game extends Canvas{
     
     String command;
     String order;
-   
-   
     
     public Game(int person) throws IOException {
         player = person;
         
-        backbuffer = createImage(800, 450);
+        backbuffer = createImage(800, 480);
         setBackground(Color.WHITE);
-        setSize(800,450);
+        setSize(800,480);
         
         avatar = new Ship(1, list);
         avatarTwo = new Ship(2, list);
@@ -102,6 +108,19 @@ public class Game extends Canvas{
         {
             
         }
+        
+        //do something here to generate the enemies
+        //listed here is how I generate the enemies on the SERVER side.
+        //the variables "one" "two" and "type" over to the CLIENT
+        /*if (player == 1)
+        {
+            int one = EnemyGenerator.getYPosA();
+            int two = EnemyGenerator.getYPosB();
+            int type = EnemyGenerator.getType();
+            
+            g.generate(one, two, type);
+        }*/
+        
             repaint();
             try {
                 Thread.sleep(10);  //will make thread sleep
@@ -456,9 +475,6 @@ d.start();
                                               }
                 }
                 
-                if (e.getKeyCode() == KeyEvent.VK_V ) {
-                    list.add(new EnemyLinker(100, 300, true, 60, 0, 1, 100, 50, list));
-                }
             }
       
        }); 
@@ -573,7 +589,7 @@ d.start();
     @Override
     public void paint(Graphics g) {
    
-        backbuffer = createImage(800, 450);
+        backbuffer = createImage(800, 480);
         Graphics backg = backbuffer.getGraphics();
         
         try
