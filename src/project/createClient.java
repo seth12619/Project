@@ -39,9 +39,11 @@ public class createClient implements Runnable {
     boolean up;
     boolean down;
     
-    String one;
-    String two;
-    String type;
+    int one;
+    int two;
+    int type;
+    
+    int checkerInt;
     
 
     /**
@@ -119,11 +121,31 @@ public class createClient implements Runnable {
         return down;
     }
     //type - for enemy generator
-    public void setType(String a) {
+    public void setType(int a) {
         type = a;
     }
-    public String getType() {
+    public int getType() {
         return type;
+    }
+    // YPosA
+    public void setYPosA (int a) {
+        one = a;
+    }
+    public int getYPosA () {
+        return one;
+    }
+    // YPosB
+    public void setYPosB(int b) {
+        two = b;
+    }
+    public int getYPosB() {
+        return two;
+    }
+    public void setCheckerInt(String a) {
+        checkerInt = Integer.parseInt(a);
+    }
+    public int getCheckerInt() {
+        return checkerInt;
     }
     
     @Override
@@ -134,6 +156,11 @@ public class createClient implements Runnable {
            checker = "";
            try {
                checker = in.nextLine();
+               try {
+                        setCheckerInt(checker);  
+                             } catch(NumberFormatException e) { 
+              
+               
                //shoot
                if (checker.equals("shootFalse")) {
                    setShootFalse();
@@ -170,21 +197,28 @@ public class createClient implements Runnable {
                    setDownTrue();
                }
                //types
-               if (checker.equals("1")) {
-                   setType("1");
+               if (checker.equals("one")) {
+                   setType(1);
                }
-               if (checker.equals("2")) {
-                   setType("2");
+               if (checker.equals("two")) {
+                   setType(2);
                }
-               if (checker.equals("3")) {
-                   setType("3");
+               if (checker.equals("three")) {
+                   setType(3);
                }
-               if (checker.equals("4")) {
-                   setType("4");
+               if (checker.equals("four")) {
+                   setType(4);
                }
+              
+                                                }
+                                  if (getCheckerInt() > 255) {
+                                  setYPosB(checkerInt);
+                                  }
+                                  if (getCheckerInt() <= 255) {
+                                  setYPosA(checkerInt);
                
-               //for yPoses
-         
+          
+               }
            } catch (Exception e) {
                wait = false;
                break;

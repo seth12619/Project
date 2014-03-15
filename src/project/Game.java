@@ -98,25 +98,40 @@ public class Game extends Canvas{
             int type = EnemyGenerator.getType();     
             g.setDelay();
             g.generate(one, two, type);
+            if (type == 1) {
+                 serve.sendCommand("one");
+            }
+            if (type == 2) {
+                 serve.sendCommand("two");
+            }
+            if (type == 3) {
+                 serve.sendCommand("three");
+            }
+            if (type == 4) {
+                 serve.sendCommand("four");
+            }
             
             
             String oneNet = Integer.toString(one);
             String twoNet = Integer.toString(two);
-            String typeNet = Integer.toString(type);
             
-          //  serve.sendCommand(oneNet);
-          //  serve.sendCommand(twoNet);
-            serve.sendCommand(typeNet);
+            
+            serve.sendCommand(oneNet);
+            serve.sendCommand(twoNet);
+           
         }
         
         if (player == 2) {
-            String typeChecker = client.getType();
             
+            int one = client.getYPosA();
+            int two = client.getYPosB();
+            int type = client.getType();
             
-            int type = Integer.parseInt(typeChecker);
+            g.setDelay();
+            g.generate(one, two, type);
             //stuff that client-side does
         } 
-                        
+                    repaint();
             try {
                 Thread.sleep(10);  //will make thread sleep
             } catch (InterruptedException ex) {
