@@ -1,5 +1,7 @@
 package project;
 
+ 
+
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +37,7 @@ public class Project extends JFrame {
         setTitle("Project version 0.012");
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(800,450);
+        setSize(800,480);
         
         setLayout(new BorderLayout());
         

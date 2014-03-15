@@ -1,4 +1,4 @@
-package project;
+ package project;
 
 import java.awt.Graphics;
 import javax.swing.*;
@@ -12,7 +12,7 @@ public class EnemyLinker implements Drawable
     // instance variables - replace the example below with your own
     private int yPosA;
     private int yPosB;
-    private boolean killedBy;
+    private int type;
     private int health;
     private int damage;
     private int speed;
@@ -25,13 +25,13 @@ public class EnemyLinker implements Drawable
     /**
      * Constructor for objects of class EnemyLinker
      */
-    public EnemyLinker(int yPosA, int yPosB, boolean killedBy, int health, int damage, int speed, int length,
+    public EnemyLinker(int yPosA, int yPosB, int type, int health, int damage, int speed, int length,
                        int width, ArrayList<Drawable>list)
     {
         // initialise instance variables
         this.yPosA = yPosA;
         this.yPosB = yPosB;
-        this.killedBy = killedBy;
+        this.type = type;
         this.health = health;
         this.damage = damage;
         this.speed = speed;
@@ -39,8 +39,29 @@ public class EnemyLinker implements Drawable
         this.width = width;
         this.list = list;
         
-        one = new Enemy (800, yPosA, length, width, speed, damage, list, health, killedBy);
-        two = new Enemy (800, yPosB, length, width, speed, damage, list, health, killedBy);
+        if(type == 1)
+        {
+            one = new Enemy (800, yPosA, length, width, speed, damage, list, health, true, 1, this);
+            two = new Enemy (800, yPosB, length, width, speed, damage, list, health, true, 1, this);
+        }
+        
+        if(type == 2)
+        {
+            one = new Enemy (800, yPosA, length, width, speed, damage, list, health, false, 2, this);
+            two = new Enemy (800, yPosB, length, width, speed, damage, list, health, false, 2, this);
+        }
+        
+        if(type == 3)
+        {
+            one = new Enemy (800, yPosA, 50, 225, speed, 1000, list, 1000, false, 5, this);
+            two = new Enemy (800, yPosB, 50, 50, speed, 0, list, 0, false, 6, this);
+        }
+        
+        if(type == 4)
+        {
+            one = new Enemy (800, yPosA, 50, 50, speed, 0, list, 0, true, 4, this);
+            two = new Enemy (800, yPosB, 50, 225, speed, 1000, list, 1000, true, 3, this);
+        }
         
         list.add(one);
         list.add(two);
@@ -87,5 +108,18 @@ public class EnemyLinker implements Drawable
             list.remove(this);
         }
         
+    }
+    
+    public Enemy getOther(Enemy a)
+    {
+        if (a.equals(one))
+        {
+            return two;
+        }
+        
+        else 
+        {
+            return one;
+        }
     }
 }

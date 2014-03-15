@@ -1,4 +1,4 @@
-package project;
+ package project;
 
 import java.awt.Graphics;
 import javax.swing.*;
@@ -38,7 +38,7 @@ public class EnemyGenerator
     
     public static int getType()
     {
-       return (0 + (int) (Math.random() * ((2 - 0 ) +1))); 
+       return (0 + (int) (Math.random() * ((4 - 0 ) +1))); 
     }
     
     public void generate(int yPosA, int yPosB, int type)
@@ -50,12 +50,22 @@ public class EnemyGenerator
             
             if(type == 1)
             {  
-                list.add(new EnemyLinker(yPosA, yPosB, true, 50, 10, 1, 100, 50, list));
+                list.add(new EnemyLinker(yPosA, yPosB, 1, 50, 10, 1, 100, 50, list));
             }
             
             if (type == 2)
             {
-                list.add(new EnemyLinker(yPosA, yPosB, false, 50, 10, 1, 100, 50, list));
+                list.add(new EnemyLinker(yPosA, yPosB, 2, 50, 10, 1, 100, 50, list));
+            }
+            
+            if (type == 3)
+            {
+                list.add(new EnemyLinker(0, yPosB, 3,  50, 10, 1, 100, 50, list));
+            }
+            
+            if (type == 4)
+            {
+                list.add(new EnemyLinker(yPosA, 225, 4,  50, 10, 1, 100, 50, list));
             }
             
             time = 0;
