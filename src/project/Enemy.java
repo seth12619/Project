@@ -1,4 +1,4 @@
-package project; 
+  package project;
 
 import java.awt.Graphics;
 import javax.swing.*;
@@ -23,9 +23,11 @@ public class Enemy implements Drawable{
   private int health;
   private boolean killedBy;
   private Enemy linkedTo;
+  private int type;
+  private EnemyLinker link;
   
   public Enemy(int xPos, int yPos, int length, int width, int speed, int damage, ArrayList<Drawable> a,
-               int health, boolean killedBy)
+               int health, boolean killedBy, int type, EnemyLinker link)
   {
     this.xPos = xPos;
     this.yPos = yPos;
@@ -36,11 +38,68 @@ public class Enemy implements Drawable{
     this.list = a;
     this.health = health;
     this.killedBy = killedBy;
-    try {    
-        enAv = ImageIO.read(getClass().getResource("Enemy.png"));
-        } catch (IOException e) {
-            System.out.println("Bullet image loading error");
-        } 
+    this.type = type;
+    this.link = link;
+    
+    if (type == 1)
+    {
+        try {    
+            enAv = ImageIO.read(getClass().getResource("EnemyRed.png"));
+            } catch (IOException e) {
+                System.out.println("Bullet image loading error");
+            } 
+    }
+    
+    if (type == 2)
+    {
+        try {    
+            enAv = ImageIO.read(getClass().getResource("EnemyGreen.png"));
+            } catch (IOException e) {
+                System.out.println("Bullet image loading error");
+            } 
+    }
+    
+    if (type ==3)
+    {
+        try {    
+            enAv = ImageIO.read(getClass().getResource("GateRed.png"));
+            } catch (IOException e) {
+                System.out.println("Bullet image loading error");
+            } 
+
+    }
+    
+    if (type == 4)
+    {
+        try {    
+            enAv = ImageIO.read(getClass().getResource("ButtonRed.png"));
+            } catch (IOException e) {
+                System.out.println("Bullet image loading error");
+            } 
+
+    }
+    
+    if (type == 5)
+    {
+        try {    
+            enAv = ImageIO.read(getClass().getResource("GateGreen.png"));
+            } catch (IOException e) {
+                System.out.println("Bullet image loading error");
+            } 
+            
+ 
+    }
+    
+    if(type == 6)
+    {
+        try {    
+            enAv = ImageIO.read(getClass().getResource("ButtonGreen.png"));
+            } catch (IOException e) {
+                System.out.println("Bullet image loading error");
+            } 
+
+    }
+    
   }
   
   @Override
@@ -83,14 +142,27 @@ public class Enemy implements Drawable{
     
     public void getHit(int damage, boolean flag)
     {
-        if( flag != killedBy)
+        if(type == 6 || type == 4)
         {
-            health = health - damage;
+            if( flag == killedBy)
+            {
+                list.remove(this);
+            }
         }
         
-        if (health <= 0 && flag == killedBy)
+        else
         {
-            list.remove(this);
+            if( flag != killedBy)
+            {
+                this.reduceHealth(damage);
+                Enemy temp = link.getOther(this);
+                temp.reduceHealth(damage);
+            }
+            
+            if (health <= 0 && flag == killedBy)
+            {
+                list.remove(this);
+            }
         }
     }
     
@@ -102,6 +174,11 @@ public class Enemy implements Drawable{
     public int getDamage()
     {
         return damage;
+    }
+    
+    public void reduceHealth(int damage)
+    {
+        health = health - damage;
     }
     
     @Override
