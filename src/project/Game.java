@@ -106,14 +106,14 @@ public class Game extends Canvas{
             
           //  serve.sendCommand(oneNet);
           //  serve.sendCommand(twoNet);
-         //   serve.sendCommand(typeNet);
+            serve.sendCommand(typeNet);
         }
         
         if (player == 2) {
-       //     String typeChecker = client.getType();
+            String typeChecker = client.getType();
             
             
-          //  int type = Integer.parseInt(typeChecker);
+            int type = Integer.parseInt(typeChecker);
             //stuff that client-side does
         } 
                         
