@@ -32,6 +32,8 @@ public final class Ship implements Drawable {
    boolean wasHit = false;
    int immunity = 0;
    
+   boolean isDead;
+   
     
     //parameter - ArrayList<Drawable> a
     public Ship(int hum, ArrayList<Drawable> a) {
@@ -39,18 +41,19 @@ public final class Ship implements Drawable {
         
         this.list = a;
         player = hum;
+        isDead = false;
         if (player == 1) {
         this.xPos = 20;
         this.yPos = 50;
-        this.hBLength =60;
-        this.hBWidth = 60;
+        this.hBLength =100;
+        this.hBWidth = 50;
         this.health = 100;
         } 
         else if (player == 2) {
         this.xPos = 20;
         this.yPos = 290;
-        this.hBLength =50;
-        this.hBWidth = 100;
+        this.hBLength =100;
+        this.hBWidth = 50;
         this.health = 100;
         }
         
@@ -94,7 +97,7 @@ public final class Ship implements Drawable {
         }
         }
         if (player == 2) {
-            if (yPos >= 215) {
+            if (yPos >= 235) {
         yPos = yPos-5;
         }
         }
@@ -107,7 +110,7 @@ public final class Ship implements Drawable {
     @Override
     public void moveDown() {
         if (player == 1) {
-        if (yPos + 50 < 210) {
+        if (yPos + 50 < 225) {
         yPos = yPos+5;
         }
         }
@@ -143,6 +146,9 @@ public final class Ship implements Drawable {
     
     public void shoot() {
         //bulletxPos = xPos +5; bulletyPos = yPos+2;
+        
+        if(isDead == false)
+        {
         if ( player == 1) {
         if (delay == 7)
         {
@@ -159,6 +165,7 @@ public final class Ship implements Drawable {
         }
         
         delay = delay + 1;
+    }
         //bulletNu++;
     }
     
@@ -231,6 +238,7 @@ public final class Ship implements Drawable {
                                 System.out.println("Took Damage");
                                 if (health <= 0)
                                 {
+                                    this.isDead = true;
                                     list.remove(this);
                                 }
                             }
