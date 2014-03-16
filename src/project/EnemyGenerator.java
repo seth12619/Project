@@ -31,7 +31,7 @@ public class EnemyGenerator
 
 
     public static int getYPosA()
-    {
+    {  //(max-min)  <-- range
         return (0 + (int) (Math.random() * ((170 - 0 ) +1)));
     }
     

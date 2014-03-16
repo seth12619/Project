@@ -37,7 +37,7 @@ public class Project extends JFrame {
         setTitle("Project version 0.012");
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(800,480);
+        setSize(800,505);
         
         setLayout(new BorderLayout());
         setResizable(false);

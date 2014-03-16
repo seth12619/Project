@@ -254,10 +254,10 @@ public class createClient implements Runnable {
                }
               
                                                 }
-                                  if (getCheckerInt() > 255) {
+                                  if (getCheckerInt() >= 225) {
                                   setYPosB(checkerInt);
                                   }
-                                  if (getCheckerInt() <= 255) {
+                                  if (getCheckerInt() <= 170) {
                                   setYPosA(checkerInt);
                
           
