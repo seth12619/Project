@@ -52,7 +52,7 @@ public class Project extends JFrame {
             join.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    setTitle("Project version 0.012 - Join");
+                    setTitle("Player 2");
                     Game start = null;
                     try {                    
                         start = new Game(2);
@@ -71,7 +71,7 @@ public class Project extends JFrame {
             create.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    setTitle("Project version 0.012 - create");
+                    setTitle("Player 1");
                     Game start = null;
                     try {                    
                         start = new Game(1);
@@ -99,12 +99,16 @@ public class Project extends JFrame {
           help.addActionListener( new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent e) {
-              JOptionPane.showMessageDialog(null, "Use the W-A-S-D buttons to move and 'm' to shoot" + "\n" +
+              JOptionPane.showMessageDialog(null, "Player 1 - Red | Player 2 - Green" + "\n" +
+                                                  "Use the W-A-S-D buttons to move and 'm' to shoot" + "\n" +
                                                   "W - Move Up" + "\n" +
                                                   "A - Move Left" + "\n" +
                                                   "S - Move Down" + "\n" +
                                                   "D - Move Right" + "\n" +
-                                                  "M - Shoot" + "\n" + "\n" +
+                                                  "M - Shoot" + "\n" +
+                                                  "Gates - Player of respective color must hit the btn of the same-colored gate to open" + "\n" +
+                                                  "Meteors - You can only damage meteors that are your color, but you can only kill the meteors that are not your color" +
+                                                  "\n" + "\n" +
                                                   "This java game was developed by Marco Santos and Seth Legaspi for a CS21b final project");    
               }
           });
