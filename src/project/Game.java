@@ -1,6 +1,6 @@
- package project;
-
   
+
+  package project;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -657,7 +657,7 @@ d.start();
         }
      //   g.drawRect(0,0, 785, 210);
         
-        backg.drawImage(gameBorder,0, 210, null); //draws game border
+        backg.drawImage(gameBorder,0, 225, null); //draws game border
     }
     
     catch (ConcurrentModificationException ex)
