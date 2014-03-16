@@ -59,7 +59,9 @@ public class Game extends Canvas{
     
     boolean refresherDone = false;
     
-    
+    boolean checkerType;
+    boolean checkerYPosA;
+    boolean checkerYPosB;
     
    
     Server serve;
@@ -111,10 +113,7 @@ public class Game extends Canvas{
         //do something here to generate the enemies
         //listed here is how I generate the enemies on the SERVER side.
         //the variables "one" "two" and "type" over to the CLIENT
-              while (true) {               
-                  boolean checker;
-                  
-                
+              while (true) {                    
                  if (player == 1) {
 
             int one = EnemyGenerator.getYPosA();
@@ -146,13 +145,20 @@ public class Game extends Canvas{
         }
         
         if (player == 2) { 
-          checker = client.getSettingSit();
-          if (checker) {
+          checkerType = client.getSettingSit();
+          checkerYPosA = client.getPosASit();
+          checkerYPosB = client.getPosBSit();
+          
+          if (checkerType & checkerYPosA  & checkerYPosB) {
+          int type = client.getType();
+            
+            
             int one = client.getYPosA();
             int two = client.getYPosB();
-            
-            int type = client.getType();
             client.removeType();
+            client.removeYPosA();
+            client.removeYPosB();
+            
          
             g.setDelay();
             g.generate(one, two, type);

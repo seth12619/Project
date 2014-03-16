@@ -158,7 +158,6 @@ public final class Server implements Runnable {
                break;
            }
            
-                   System.out.println("the command: " + checker);
       }             
 
     }

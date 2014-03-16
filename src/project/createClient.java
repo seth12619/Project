@@ -39,6 +39,10 @@ public class createClient implements Runnable {
     boolean up;
     boolean down;
     
+    boolean settingDoneType = false;
+    boolean settingDoneYPosA = false;
+    boolean settingDoneYPosB = false;
+    
     int one;
     int two;
     int type;
@@ -46,7 +50,8 @@ public class createClient implements Runnable {
     int checkerInt;
     
     ArrayList<Integer> typeChecker;
-    boolean settingDone = false;
+    ArrayList<Integer> yPosALine;
+    ArrayList<Integer> yPosBLine;
     
 
     /**
@@ -62,7 +67,11 @@ public class createClient implements Runnable {
                
         sendOut = new PrintStream(sock.getOutputStream());
         in = new Scanner(new InputStreamReader(sock.getInputStream()));
+        
         typeChecker = new ArrayList<Integer>();
+        yPosALine = new ArrayList<Integer>();
+        yPosBLine = new ArrayList<Integer>();
+        
         Thread client = new Thread(this);
         client.start();
    
@@ -126,8 +135,7 @@ public class createClient implements Runnable {
     //type - for enemy generator
     public void addType(int a) {
         typeChecker.add(a);
-        System.out.println(a + " successfully added");
-        settingDone = true;
+        settingDoneType = true;
     }
     public int getType() { 
         return typeChecker.get(0);
@@ -135,26 +143,47 @@ public class createClient implements Runnable {
     public void removeType() {
         typeChecker.remove(0);
         if (typeChecker.size() == 0) {
-            settingDone = false;
+            settingDoneType = false;
         }
     }
     public boolean getSettingSit() {
-        return settingDone;
+        return settingDoneType;
     }
     // YPosA
     public void setYPosA (int a) {
-        one = a;
+        yPosALine.add(a);
+        settingDoneYPosA = true;
     }
     public int getYPosA () {
-        return one;
+        return yPosALine.get(0);
+    }
+    public void removeYPosA() {
+        yPosALine.remove(0);
+        if (yPosALine.size() == 0) {
+            settingDoneYPosA = false;
+        }
+    }
+    public boolean getPosASit() {
+        return settingDoneYPosA;
     }
     // YPosB
     public void setYPosB(int b) {
-        two = b;
+        yPosBLine.add(b);
+        settingDoneYPosB = true;
     }
     public int getYPosB() {
-        return two;
+        return yPosBLine.get(0);
     }
+    public void removeYPosB() {
+        yPosBLine.remove(0);
+        if (yPosBLine.size() == 0) {
+            settingDoneYPosB = false;
+        }
+    }
+    public boolean getPosBSit() {
+        return settingDoneYPosB;
+    }
+    //checkerInt
     public void setCheckerInt(String a) {
         checkerInt = Integer.parseInt(a);
     }
@@ -237,8 +266,6 @@ public class createClient implements Runnable {
                wait = false;
                break;
            }
-           
-      System.out.println("the command: " + checker);
            
        }
 
