@@ -100,6 +100,12 @@ public class Game extends Canvas{
              @Override
              public void run() {
                  
+                  try {
+                Thread.sleep(10);  //will make thread sleep
+            } catch (InterruptedException ex) {
+                System.out.println("Thread's sleep thingie was interrupted");
+                } 
+                 
         //do something here to generate the enemies
         //listed here is how I generate the enemies on the SERVER side.
         //the variables "one" "two" and "type" over to the CLIENT
@@ -136,20 +142,25 @@ public class Game extends Canvas{
         }
         
         if (player == 2) { 
+          
             int one = client.getYPosA();
             int two = client.getYPosB();
-            int type = client.getType();
             
+            int type = client.getType();
+            client.removeType();
+         
             g.setDelay();
             g.generate(one, two, type);
+            
             //stuff that client-side does
         } 
-             
-            try {
+         try {
                 Thread.sleep(10);  //will make thread sleep
             } catch (InterruptedException ex) {
                 System.out.println("Thread's sleep thingie was interrupted");
                 } 
+             
+           
              }
              }
          };

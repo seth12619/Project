@@ -45,6 +45,8 @@ public class createClient implements Runnable {
     
     int checkerInt;
     
+    ArrayList<Integer> typeChecker;
+    
 
     /**
      *
@@ -59,7 +61,7 @@ public class createClient implements Runnable {
                
         sendOut = new PrintStream(sock.getOutputStream());
         in = new Scanner(new InputStreamReader(sock.getInputStream()));
-        
+        typeChecker = new ArrayList<Integer>();
         Thread client = new Thread(this);
         client.start();
    
@@ -121,11 +123,17 @@ public class createClient implements Runnable {
         return down;
     }
     //type - for enemy generator
-    public void setType(int a) {
-        type = a;
+    public void addType(int a) {
+        typeChecker.add(a);
+        System.out.println(a + " successfully added");
     }
-    public int getType() {
-        return type;
+    public int getType() { 
+        return typeChecker.get(0);
+    }
+    public void removeType() {
+        
+        typeChecker.remove(0);
+        
     }
     // YPosA
     public void setYPosA (int a) {
@@ -198,16 +206,16 @@ public class createClient implements Runnable {
                }
                //types
                if (checker.equals("one")) {
-                   setType(1);
+                   addType(1);
                }
                if (checker.equals("two")) {
-                   setType(2);
+                   addType(2);
                }
                if (checker.equals("three")) {
-                   setType(3);
+                   addType(3);
                }
                if (checker.equals("four")) {
-                   setType(4);
+                   addType(4);
                }
               
                                                 }
