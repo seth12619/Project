@@ -46,6 +46,7 @@ public class createClient implements Runnable {
     int checkerInt;
     
     ArrayList<Integer> typeChecker;
+    boolean settingDone = false;
     
 
     /**
@@ -126,14 +127,19 @@ public class createClient implements Runnable {
     public void addType(int a) {
         typeChecker.add(a);
         System.out.println(a + " successfully added");
+        settingDone = true;
     }
     public int getType() { 
         return typeChecker.get(0);
     }
     public void removeType() {
-        
         typeChecker.remove(0);
-        
+        if (typeChecker.size() == 0) {
+            settingDone = false;
+        }
+    }
+    public boolean getSettingSit() {
+        return settingDone;
     }
     // YPosA
     public void setYPosA (int a) {
