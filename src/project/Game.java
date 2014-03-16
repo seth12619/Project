@@ -149,7 +149,7 @@ public class Game extends Canvas{
           checkerYPosA = client.getPosASit();
           checkerYPosB = client.getPosBSit();
           
-          if (checkerType & checkerYPosA  & checkerYPosB) {
+          if (checkerType && checkerYPosA  && checkerYPosB) {
           int type = client.getType();
             
             

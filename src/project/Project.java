@@ -43,7 +43,9 @@ public class Project extends JFrame {
         setResizable(false);
         
         final JPanel menu = new JPanel();
+        final JPanel southMenu = new JPanel();
         menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
+        southMenu.setLayout(new BoxLayout(southMenu,BoxLayout.LINE_AXIS));
 
         
         JButton join = new JButton("Join Game");
@@ -93,6 +95,20 @@ public class Project extends JFrame {
                 }
             });
             
+       JButton help = new JButton("Help");
+          help.addActionListener( new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+              JOptionPane.showMessageDialog(null, "Use the W-A-S-D buttons to move and 'm' to shoot" + "\n" +
+                                                  "W - Move Up" + "\n" +
+                                                  "A - Move Left" + "\n" +
+                                                  "S - Move Down" + "\n" +
+                                                  "D - Move Right" + "\n" +
+                                                  "M - Shoot" + "\n" + "\n" +
+                                                  "This java game was developed by Marco Santos and Seth Legaspi for a CS21b final project");    
+              }
+          });
+            
        
             
         
@@ -103,10 +119,14 @@ public class Project extends JFrame {
         menu.add(new JLabel("        "));
         menu.add(exit);
         menu.add(new JLabel(" "));menu.add(new JLabel("              "));menu.add(new JLabel(" "));  
+        southMenu.add(new JLabel(" "));
+        southMenu.add(help);
+        southMenu.add(new JLabel(" "));
         
    // Game start = new Game();
    // add(start, BorderLayout.NORTH);
         add(menu, BorderLayout.CENTER);
+        add(southMenu, BorderLayout.SOUTH);
         setLocationRelativeTo(null);
         
         setVisible(true);
