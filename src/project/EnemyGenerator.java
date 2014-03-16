@@ -1,4 +1,4 @@
- package project;
+  package project;
 
 import java.awt.Graphics;
 import javax.swing.*;
@@ -37,7 +37,7 @@ public class EnemyGenerator
     
     public static int getYPosB()
     {
-        return (225 + (int) (Math.random() * ((370 - 225 ) +1)));
+        return (225 + (int) (Math.random() * ((400 - 225 ) +1)));
     }
     
     public static int getType()
@@ -69,7 +69,7 @@ public class EnemyGenerator
             
             if (type == 4)
             {
-                list.add(new EnemyLinker(yPosA, 225, 4,  50, 10, 1, 100, 50, list));
+                list.add(new EnemyLinker(yPosA, 230, 4,  50, 10, 1, 100, 50, list));
             }
             
             time = 0;
