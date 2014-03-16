@@ -64,6 +64,7 @@ public class createClient implements Runnable {
                ip = host.getHostAddress();
        
                sock = new Socket(ip, 8888);
+               checkerInt = 8888;
                
         sendOut = new PrintStream(sock.getOutputStream());
         in = new Scanner(new InputStreamReader(sock.getInputStream()));
@@ -152,6 +153,7 @@ public class createClient implements Runnable {
     // YPosA
     public void setYPosA (int a) {
         yPosALine.add(a);
+        System.out.println("value added to YPosA:" + yPosALine.get(0));
         settingDoneYPosA = true;
     }
     public int getYPosA () {
@@ -168,8 +170,11 @@ public class createClient implements Runnable {
     }
     // YPosB
     public void setYPosB(int b) {
+      
         yPosBLine.add(b);
+        System.out.println("value added to YPosB:" + yPosBLine.get(0));
         settingDoneYPosB = true;
+        
     }
     public int getYPosB() {
         return yPosBLine.get(0);
@@ -254,14 +259,18 @@ public class createClient implements Runnable {
                }
               
                                                 }
-                                  if (getCheckerInt() >= 225) {
-                                  setYPosB(checkerInt);
-                                  }
                                   if (getCheckerInt() <= 170) {
                                   setYPosA(checkerInt);
-               
-          
-               }
+                                  }
+                                  if (getCheckerInt() >= 225) {
+                                      if (getCheckerInt() <= 400) {
+                                  setYPosB(checkerInt);
+                                      }
+                                  }
+                                  if (getCheckerInt() == 8888) {
+                                      //do nothing
+                                  }
+                                  
            } catch (Exception e) {
                wait = false;
                break;

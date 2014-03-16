@@ -119,7 +119,10 @@ public class Game extends Canvas{
             int one = EnemyGenerator.getYPosA();
             int two = EnemyGenerator.getYPosB();
             int type = EnemyGenerator.getType();     
-            g.setDelay();
+            
+            String oneNet = Integer.toString(one);
+            String twoNet = Integer.toString(two);
+            
             
             if (type == 1) {
                  serve.sendCommand("one");
@@ -133,14 +136,15 @@ public class Game extends Canvas{
             if (type == 4) {
                  serve.sendCommand("four");
             }
-           
-            
-            String oneNet = Integer.toString(one);
-            String twoNet = Integer.toString(two);
-            
+  
             
             serve.sendCommand(oneNet);
             serve.sendCommand(twoNet);
+            
+            System.out.println("yPosA: " + oneNet);
+            System.out.println("yPosB: " + twoNet);
+            
+            g.setDelay();
             g.generate(one, two, type);
         }
         
@@ -151,8 +155,6 @@ public class Game extends Canvas{
           
           if (checkerType && checkerYPosA  && checkerYPosB) {
           int type = client.getType();
-            
-            
             int one = client.getYPosA();
             int two = client.getYPosB();
             client.removeType();
