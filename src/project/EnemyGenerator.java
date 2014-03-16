@@ -32,7 +32,7 @@ public class EnemyGenerator
 
     public static int getYPosA()
     {
-        return (0 + (int) (Math.random() * ((175 - 0 ) +1)));
+        return (0 + (int) (Math.random() * ((170 - 0 ) +1)));
     }
     
     public static int getYPosB()
