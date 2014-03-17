@@ -6,13 +6,16 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.*;
-import sun.audio.AudioPlayer;
+
+import javax.sound.sampled.*;
+import sun.audio.*;
 
 /**
  *
@@ -22,9 +25,10 @@ import sun.audio.AudioPlayer;
  *  + server and client are run on separate threads, so you can sort of have the moving stuff work separately, and
  * just have them do something with client and server respectively to change stuff.
  * 
- * 
+ * This uses the JMF (Jave Media Framework) mp3plugin.jar
  */
 public class Project extends JFrame {
+    
 
     /**
      * @param args the command line arguments
@@ -34,10 +38,8 @@ public class Project extends JFrame {
         Project frame = new Project();
     }
     
-    public Project() throws IOException {
+    public Project() throws IOException{
        
-        
-        
         setTitle("Adelardian Garden");
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -50,6 +52,11 @@ public class Project extends JFrame {
         final JPanel southMenu = new JPanel();
         menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
         southMenu.setLayout(new BoxLayout(southMenu,BoxLayout.LINE_AXIS));
+        
+        InputStream is = new FileInputStream("bgm.wav"); //it's somehow not reading the sound file
+        final AudioStream audioStream = new AudioStream(is);
+          
+            //add sound 
 
         
         JButton join = new JButton("Join Game");
@@ -66,7 +73,7 @@ public class Project extends JFrame {
                     
                  
                     add(start, BorderLayout.NORTH);
-                    
+                    AudioPlayer.player.start(audioStream);
                     menu.setVisible(false);
                 }
             });
@@ -85,7 +92,7 @@ public class Project extends JFrame {
                    
                  
                     add(start, BorderLayout.NORTH);
- 
+                    AudioPlayer.player.start(audioStream);
                     menu.setVisible(false);
                     
                 }
