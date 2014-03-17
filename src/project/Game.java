@@ -143,9 +143,6 @@ public class Game extends Canvas{
             serve.sendCommand(twoNet); 
                   
   
-            System.out.println("yPosA: " + oneNet);
-            System.out.println("yPosB: " + twoNet);
-            
             
         }
         

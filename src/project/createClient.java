@@ -159,7 +159,6 @@ public class createClient implements Runnable {
         }
         if (a != 9999) {
         yPosALine.add(a);
-        System.out.println("value added to YPosA:" + yPosALine.get(0));
         settingDoneYPosA = true;
         }
     }
@@ -182,7 +181,6 @@ public class createClient implements Runnable {
         }
         if (b != 9999) {
               yPosBLine.add(b);
-              System.out.println("value added to YPosB:" + yPosBLine.get(0));
               settingDoneYPosB = true;
         }
     }
