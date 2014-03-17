@@ -136,18 +136,17 @@ public class Game extends Canvas{
             if (type == 4) {
                  serve.sendCommand("four");
             }
-  
-            
+            g.setDelay();
+            g.generate(one, two, type);
+
             serve.sendCommand(oneNet);
-            serve.sendCommand(twoNet);       
-                 
-            
-            
+            serve.sendCommand(twoNet); 
+                  
+  
             System.out.println("yPosA: " + oneNet);
             System.out.println("yPosB: " + twoNet);
             
-            g.setDelay();
-            g.generate(one, two, type);
+            
         }
         
         if (player == 2) { 

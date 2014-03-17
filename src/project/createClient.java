@@ -82,6 +82,8 @@ public class createClient implements Runnable {
         sendOut.println(act);
         sendOut.flush();
     }
+    
+   
    
     //shoot
     public void setShootTrue() {
@@ -152,9 +154,14 @@ public class createClient implements Runnable {
     }
     // YPosA
     public void setYPosA (int a) {
+        if (a == 9999) {
+            //do nothing
+        }
+        if (a != 9999) {
         yPosALine.add(a);
         System.out.println("value added to YPosA:" + yPosALine.get(0));
         settingDoneYPosA = true;
+        }
     }
     public int getYPosA () {
         return yPosALine.get(0);
@@ -170,11 +177,14 @@ public class createClient implements Runnable {
     }
     // YPosB
     public void setYPosB(int b) {
-     
+        if (b == 9999) {
+            //do nothing
+        }
+        if (b != 9999) {
               yPosBLine.add(b);
               System.out.println("value added to YPosB:" + yPosBLine.get(0));
               settingDoneYPosB = true;
-
+        }
     }
     public int getYPosB() {
         return yPosBLine.get(0);
@@ -259,11 +269,13 @@ public class createClient implements Runnable {
               
                                                 }
                                   if (getCheckerInt() <= 170) {
-                                  setYPosA(checkerInt);
+                                  setYPosA(getCheckerInt());
+                                  setCheckerInt("9999");
                                   }
                                   if (getCheckerInt() >= 225) {
                                       if (getCheckerInt() <= 400) {
-                                  setYPosB(checkerInt);
+                                  setYPosB(getCheckerInt());
+                                  setCheckerInt("9999");
                                       }
                                   }
                                   if (getCheckerInt() == 8888) {

@@ -58,6 +58,7 @@ public final class Server implements Runnable {
         out.println(act);
         out.flush();
     }
+    
    //shoot
     public void setShootTrue() {
         shoot = true;
