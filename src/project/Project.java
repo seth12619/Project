@@ -6,10 +6,13 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.*;
+import sun.audio.AudioPlayer;
 
 /**
  *
@@ -32,6 +35,7 @@ public class Project extends JFrame {
     }
     
     public Project() throws IOException {
+       
         
         
         setTitle("Adelardian Garden");
@@ -135,4 +139,6 @@ public class Project extends JFrame {
         
         setVisible(true);
     }
+    
+    
 }

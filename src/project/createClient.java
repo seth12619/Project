@@ -170,11 +170,11 @@ public class createClient implements Runnable {
     }
     // YPosB
     public void setYPosB(int b) {
-      
-        yPosBLine.add(b);
-        System.out.println("value added to YPosB:" + yPosBLine.get(0));
-        settingDoneYPosB = true;
-        
+     
+              yPosBLine.add(b);
+              System.out.println("value added to YPosB:" + yPosBLine.get(0));
+              settingDoneYPosB = true;
+
     }
     public int getYPosB() {
         return yPosBLine.get(0);
@@ -198,7 +198,6 @@ public class createClient implements Runnable {
     
     @Override
     public void run() {
-       //Client below
         
        while (wait) {
            checker = "";
