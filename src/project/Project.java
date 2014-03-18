@@ -73,7 +73,7 @@ public class Project extends JFrame {
             create.addActionListener( new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    setTitle("Adelardian Garden - Player 1");
+                    setTitle("Adelardian Garden - Player 1 - Waiting for request from client...");
                     
                     Game start = null;
                     try {                    
@@ -84,6 +84,7 @@ public class Project extends JFrame {
                    
                  
                     add(start, BorderLayout.NORTH);    
+                    setTitle("Adelardian Garden - Player 1");
               
                     menu.setVisible(false);
                     

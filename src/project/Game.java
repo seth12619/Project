@@ -577,7 +577,7 @@ d.start();
      */
     public void create() throws IOException {
          setPlayerOne();
-         JOptionPane.showMessageDialog(null,"Waiting for connection from client...");
+
                     serve = new Server();
 
     }
