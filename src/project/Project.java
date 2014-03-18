@@ -14,8 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.*;
 
-import javax.sound.sampled.*;
-import sun.audio.*;
 
 /**
  *
@@ -25,7 +23,7 @@ import sun.audio.*;
  *  + server and client are run on separate threads, so you can sort of have the moving stuff work separately, and
  * just have them do something with client and server respectively to change stuff.
  * 
- * This uses the JMF (Jave Media Framework) mp3plugin.jar
+ * 
  */
 public class Project extends JFrame {
     
@@ -53,11 +51,6 @@ public class Project extends JFrame {
         menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
         southMenu.setLayout(new BoxLayout(southMenu,BoxLayout.LINE_AXIS));
         
-        InputStream is = new FileInputStream("bgm.wav"); //it's somehow not reading the sound file
-        final AudioStream audioStream = new AudioStream(is);
-          
-            //add sound 
-
         
         JButton join = new JButton("Join Game");
             join.addActionListener( new ActionListener() {
@@ -73,7 +66,6 @@ public class Project extends JFrame {
                     
                  
                     add(start, BorderLayout.NORTH);
-                    AudioPlayer.player.start(audioStream);
                     menu.setVisible(false);
                 }
             });
@@ -91,8 +83,7 @@ public class Project extends JFrame {
                     }
                    
                  
-                    add(start, BorderLayout.NORTH);
-                    AudioPlayer.player.start(audioStream);
+                    add(start, BorderLayout.NORTH);    
                     menu.setVisible(false);
                     
                 }

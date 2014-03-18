@@ -28,9 +28,6 @@ public class createClient implements Runnable {
 
     String stopCommand;
     String checker;
-
-    
-    InetAddress host = null;
     
     boolean wait = true;
     boolean shoot;
@@ -58,11 +55,10 @@ public class createClient implements Runnable {
      *
      * @throws java.net.UnknownHostException
      */
-    public createClient() throws UnknownHostException, IOException {
-               host = InetAddress.getLocalHost();
-
-               ip = host.getHostAddress();
-       
+    public createClient(String IPA) throws UnknownHostException, IOException {
+           
+               ip = IPA;
+               
                sock = new Socket(ip, 8888);
                checkerInt = 8888;
                

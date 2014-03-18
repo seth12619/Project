@@ -577,9 +577,6 @@ d.start();
      */
     public void create() throws IOException {
          setPlayerOne();
-         String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
-         
-     
                     serve = new Server();
          
    
@@ -593,9 +590,9 @@ d.start();
      */
    public void join() throws IOException {
         setPlayerTwo();
-        String username = JOptionPane.showInputDialog("Enter a name you want to use: ");
+        String ipAddress = JOptionPane.showInputDialog("Please enter the IP address for player 1: ");
         
-        client = new createClient();
+        client = new createClient(ipAddress);
 
     }
     
