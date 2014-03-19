@@ -14,16 +14,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.*;
 
+import javax.sound.sampled.*;
+import sun.audio.*;
+
 
 /**
  *
  * @author Seth Legaspi/Marco Santos
- * 
- * NOTE: 3/4/14 = The server client works; error is nullPointer, maybe once the stuff's there, it won't do this anymore
- *  + server and client are run on separate threads, so you can sort of have the moving stuff work separately, and
- * just have them do something with client and server respectively to change stuff.
- * 
- * 
  */
 public class Project extends JFrame {
 
@@ -49,6 +46,9 @@ public class Project extends JFrame {
         final JPanel southMenu = new JPanel();
         menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
         southMenu.setLayout(new BoxLayout(southMenu,BoxLayout.LINE_AXIS));
+        
+        InputStream is = new FileInputStream("bgm.wav"); //it's somehow not reading the sound file
+        final AudioStream audioStream = new AudioStream(is);
     
         
         JButton join = new JButton("Join Game");
@@ -65,6 +65,7 @@ public class Project extends JFrame {
                     
                  
                     add(start, BorderLayout.NORTH);
+                    AudioPlayer.player.start(audioStream);
                     menu.setVisible(false);
                 }
             });
@@ -85,7 +86,7 @@ public class Project extends JFrame {
                  
                     add(start, BorderLayout.NORTH);    
                     setTitle("Adelardian Garden - Player 1");
-              
+                    AudioPlayer.player.start(audioStream);
                     menu.setVisible(false);
                     
                 }
