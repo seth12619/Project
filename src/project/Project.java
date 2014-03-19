@@ -14,6 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.*;
 
+import javax.sound.sampled.*;
+import sun.audio.*;
+
 
 /**
  *
@@ -49,6 +52,9 @@ public class Project extends JFrame {
         final JPanel southMenu = new JPanel();
         menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
         southMenu.setLayout(new BoxLayout(southMenu,BoxLayout.LINE_AXIS));
+        
+        InputStream is = new FileInputStream("bgm.wav"); //it's somehow not reading the sound file
+        final AudioStream audioStream = new AudioStream(is);
     
         
         JButton join = new JButton("Join Game");
@@ -65,6 +71,7 @@ public class Project extends JFrame {
                     
                  
                     add(start, BorderLayout.NORTH);
+                    AudioPlayer.player.start(audioStream);
                     menu.setVisible(false);
                 }
             });
@@ -85,7 +92,7 @@ public class Project extends JFrame {
                  
                     add(start, BorderLayout.NORTH);    
                     setTitle("Adelardian Garden - Player 1");
-              
+                    AudioPlayer.player.start(audioStream);
                     menu.setVisible(false);
                     
                 }
